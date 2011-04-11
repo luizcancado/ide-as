@@ -6,21 +6,13 @@ namespace Stetic
 	{
 		private static bool initialized;
 
-		static internal void Initialize (Gtk.Widget iconRenderer)
+		internal static void Initialize (Gtk.Widget iconRenderer)
 		{
 			if ((Stetic.Gui.initialized == false)) {
 				Stetic.Gui.initialized = true;
 				global::Gtk.IconFactory w1 = new global::Gtk.IconFactory ();
 				global::Gtk.IconSet w2 = new global::Gtk.IconSet (global::Stetic.IconLoader.LoadIcon (iconRenderer, "gtk-about", global::Gtk.IconSize.Menu));
 				w1.Add ("gtk-about", w2);
-				global::Gtk.IconSet w3 = new global::Gtk.IconSet ();
-				global::Gtk.IconSource w4 = new global::Gtk.IconSource ();
-				w4.Pixbuf = new global::Gdk.Pixbuf (global::System.IO.Path.Combine (global::System.AppDomain.CurrentDomain.BaseDirectory, "./icon_24x24.png"));
-				w3.AddSource (w4);
-				global::Gtk.IconSource w5 = new global::Gtk.IconSource ();
-				w5.Pixbuf = new global::Gdk.Pixbuf (global::System.IO.Path.Combine (global::System.AppDomain.CurrentDomain.BaseDirectory, "./icon_32x32.png"));
-				w3.AddSource (w5);
-				w1.Add ("ideas.scada", w3);
 				w1.AddDefault ();
 			}
 		}
@@ -51,8 +43,12 @@ namespace Stetic
 						pmap.DrawRectangle (gc, false, 0, 0, (sz - 1), (sz - 1));
 						gc.SetLineAttributes (3, Gdk.LineStyle.Solid, Gdk.CapStyle.Round, Gdk.JoinStyle.Round);
 						gc.RgbFgColor = new Gdk.Color (255, 0, 0);
-						pmap.DrawLine (gc, (sz / 4), (sz / 4), ((sz - 1) - (sz / 4)), ((sz - 1) - (sz / 4)));
-						pmap.DrawLine (gc, ((sz - 1) - (sz / 4)), (sz / 4), (sz / 4), ((sz - 1) - (sz / 4)));
+						pmap.DrawLine (gc, (sz / 4), (sz / 4), ((sz - 1) 
+ - (sz / 4)), ((sz - 1) 
+ - (sz / 4)));
+						pmap.DrawLine (gc, ((sz - 1) 
+ - (sz / 4)), (sz / 4), (sz / 4), ((sz - 1) 
+ - (sz / 4)));
 						return Gdk.Pixbuf.FromDrawable (pmap, pmap.Colormap, 0, 0, 0, 0, sz, sz);
 					}
 				}

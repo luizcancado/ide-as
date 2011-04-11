@@ -2,7 +2,7 @@
 <Application name="SampleApplication">
 	<Project name="SampleProject" path="SampleProject/">
 		<Screen name="Tela" path="screens/tela.svg" type="svg" serverscriptlanguage="cs" clientscriptlanguage="js" />
-        	<Screen name="Misturador" path="screens/Misturador_Tintas.svg" type="svg" serverscriptlanguage="cs" clientscriptlanguage="js" />
+        <Screen name="Misturador" path="screens/Misturador_Tintas.svg" type="svg" serverscriptlanguage="cs" clientscriptlanguage="js" />
 		<TagsWebService name="SampleTagWebservice" address="http://localhost" port="8081" />
 		<TagsDataBase name="SampleTagDatabase" path="configs/tagsdatabase.csv" type="csv" />
     </Project>

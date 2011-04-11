@@ -24,8 +24,6 @@ namespace Ideas.Server.Manager
 			}
 			else
 			{				
-				
-				Configuration config = new Configuration();
 				string[] newargs;
 				
 				// If there is only one arg, it is assumed that that is the file arg.
@@ -38,7 +36,7 @@ namespace Ideas.Server.Manager
 					newargs = args;
 				}
 				
-				config.ProcessArgs(newargs);
+				Configuration config = new Configuration(newargs);
 				win = new MainWindow(config);
 			}
 			

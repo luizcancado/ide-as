@@ -166,7 +166,8 @@ namespace Ideas.Common
 				tagsWebserviceToAdd.Name = nodeName;
 				tagsWebserviceToAdd.ServerPort = Convert.ToInt32(nodeServerPort);
 				tagsWebserviceToAdd.ServerAddress = nodeServerAddress;
-				tagsWebserviceToAdd.ServerRootPath = project.FilePath + "screens/";
+				//tagsWebserviceToAdd.ServerRootPath = project.FilePath + "screens";
+				tagsWebserviceToAdd.ServerRootPath = "D:\\Documents and Settings\\Luiz\\Desktop\\ide-as\\ideas\\Samples\\SampleProject\\screens";
 				
 				project.TagsWebService = tagsWebserviceToAdd;
 			}

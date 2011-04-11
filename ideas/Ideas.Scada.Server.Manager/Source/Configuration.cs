@@ -1,17 +1,25 @@
 using System;
 using System.IO;
-using Mono.GetOptions;
+using NDesk.Options;
 
 namespace Ideas.Server.Manager
 {
-	public class Configuration : Mono.GetOptions.Options
+	public class Configuration
 	{
-		[Option ("SCADA Application File to open", 'f')]
 		public string file;
 		
-		public Configuration ()
+		public Configuration (string[] args)
 		{
-			base.ParsingMode = OptionsParsingMode.Both;
+			OptionSet p = new OptionSet () 
+			{
+				{ 
+					"f|file=", 
+					"the SCADA Application File to open", 
+					v => file = v
+				},		
+			};
+			
+			p.Parse(args);
 		}
 	}
 }

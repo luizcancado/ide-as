@@ -13,10 +13,6 @@ using System.Runtime.CompilerServices;
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
-// Attributes visible in " -V"
-[assembly: Mono.About("Manager for Ideas Scada servers")]
-[assembly: Mono.Author ("Luiz Cançado")]
-
 // The assembly version has the format "{Major}.{Minor}.{Build}.{Revision}".
 // The form "{Major}.{Minor}.*" will automatically update the build and revision,
 // and "{Major}.{Minor}.{Build}.*" will update just the revision.
