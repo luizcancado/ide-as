@@ -6,7 +6,7 @@ namespace Stetic
 	{
 		private static bool initialized;
 
-		internal static void Initialize (Gtk.Widget iconRenderer)
+		static internal void Initialize (Gtk.Widget iconRenderer)
 		{
 			if ((Stetic.Gui.initialized == false)) {
 				Stetic.Gui.initialized = true;
@@ -43,12 +43,8 @@ namespace Stetic
 						pmap.DrawRectangle (gc, false, 0, 0, (sz - 1), (sz - 1));
 						gc.SetLineAttributes (3, Gdk.LineStyle.Solid, Gdk.CapStyle.Round, Gdk.JoinStyle.Round);
 						gc.RgbFgColor = new Gdk.Color (255, 0, 0);
-						pmap.DrawLine (gc, (sz / 4), (sz / 4), ((sz - 1) 
- - (sz / 4)), ((sz - 1) 
- - (sz / 4)));
-						pmap.DrawLine (gc, ((sz - 1) 
- - (sz / 4)), (sz / 4), (sz / 4), ((sz - 1) 
- - (sz / 4)));
+						pmap.DrawLine (gc, (sz / 4), (sz / 4), ((sz - 1) - (sz / 4)), ((sz - 1) - (sz / 4)));
+						pmap.DrawLine (gc, ((sz - 1) - (sz / 4)), (sz / 4), (sz / 4), ((sz - 1) - (sz / 4)));
 						return Gdk.Pixbuf.FromDrawable (pmap, pmap.Colormap, 0, 0, 0, 0, sz, sz);
 					}
 				}

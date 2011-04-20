@@ -34,10 +34,11 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Source\" />
+    <Folder Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Source\AssemblyInfo.cs" />
     <Compile Include="Source\Main.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
