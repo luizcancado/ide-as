@@ -29,15 +29,11 @@ namespace Ideas.Common.Tags
 		public void Start()
 		{		
 			XSPWebSource websource = new XSPWebSource(IPAddress.Any, this.ServerPort);
-			    
+			
 			webAppServer = new ApplicationServer(websource, serverRootPath);
-			
-			//"[[hostname:]port:]VPath:realpath"
-			string cmdLine = this.ServerPort + ":/:" + serverRootPath;
-			
+					
 			// Adds application to the webserver
-			//webAppServer.AddApplicationsFromCommandLine(cmdLine);
-			webAppServer.AddApplication("127.0.0.1", this.ServerPort, "/", serverRootPath);
+			webAppServer.AddApplication("localhost", this.ServerPort, "/", serverRootPath);
 			
 			// Starts server instance
 			webAppServer.Start(true);

@@ -73,7 +73,8 @@ namespace Ideas.Common
 				
 				Project projectToAdd = new Project();
 				projectToAdd.Name = nodeName;
-				projectToAdd.FilePath = this.RootPath + "/" + nodePath;
+				projectToAdd.FilePath = this.RootPath + Path.DirectorySeparatorChar;
+				projectToAdd.FilePath += nodePath + Path.DirectorySeparatorChar;
 				
 				foreach(XmlNode childNode in node.ChildNodes)
 				{
@@ -110,7 +111,9 @@ namespace Ideas.Common
 				IdeasScadaScreenClientScriptLanguage nodeClientScriptLanguage = Screen.convertScreenClientScriptLanguageFromString(nodeStringClientScriptLanguage);
 				
 				screenToAdd.Name = nodeName;
-				screenToAdd.FilePath = this.FilePath + nodePath;
+				screenToAdd.FilePath = this.FilePath + "screens" + Path.DirectorySeparatorChar;
+				screenToAdd.FilePath += nodePath + Path.DirectorySeparatorChar;
+				
 				screenToAdd.Type = nodeType;
 				screenToAdd.ServerScriptLanguage = nodeServerScriptLanguage;
 				screenToAdd.ClientScriptLanguage = nodeClientScriptLanguage;
@@ -138,10 +141,18 @@ namespace Ideas.Common
 				
 				IdeasScadaTagsDataBaseSourceType nodeSourceType = DataBase.convertSourceTypeFromString(nodeStringSourceType);
 				
+				// Retrieves the Tags Database name
 				tagsDatabaseToAdd.Name = nodeName;
-				tagsDatabaseToAdd.FilePath = project.FilePath + nodePath;
+				
+				// Retrieves the Tags Database file path
+				tagsDatabaseToAdd.FilePath = project.FilePath + Path.DirectorySeparatorChar;
+				tagsDatabaseToAdd.FilePath += "screens" + Path.DirectorySeparatorChar;
+				tagsDatabaseToAdd.FilePath += nodePath;
+				
+				// Retrieves the Tags Database source type
 				tagsDatabaseToAdd.SourceType = nodeSourceType;
 				
+				// Adds the new tags database to the current project
 				project.TagsDatabase = tagsDatabaseToAdd;
 			}
 		}
@@ -167,8 +178,7 @@ namespace Ideas.Common
 				tagsWebserviceToAdd.ServerPort = Convert.ToInt32(nodeServerPort);
 				tagsWebserviceToAdd.ServerAddress = nodeServerAddress;
 				tagsWebserviceToAdd.ServerRootPath = project.FilePath + "screens";
-				//tagsWebserviceToAdd.ServerRootPath = "D:\\Documents and Settings\\Luiz\\Desktop\\ide-as\\ideas\\Samples\\SampleProject\\screens";
-				
+								
 				project.TagsWebService = tagsWebserviceToAdd;
 			}
 		}
