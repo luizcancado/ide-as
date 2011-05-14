@@ -3,6 +3,8 @@ using System.Xml;
 using System.IO;
 using Ideas.Common;
 using System.Collections.Generic;
+using Mono.Data.Sqlite;
+using System.Data;
 
 namespace Ideas.Common.Tags
 {
@@ -11,16 +13,58 @@ namespace Ideas.Common.Tags
 		private string name;
 		private string filePath;
 		private IdeasScadaTagsDataBaseSourceType sourceType;
+		private IDbConnection dbcon = null;
+		private IDbCommand dbcmd = null;
+		private string connectionString = "URI=file::memory:,version=3";
 		
 		/// <summary>
 		/// Constructs the class
 		/// </summary>	
 		public DataBase ()
 		{
+			dbcon = (IDbConnection) new SqliteConnection(connectionString);
+			dbcon.Open();
+			dbcmd = dbcon.CreateCommand();
+			
+			CreateDatabaseStructure();
+			
+			
 			
 		}
 			
+		~DataBase ()
+		{
+			if(dbcon != null)
+			{
+				if(dbcmd != null)
+				{
+					dbcmd.Dispose();
+       				dbcmd = null;	
+				}
+				
+				dbcon.Close();
+				dbcon = null;
+			}
+			
+		}
 		
+		void CreateDatabaseStructure ()
+		{
+			string sql = "";
+			sql += "CREATE TABLE tb"+ this.Name + " ( ";
+            sql += "TagName varchar(50), ";
+            sql += "DataType varchar(50), ";
+			sql += "DateTimeUpdate DATETIME, "
+			sql += "ClientAccess varchar(3), ";
+			sql += "EngUnits varchar(32), ";
+			sql += "Description varchar(255) ";
+			sql += " ); ";
+								
+			dbcmd.CommandText = sql;
+			
+			IDataReader reader = dbcmd.ExecuteNonQuery();
+		}
+
 		#region P R O P E R T I E S
 		
 		public string Name 
