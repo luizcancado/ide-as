@@ -29,6 +29,8 @@ public partial class MainWindow
 
 	private global::Gtk.Action tbbStopServer;
 
+	private global::Gtk.Action SettingsAction;
+
 	private global::Gtk.VBox vbox1;
 
 	private global::Gtk.MenuBar menubar3;
@@ -41,7 +43,9 @@ public partial class MainWindow
 
 	private global::Gtk.TreeView trvApplicationTreeView;
 
-	private global::Gtk.Fixed fixed1;
+	private global::Gtk.ScrolledWindow GtkScrolledWindow1;
+
+	private global::Gtk.TextView txvTextView;
 
 	private global::Gtk.Statusbar statusbar1;
 
@@ -72,7 +76,7 @@ public partial class MainWindow
 		this.quitAction1 = new global::Gtk.Action ("quitAction1", global::Mono.Unix.Catalog.GetString ("Exit"), null, "gtk-quit");
 		this.quitAction1.ShortLabel = global::Mono.Unix.Catalog.GetString ("Exit");
 		w1.Add (this.quitAction1, null);
-		this.closeAction = new global::Gtk.Action ("closeAction", global::Mono.Unix.Catalog.GetString ("Close Application"), null, "gtk-close");
+		this.closeAction = new global::Gtk.Action ("closeAction", global::Mono.Unix.Catalog.GetString ("Close"), null, "gtk-close");
 		this.closeAction.ShortLabel = global::Mono.Unix.Catalog.GetString ("Close Application");
 		w1.Add (this.closeAction, null);
 		this.tbbOpen = new global::Gtk.Action ("tbbOpen", global::Mono.Unix.Catalog.GetString ("Open"), global::Mono.Unix.Catalog.GetString ("Open..."), "gtk-open");
@@ -90,6 +94,9 @@ public partial class MainWindow
 		this.tbbStopServer.Sensitive = false;
 		this.tbbStopServer.ShortLabel = global::Mono.Unix.Catalog.GetString ("Stop");
 		w1.Add (this.tbbStopServer, null);
+		this.SettingsAction = new global::Gtk.Action ("SettingsAction", global::Mono.Unix.Catalog.GetString ("Settings..."), null, null);
+		this.SettingsAction.ShortLabel = global::Mono.Unix.Catalog.GetString ("Settings...");
+		w1.Add (this.SettingsAction, null);
 		this.UIManager.InsertActionGroup (w1, 0);
 		this.AddAccelGroup (this.UIManager.AccelGroup);
 		this.Name = "MainWindow";
@@ -102,7 +109,7 @@ public partial class MainWindow
 		this.vbox1 = new global::Gtk.VBox ();
 		this.vbox1.Name = "vbox1";
 		// Container child vbox1.Gtk.Box+BoxChild
-		this.UIManager.AddUiFromString ("<ui><menubar name='menubar3'><menu name='FileAction' action='FileAction'><menuitem name='openAction' action='openAction'/><menuitem name='closeAction' action='closeAction'/><separator/><menuitem name='quitAction1' action='quitAction1'/></menu><menu name='EditAction' action='EditAction'/><menu name='HelpAction' action='HelpAction'><menuitem name='aboutAction' action='aboutAction'/></menu></menubar></ui>");
+		this.UIManager.AddUiFromString ("<ui><menubar name='menubar3'><menu name='FileAction' action='FileAction'><menuitem name='openAction' action='openAction'/><menuitem name='closeAction' action='closeAction'/><separator/><menuitem name='quitAction1' action='quitAction1'/></menu><menu name='EditAction' action='EditAction'><menuitem name='SettingsAction' action='SettingsAction'/></menu><menu name='HelpAction' action='HelpAction'><menuitem name='aboutAction' action='aboutAction'/></menu></menubar></ui>");
 		this.menubar3 = ((global::Gtk.MenuBar)(this.UIManager.GetWidget ("/menubar3")));
 		this.menubar3.Name = "menubar3";
 		this.vbox1.Add (this.menubar3);
@@ -136,27 +143,33 @@ public partial class MainWindow
 		this.trvApplicationTreeView = new global::Gtk.TreeView ();
 		this.trvApplicationTreeView.CanFocus = true;
 		this.trvApplicationTreeView.Name = "trvApplicationTreeView";
+		this.trvApplicationTreeView.HeadersVisible = false;
 		this.GtkScrolledWindow.Add (this.trvApplicationTreeView);
 		this.hpaned1.Add (this.GtkScrolledWindow);
 		global::Gtk.Paned.PanedChild w5 = ((global::Gtk.Paned.PanedChild)(this.hpaned1[this.GtkScrolledWindow]));
 		w5.Resize = false;
 		// Container child hpaned1.Gtk.Paned+PanedChild
-		this.fixed1 = new global::Gtk.Fixed ();
-		this.fixed1.Name = "fixed1";
-		this.fixed1.HasWindow = false;
-		this.hpaned1.Add (this.fixed1);
+		this.GtkScrolledWindow1 = new global::Gtk.ScrolledWindow ();
+		this.GtkScrolledWindow1.Name = "GtkScrolledWindow1";
+		this.GtkScrolledWindow1.ShadowType = ((global::Gtk.ShadowType)(1));
+		// Container child GtkScrolledWindow1.Gtk.Container+ContainerChild
+		this.txvTextView = new global::Gtk.TextView ();
+		this.txvTextView.CanFocus = true;
+		this.txvTextView.Name = "txvTextView";
+		this.GtkScrolledWindow1.Add (this.txvTextView);
+		this.hpaned1.Add (this.GtkScrolledWindow1);
 		this.vbox1.Add (this.hpaned1);
-		global::Gtk.Box.BoxChild w7 = ((global::Gtk.Box.BoxChild)(this.vbox1[this.hpaned1]));
-		w7.Position = 2;
+		global::Gtk.Box.BoxChild w8 = ((global::Gtk.Box.BoxChild)(this.vbox1[this.hpaned1]));
+		w8.Position = 2;
 		// Container child vbox1.Gtk.Box+BoxChild
 		this.statusbar1 = new global::Gtk.Statusbar ();
 		this.statusbar1.Name = "statusbar1";
 		this.statusbar1.Spacing = 6;
 		this.vbox1.Add (this.statusbar1);
-		global::Gtk.Box.BoxChild w8 = ((global::Gtk.Box.BoxChild)(this.vbox1[this.statusbar1]));
-		w8.Position = 3;
-		w8.Expand = false;
-		w8.Fill = false;
+		global::Gtk.Box.BoxChild w9 = ((global::Gtk.Box.BoxChild)(this.vbox1[this.statusbar1]));
+		w9.Position = 3;
+		w9.Expand = false;
+		w9.Fill = false;
 		this.Add (this.vbox1);
 		if ((this.Child != null)) {
 			this.Child.ShowAll ();
@@ -167,9 +180,11 @@ public partial class MainWindow
 		this.quitAction.Activated += new global::System.EventHandler (this.mnuFileExit_Click);
 		this.openAction.Activated += new global::System.EventHandler (this.mnuOpenApplication_Click);
 		this.quitAction1.Activated += new global::System.EventHandler (this.mnuFileExit_Click);
+		this.closeAction.Activated += new global::System.EventHandler (this.OnCloseActionActivated);
 		this.tbbOpen.Activated += new global::System.EventHandler (this.tbbOpen_Click);
 		this.tbbClose.Activated += new global::System.EventHandler (this.tbbClose_Click);
 		this.tbbStartServer.Activated += new global::System.EventHandler (this.tbbStartServer_Click);
 		this.tbbStopServer.Activated += new global::System.EventHandler (this.tbbStopServer_Click);
+		this.SettingsAction.Activated += new global::System.EventHandler (this.OnSettingsActionActivated);
 	}
 }

@@ -1,13 +1,15 @@
 using System;
 using Gtk;
 using System.Collections.Generic;
-using Ideas.Common;
+using Ideas.Scada.Common;
 using Ideas.Server.Manager;
 using Ideas.Scada.Common.DataSources;
+using System.Diagnostics;
 
 public partial class MainWindow : Gtk.Window
 {
-	static ScadaApplication scadaApplication;
+	private ScadaApplication scadaApplication;
+	private Process serverProcess;
 	
 	/// <summary>
 	/// Default constructor
@@ -70,6 +72,14 @@ public partial class MainWindow : Gtk.Window
 		
 		// Updates the list tree/expander
 		UpdateScadaApplicationsListTree();
+		
+		UpdateTextView();
+	}
+	
+	
+	protected void UpdateTextView ()
+	{
+		//txvTextView
 	}
 	
 	protected void UpdateScadaApplicationsListTree ()
@@ -82,38 +92,73 @@ public partial class MainWindow : Gtk.Window
 		
 		// Closes current application if any
 		closeApplication();
+
+		Gdk.Pixbuf icnApplicationIcon = new Gdk.Pixbuf(this.GetType().Assembly, "Ideas.Scada.Server.Manager.Resources.Icons.Interface.16.scada.png");
+		Gdk.Pixbuf icnFolderIcon =  new Gdk.Pixbuf(this.GetType().Assembly, "Ideas.Scada.Server.Manager.Resources.Icons.Interface.16.folder.svg");
+		Gdk.Pixbuf icnScreenIcon =  new Gdk.Pixbuf(this.GetType().Assembly, "Ideas.Scada.Server.Manager.Resources.Icons.Interface.16.screen.svg");
+		Gdk.Pixbuf icnProjectIcon =  new Gdk.Pixbuf(this.GetType().Assembly, "Ideas.Scada.Server.Manager.Resources.Icons.Interface.16.folder.svg");
+		Gdk.Pixbuf icnTagsWebserviceIcon =  new Gdk.Pixbuf(this.GetType().Assembly, "Ideas.Scada.Server.Manager.Resources.Icons.Interface.16.webservice.svg");
+		Gdk.Pixbuf icnTagsDatabaseIcon =  new Gdk.Pixbuf(this.GetType().Assembly, "Ideas.Scada.Server.Manager.Resources.Icons.Interface.16.database.svg");
 		
-		TreeViewColumn colApplication = new TreeViewColumn ();
-		colApplication.Title = "Application";
- 
-		Gtk.CellRendererText cellApplication = new Gtk.CellRendererText ();
+		Gtk.CellRendererPixbuf cellIcon = new Gtk.CellRendererPixbuf ();
+		TreeViewColumn colIcon = new TreeViewColumn ();
+		colIcon.Title = "Icon";
+		colIcon.PackStart (cellIcon, true);
+  		colIcon.AddAttribute (cellIcon, "pixbuf", 0);
 		
-		colApplication.PackStart (cellApplication, true);
-  
-		trvApplicationTreeView.AppendColumn (colApplication);
+		Gtk.CellRendererText cellItem = new Gtk.CellRendererText ();
+		TreeViewColumn colItem = new TreeViewColumn ();
+		colItem.Title = "Application";
+		colItem.PackStart (cellIcon, false);
+		colItem.AddAttribute (cellIcon, "pixbuf", 0);
+		colItem.PackStart (cellItem, true);
+  		colItem.AddAttribute (cellItem, "text", 1);
+				
+		//trvApplicationTreeView.AppendColumn (colIcon);  
+		trvApplicationTreeView.AppendColumn (colItem);
 		
-		colApplication.AddAttribute (cellApplication, "text", 0);
-		
-		
-		TreeStore applicationTreeStore = new TreeStore(typeof (string));
-		Gtk.TreeIter applicationIter = applicationTreeStore.AppendValues (scadaApplication.Name);	
+		TreeStore applicationTreeStore = new TreeStore(typeof (Gdk.Pixbuf), typeof (string));
+			
+		Gtk.TreeIter applicationIter = 
+			applicationTreeStore.AppendValues(new object[] { icnApplicationIcon, scadaApplication.Name});
 		
 		foreach(Project project in scadaApplication.Projects)
 		{
-			Gtk.TreeIter projectIter = applicationTreeStore.AppendValues(applicationIter, project.Name);
+			Gtk.TreeIter projectIter = 
+				applicationTreeStore.AppendValues(
+                      applicationIter, 
+                      new object[] { icnProjectIcon, project.Name});
 			
-			Gtk.TreeIter screensIter = applicationTreeStore.AppendValues(projectIter, "Screens");
+			Gtk.TreeIter screensIter = 
+				applicationTreeStore.AppendValues(
+                      projectIter, 
+                      new object[] { icnFolderIcon, "Screens" });
 			
 			foreach(Screen screen in project.Screens)
 			{
-				applicationTreeStore.AppendValues(screensIter, screen.Name);
+				applicationTreeStore.AppendValues(
+					screensIter, 
+					new object[] { icnScreenIcon, screen.Name });
 			}
 			
-			Gtk.TreeIter tagsDatabaseIter = applicationTreeStore.AppendValues(projectIter, "Tags Database");
-			applicationTreeStore.AppendValues(tagsDatabaseIter, project.TagsDatabase.Name);
+			Gtk.TreeIter tagsDatabaseIter = 
+				applicationTreeStore.AppendValues(
+					projectIter, 
+					new object[] { icnFolderIcon, "Tags Database" });
 			
-			Gtk.TreeIter tagsWebserviceIter = applicationTreeStore.AppendValues(projectIter, "Tags WebService");
-			applicationTreeStore.AppendValues(tagsWebserviceIter, project.TagsWebService.Name);
+			applicationTreeStore.AppendValues(
+                      tagsDatabaseIter, 
+                      new object[] { icnTagsDatabaseIcon, project.TagsDatabase.Name });
+					
+			Gtk.TreeIter tagsWebserviceIter = 
+				applicationTreeStore.AppendValues(
+					projectIter, 
+					new object[] { icnFolderIcon, "Tags WebService"});
+			
+			applicationTreeStore.AppendValues(
+                      tagsWebserviceIter, 
+                      new object[] { icnTagsWebserviceIcon, project.TagsWebService.Name });
+		
 		}
 		
 		trvApplicationTreeView.Model = applicationTreeStore;
@@ -132,18 +177,35 @@ public partial class MainWindow : Gtk.Window
 	
 	private void startServers()
 	{	
-		scadaApplication.Start();
+		ProcessStartInfo serverProcessInfo = new ProcessStartInfo();
+		serverProcessInfo.FileName = "/home/luiz/Projects/Ideas/Ideas.Scada.Server/bin/Debug/Ideas.Scada.Server.exe";
+		serverProcessInfo.Arguments = scadaApplication.FilePath;
+		serverProcessInfo.WorkingDirectory = System.IO.Path.GetDirectoryName(scadaApplication.FilePath);
+				
+		serverProcess = Process.Start(serverProcessInfo);
 		
 		tbbStopServer.Sensitive = true;
-		tbbStartServer.Sensitive = false;		
+		tbbStartServer.Sensitive = false;	
 	}
 	
 	private void stopServers()
 	{
-		scadaApplication.Stop();
-		
-		tbbStopServer.Sensitive = false;
-		tbbStartServer.Sensitive = true;
+		try
+		{
+			serverProcess.WaitForExit();
+		}
+		catch(Exception e)
+		{
+			serverProcess.Kill();
+		}
+		finally
+		{
+			serverProcess.Close();
+			serverProcess = null;
+			
+			tbbStopServer.Sensitive = false;
+			tbbStartServer.Sensitive = true;	
+		}
 	}
 	
 	private void openApplication()
@@ -177,6 +239,8 @@ public partial class MainWindow : Gtk.Window
 			// Load application's configuration file
 			LoadScadaFile(fileName);
 		}
+		
+		
 		
 		enableToolBarButtons();
 	}
@@ -226,6 +290,19 @@ public partial class MainWindow : Gtk.Window
 	{
 		stopServers();
 	}
+	
+	protected virtual void OnCloseActionActivated (object sender, System.EventArgs e)
+	{
+		closeApplication();
+	}
+	
+	protected virtual void OnSettingsActionActivated (object sender, System.EventArgs e)
+	{
+		Ideas.Scada.Server.Manager.Settings.SettingsMain settingsDialog = new Ideas.Scada.Server.Manager.Settings.SettingsMain();
+		settingsDialog.Show();
+	}
+	
+	
 	
 	
 	
