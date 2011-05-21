@@ -3,6 +3,7 @@ using Gtk;
 using System.Collections.Generic;
 using Ideas.Common;
 using Ideas.Server.Manager;
+using Ideas.Scada.Common.DataSources;
 
 public partial class MainWindow : Gtk.Window
 {
@@ -82,16 +83,16 @@ public partial class MainWindow : Gtk.Window
 		// Closes current application if any
 		closeApplication();
 		
-		TreeViewColumn artistColumn = new TreeViewColumn ();
-		artistColumn.Title = "Application";
+		TreeViewColumn colApplication = new TreeViewColumn ();
+		colApplication.Title = "Application";
  
-		Gtk.CellRendererText artistNameCell = new Gtk.CellRendererText ();
+		Gtk.CellRendererText cellApplication = new Gtk.CellRendererText ();
 		
-		artistColumn.PackStart (artistNameCell, true);
+		colApplication.PackStart (cellApplication, true);
   
-		trvApplicationTreeView.AppendColumn (artistColumn);
+		trvApplicationTreeView.AppendColumn (colApplication);
 		
-		artistColumn.AddAttribute (artistNameCell, "text", 0);		
+		colApplication.AddAttribute (cellApplication, "text", 0);
 		
 		
 		TreeStore applicationTreeStore = new TreeStore(typeof (string));

@@ -1,7 +1,4 @@
-using System;
 using Gtk;
-using Gdk;
-
 
 namespace Ideas.Server.Manager
 {
@@ -13,8 +10,6 @@ namespace Ideas.Server.Manager
 		
 		public static void Main (string[] args)
 		{
-			
-			
 			// Inicia a aplicacao
 			Application.Init ();
 			
