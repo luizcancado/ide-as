@@ -146,7 +146,7 @@ namespace Ideas.Common
 				
 				// Retrieves the Tags Database file path
 				tagsDatabaseToAdd.FilePath = project.FilePath + Path.DirectorySeparatorChar;
-				tagsDatabaseToAdd.FilePath += "screens" + Path.DirectorySeparatorChar;
+				tagsDatabaseToAdd.FilePath += Path.DirectorySeparatorChar;
 				tagsDatabaseToAdd.FilePath += nodePath;
 				
 				// Retrieves the Tags Database source type
@@ -188,6 +188,7 @@ namespace Ideas.Common
 			foreach(Project project in this.Projects)
 			{
 				project.TagsWebService.Start();
+				project.TagsDatabase.Start();
 			}		
 		}
 				
@@ -196,6 +197,7 @@ namespace Ideas.Common
 			foreach(Project project in this.Projects)
 			{
 				project.TagsWebService.Stop();
+				project.TagsDatabase.Stop();
 			}	
 		}
 		
