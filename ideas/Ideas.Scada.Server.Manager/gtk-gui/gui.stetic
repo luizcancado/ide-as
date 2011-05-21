@@ -15,6 +15,42 @@
         <property name="Image">stock:gtk-about Menu</property>
       </source>
     </icon-set>
+    <icon-set id="tagsdatabase">
+      <source>
+        <property name="Image">file:./Resources/Icons/Interface/16/database.svg</property>
+      </source>
+    </icon-set>
+    <icon-set id="folder">
+      <source>
+        <property name="Image">file:./Resources/Icons/Interface/16/folder.svg</property>
+      </source>
+    </icon-set>
+    <icon-set id="tagswebservice">
+      <source>
+        <property name="Image">file:./Resources/Icons/Interface/16/webservice.svg</property>
+      </source>
+    </icon-set>
+    <icon-set id="screen">
+      <source>
+        <property name="Image">file:./Resources/Icons/Interface/16/screen.svg</property>
+      </source>
+    </icon-set>
+    <icon-set id="scada">
+      <source>
+        <property name="Image">file:./Resources/Icons/Interface/16/scada.png</property>
+      </source>
+    </icon-set>
+    <icon-set id="icon">
+      <source>
+        <property name="Image">file:./Resources/Icons/icon_16x16.png</property>
+      </source>
+      <source>
+        <property name="Image">file:./Resources/Icons/icon_24x24.png</property>
+      </source>
+      <source>
+        <property name="Image">file:./Resources/Icons/icon_32x32.png</property>
+      </source>
+    </icon-set>
   </icon-factory>
   <widget class="Gtk.Window" id="MainWindow" design-size="607 419">
     <action-group name="Default">

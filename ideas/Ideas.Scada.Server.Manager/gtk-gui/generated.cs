@@ -13,6 +13,27 @@ namespace Stetic
 				global::Gtk.IconFactory w1 = new global::Gtk.IconFactory ();
 				global::Gtk.IconSet w2 = new global::Gtk.IconSet (global::Stetic.IconLoader.LoadIcon (iconRenderer, "gtk-about", global::Gtk.IconSize.Menu));
 				w1.Add ("gtk-about", w2);
+				global::Gtk.IconSet w3 = new global::Gtk.IconSet (new global::Gdk.Pixbuf (global::System.IO.Path.Combine (global::System.AppDomain.CurrentDomain.BaseDirectory, "./Resources/Icons/Interface/16/database.svg")));
+				w1.Add ("tagsdatabase", w3);
+				global::Gtk.IconSet w4 = new global::Gtk.IconSet (new global::Gdk.Pixbuf (global::System.IO.Path.Combine (global::System.AppDomain.CurrentDomain.BaseDirectory, "./Resources/Icons/Interface/16/folder.svg")));
+				w1.Add ("folder", w4);
+				global::Gtk.IconSet w5 = new global::Gtk.IconSet (new global::Gdk.Pixbuf (global::System.IO.Path.Combine (global::System.AppDomain.CurrentDomain.BaseDirectory, "./Resources/Icons/Interface/16/webservice.svg")));
+				w1.Add ("tagswebservice", w5);
+				global::Gtk.IconSet w6 = new global::Gtk.IconSet (new global::Gdk.Pixbuf (global::System.IO.Path.Combine (global::System.AppDomain.CurrentDomain.BaseDirectory, "./Resources/Icons/Interface/16/screen.svg")));
+				w1.Add ("screen", w6);
+				global::Gtk.IconSet w7 = new global::Gtk.IconSet (new global::Gdk.Pixbuf (global::System.IO.Path.Combine (global::System.AppDomain.CurrentDomain.BaseDirectory, "./Resources/Icons/Interface/16/scada.png")));
+				w1.Add ("scada", w7);
+				global::Gtk.IconSet w8 = new global::Gtk.IconSet ();
+				global::Gtk.IconSource w9 = new global::Gtk.IconSource ();
+				w9.Pixbuf = new global::Gdk.Pixbuf (global::System.IO.Path.Combine (global::System.AppDomain.CurrentDomain.BaseDirectory, "./Resources/Icons/icon_16x16.png"));
+				w8.AddSource (w9);
+				global::Gtk.IconSource w10 = new global::Gtk.IconSource ();
+				w10.Pixbuf = new global::Gdk.Pixbuf (global::System.IO.Path.Combine (global::System.AppDomain.CurrentDomain.BaseDirectory, "./Resources/Icons/icon_24x24.png"));
+				w8.AddSource (w10);
+				global::Gtk.IconSource w11 = new global::Gtk.IconSource ();
+				w11.Pixbuf = new global::Gdk.Pixbuf (global::System.IO.Path.Combine (global::System.AppDomain.CurrentDomain.BaseDirectory, "./Resources/Icons/icon_32x32.png"));
+				w8.AddSource (w11);
+				w1.Add ("icon", w8);
 				w1.AddDefault ();
 			}
 		}
