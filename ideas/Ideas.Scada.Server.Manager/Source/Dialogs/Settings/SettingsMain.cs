@@ -20,7 +20,7 @@ namespace Ideas.Scada.Server.Manager.Settings
 		
 		private void CreateSettingsTree ()
 		{
-			Gtk.TreeStore trsSettingsTreeStore = new Gtk.TreeStore (typeof (string));
+			Gtk.TreeStore trsSettingsTreeStore = new Gtk.TreeStore (typeof (Gdk.Pixbuf), typeof (string));
 			
 			Gtk.CellRendererPixbuf celSettingsTreeItemIcon = new Gtk.CellRendererPixbuf();
 			Gtk.CellRendererText celSettingsTreeItemText = new Gtk.CellRendererText();

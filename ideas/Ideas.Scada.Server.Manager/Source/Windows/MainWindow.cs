@@ -79,7 +79,7 @@ public partial class MainWindow : Gtk.Window
 	
 	protected void UpdateTextView ()
 	{
-		//txvTextView
+
 	}
 	
 	protected void UpdateScadaApplicationsListTree ()
@@ -114,8 +114,9 @@ public partial class MainWindow : Gtk.Window
 		colItem.PackStart (cellItem, true);
   		colItem.AddAttribute (cellItem, "text", 1);
 				
-		//trvApplicationTreeView.AppendColumn (colIcon);  
+		// Add column to the TreeView
 		trvApplicationTreeView.AppendColumn (colItem);
+		
 		
 		TreeStore applicationTreeStore = new TreeStore(typeof (Gdk.Pixbuf), typeof (string));
 			
