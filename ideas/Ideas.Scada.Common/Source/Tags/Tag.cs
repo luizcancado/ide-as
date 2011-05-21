@@ -1,6 +1,6 @@
 using System;
 
-namespace Ideas.Common.Tags
+namespace Ideas.Scada.Common.Tags
 {
 	public struct Tag
 	{

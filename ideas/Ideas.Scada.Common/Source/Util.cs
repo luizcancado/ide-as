@@ -1,6 +1,6 @@
 using System;
 
-namespace Ideas.Common
+namespace Ideas.Scada.Common
 {
 	public static class Util
 	{

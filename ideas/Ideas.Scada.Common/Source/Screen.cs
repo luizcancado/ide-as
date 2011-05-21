@@ -3,7 +3,7 @@ using System.Xml;
 using System.IO;
 using System.Collections.Generic;
 
-namespace Ideas.Common
+namespace Ideas.Scada.Common
 {
 	public class Screen
 	{
@@ -19,6 +19,27 @@ namespace Ideas.Common
 		public Screen ()
 		{
 			
+		}
+		
+		public Screen (XmlNode xmlScreenNode)
+		{
+			string nodeName = xmlScreenNode.Attributes["name"].Value;
+			string nodePath = xmlScreenNode.Attributes["path"].Value;
+			string nodeStringType = xmlScreenNode.Attributes["type"].Value;
+			string nodeStringServerScriptLanguage = xmlScreenNode.Attributes["serverscriptlanguage"].Value;
+			string nodeStringClientScriptLanguage = xmlScreenNode.Attributes["clientscriptlanguage"].Value;
+			
+			IdeasScadaScreenType nodeType = convertScreenTypeFromString(nodeStringType);
+			IdeasScadaScreenServerScriptLanguage nodeServerScriptLanguage = convertScreenServerScriptLanguageFromString(nodeStringServerScriptLanguage);
+			IdeasScadaScreenClientScriptLanguage nodeClientScriptLanguage = convertScreenClientScriptLanguageFromString(nodeStringClientScriptLanguage);
+			
+			this.Name = nodeName;
+			this.FilePath = "screens" + Path.DirectorySeparatorChar;
+			this.FilePath += nodePath + Path.DirectorySeparatorChar;
+			
+			this.Type = nodeType;
+			this.ServerScriptLanguage = nodeServerScriptLanguage;
+			this.ClientScriptLanguage = nodeClientScriptLanguage;
 		}
 			
 	

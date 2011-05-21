@@ -2,9 +2,9 @@ using System;
 using System.Xml;
 using System.IO;
 using System.Collections.Generic;
-using Ideas.Common.Tags;
+using Ideas.Scada.Common.Tags;
 
-namespace Ideas.Common
+namespace Ideas.Scada.Common
 {
 	public class ScadaApplication
 	{
@@ -68,118 +68,9 @@ namespace Ideas.Common
 			
 			foreach(XmlNode node in nodesList)
 			{
-				string nodeName = node.Attributes["name"].Value;
-				string nodePath = node.Attributes["path"].Value;
-				
-				Project projectToAdd = new Project();
-				projectToAdd.Name = nodeName;
-				projectToAdd.FilePath = this.RootPath + Path.DirectorySeparatorChar;
-				projectToAdd.FilePath += nodePath + Path.DirectorySeparatorChar;
-				
-				foreach(XmlNode childNode in node.ChildNodes)
-				{
-					LoadProjectScreen(childNode, projectToAdd);
-					LoadProjectTagsDatabase(childNode, projectToAdd);
-					LoadProjectTagsWebservice(childNode, projectToAdd);
-					
-				}
+				Project projectToAdd = new Project(node);
 				
 				Projects.Add(projectToAdd);
-			}
-		}
-		
-		/// <summary>
-		/// Load a screen configuration configuration if it is a correspondant Xml node
-		/// </summary>
-		/// <param name="xmlProjectNode">
-		/// A <see cref="XmlNode"/>
-		/// </param>
-		private void LoadProjectScreen(XmlNode xmlScreenNode, Project project)
-		{
-			if(xmlScreenNode.Name.ToLower() == "screen")
-			{
-				Screen screenToAdd = new Screen();		
-				
-				string nodeName = xmlScreenNode.Attributes["name"].Value;
-				string nodePath = xmlScreenNode.Attributes["path"].Value;
-				string nodeStringType = xmlScreenNode.Attributes["type"].Value;
-				string nodeStringServerScriptLanguage = xmlScreenNode.Attributes["serverscriptlanguage"].Value;
-				string nodeStringClientScriptLanguage = xmlScreenNode.Attributes["clientscriptlanguage"].Value;
-				
-				IdeasScadaScreenType nodeType = Screen.convertScreenTypeFromString(nodeStringType);
-				IdeasScadaScreenServerScriptLanguage nodeServerScriptLanguage = Screen.convertScreenServerScriptLanguageFromString(nodeStringServerScriptLanguage);
-				IdeasScadaScreenClientScriptLanguage nodeClientScriptLanguage = Screen.convertScreenClientScriptLanguageFromString(nodeStringClientScriptLanguage);
-				
-				screenToAdd.Name = nodeName;
-				screenToAdd.FilePath = this.FilePath + "screens" + Path.DirectorySeparatorChar;
-				screenToAdd.FilePath += nodePath + Path.DirectorySeparatorChar;
-				
-				screenToAdd.Type = nodeType;
-				screenToAdd.ServerScriptLanguage = nodeServerScriptLanguage;
-				screenToAdd.ClientScriptLanguage = nodeClientScriptLanguage;
-				
-				project.Screens.Add(screenToAdd);
-			}
-		}
-		
-		/// <summary>
-		/// Load the Tags Database configuration if it is a correspondant Xml node
-		/// </summary>
-		/// <param name="xmlProjectNode">
-		/// A <see cref="XmlNode"/>
-		/// </param>
-		private void LoadProjectTagsDatabase(XmlNode xmlTagsDatabasetNode, Project project)
-		{
-			if(xmlTagsDatabasetNode.Name.ToLower() == "tagsdatabase")
-			{
-				// Instantiate a new tag database to be added to the project
-				DataBase tagsDatabaseToAdd = new DataBase();
-				
-				string nodeName = xmlTagsDatabasetNode.Attributes["name"].Value;
-				string nodePath = xmlTagsDatabasetNode.Attributes["path"].Value;
-				string nodeStringSourceType = xmlTagsDatabasetNode.Attributes["type"].Value;
-				
-				IdeasScadaTagsDataBaseSourceType nodeSourceType = DataBase.convertSourceTypeFromString(nodeStringSourceType);
-				
-				// Retrieves the Tags Database name
-				tagsDatabaseToAdd.Name = nodeName;
-				
-				// Retrieves the Tags Database file path
-				tagsDatabaseToAdd.FilePath = project.FilePath + Path.DirectorySeparatorChar;
-				tagsDatabaseToAdd.FilePath += Path.DirectorySeparatorChar;
-				tagsDatabaseToAdd.FilePath += nodePath;
-				
-				// Retrieves the Tags Database source type
-				tagsDatabaseToAdd.SourceType = nodeSourceType;
-				
-				// Adds the new tags database to the current project
-				project.TagsDatabase = tagsDatabaseToAdd;
-			}
-		}
-		
-		/// <summary>
-		/// Load the Tags Webservice configuration if it is a correspondant Xml node
-		/// </summary>
-		/// <param name="xmlProjectNode">
-		/// A <see cref="XmlNode"/>
-		/// </param>
-		private void LoadProjectTagsWebservice(XmlNode xmlTagsWebserviceNode, Project project)
-		{
-			if(xmlTagsWebserviceNode.Name.ToLower() == "tagswebservice")
-			{
-				// Instantiate a new tag database to be added to the project
-				WebService tagsWebserviceToAdd = new WebService();
-				
-				string nodeName = xmlTagsWebserviceNode.Attributes["name"].Value;
-				string nodeServerPort = xmlTagsWebserviceNode.Attributes["port"].Value;
-				string nodeServerAddress = xmlTagsWebserviceNode.Attributes["address"].Value;
-						
-				tagsWebserviceToAdd.Name = nodeName;
-				tagsWebserviceToAdd.ServerPort = Convert.ToInt32(nodeServerPort);
-				tagsWebserviceToAdd.ServerAddress = nodeServerAddress;
-				tagsWebserviceToAdd.ServerRootPath = project.FilePath + "screens";
-								
-				project.TagsWebService = tagsWebserviceToAdd;
 			}
 		}
 		

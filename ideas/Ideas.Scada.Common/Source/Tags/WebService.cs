@@ -1,8 +1,10 @@
+using System;
 using System.Net;
+using System.Xml;
 using Mono.WebServer;
 
 
-namespace Ideas.Common.Tags
+namespace Ideas.Scada.Common.Tags
 {
 	public class WebService
 	{
@@ -18,6 +20,18 @@ namespace Ideas.Common.Tags
 		public WebService ()
 		{
 			
+		}
+		
+		public WebService (XmlNode xmlTagsWebserviceNode)
+		{
+			string nodeName = xmlTagsWebserviceNode.Attributes["name"].Value;
+			string nodeServerPort = xmlTagsWebserviceNode.Attributes["port"].Value;
+			string nodeServerAddress = xmlTagsWebserviceNode.Attributes["address"].Value;
+					
+			this.Name = nodeName;
+			this.ServerPort = Convert.ToInt32(nodeServerPort);
+			this.ServerAddress = nodeServerAddress;
+			this.ServerRootPath = "screens";
 		}
 		
 		#region PUBLIC METHODS

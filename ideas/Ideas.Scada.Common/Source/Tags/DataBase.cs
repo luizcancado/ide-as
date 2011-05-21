@@ -1,13 +1,11 @@
 using System;
-using System.Xml;
 using System.IO;
-using Ideas.Common;
-using System.Collections.Generic;
-using Mono.Data.Sqlite;
 using System.Data;
+using System.Xml;
+using Mono.Data.Sqlite;
 using LumenWorks.Framework.IO.Csv;
 
-namespace Ideas.Common.Tags
+namespace Ideas.Scada.Common.Tags
 {
 	public class DataBase
 	{
@@ -23,7 +21,26 @@ namespace Ideas.Common.Tags
 		/// </summary>	
 		public DataBase ()
 		{
-					
+						
+		}
+		
+		public DataBase (XmlNode xmlTagsDatabasetNode)
+		{
+			string nodeName = xmlTagsDatabasetNode.Attributes["name"].Value;
+			string nodePath = xmlTagsDatabasetNode.Attributes["path"].Value;
+			string nodeStringSourceType = xmlTagsDatabasetNode.Attributes["type"].Value;
+			
+			IdeasScadaTagsDataBaseSourceType nodeSourceType = DataBase.convertSourceTypeFromString(nodeStringSourceType);
+			
+			// Retrieves the Tags Database name
+			this.Name = nodeName;
+			
+			// Retrieves the Tags Database file path
+			this.FilePath = Path.DirectorySeparatorChar.ToString();
+			this.FilePath += nodePath;
+			
+			// Retrieves the Tags Database source type
+			this.SourceType = nodeSourceType;
 		}
 			
 		~DataBase ()
