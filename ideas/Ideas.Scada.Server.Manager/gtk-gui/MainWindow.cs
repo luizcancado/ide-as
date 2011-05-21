@@ -4,27 +4,49 @@
 public partial class MainWindow
 {
 	private global::Gtk.UIManager UIManager;
+
 	private global::Gtk.Action FileAction;
+
 	private global::Gtk.Action EditAction;
+
 	private global::Gtk.Action HelpAction;
+
 	private global::Gtk.Action aboutAction;
+
 	private global::Gtk.Action quitAction;
+
 	private global::Gtk.Action openAction;
+
 	private global::Gtk.Action quitAction1;
+
 	private global::Gtk.Action closeAction;
+
 	private global::Gtk.Action tbbOpen;
+
 	private global::Gtk.Action tbbClose;
+
 	private global::Gtk.Action tbbStartServer;
+
 	private global::Gtk.Action tbbStopServer;
+
 	private global::Gtk.Action SettingsAction;
+
 	private global::Gtk.VBox vbox1;
+
 	private global::Gtk.MenuBar menubar3;
+
 	private global::Gtk.Toolbar tbrMenuBar;
+
 	private global::Gtk.HPaned hpaned1;
+
 	private global::Gtk.ScrolledWindow GtkScrolledWindow;
+
 	private global::Gtk.TreeView trvApplicationTreeView;
+
 	private global::Gtk.ScrolledWindow GtkScrolledWindow1;
+
 	private global::Gtk.TextView txvTextView;
+
 	private global::Gtk.Statusbar statusbar1;
 
 	protected virtual void Build ()
@@ -87,19 +109,16 @@ public partial class MainWindow
 		this.vbox1 = new global::Gtk.VBox ();
 		this.vbox1.Name = "vbox1";
 		// Container child vbox1.Gtk.Box+BoxChild
-		this.UIManager.AddUiFromString (@"<ui><menubar name='menubar3'><menu name='FileAction' action='FileAction'><menuitem name='openAction' action='openAction'/><menuitem name='closeAction' action='closeAction'/><separator/><menuitem name='quitAction1' action='quitAction1'/></menu><menu name='EditAction' action='EditAction'><menuitem name='SettingsAction' action='SettingsAction'/></menu><menu name='HelpAction' action='HelpAction'><menuitem name='aboutAction' action='aboutAction'/></menu></menubar></ui>");
+		this.UIManager.AddUiFromString ("<ui><menubar name='menubar3'><menu name='FileAction' action='FileAction'><menuitem name='openAction' action='openAction'/><menuitem name='closeAction' action='closeAction'/><separator/><menuitem name='quitAction1' action='quitAction1'/></menu><menu name='EditAction' action='EditAction'><menuitem name='SettingsAction' action='SettingsAction'/></menu><menu name='HelpAction' action='HelpAction'><menuitem name='aboutAction' action='aboutAction'/></menu></menubar></ui>");
 		this.menubar3 = ((global::Gtk.MenuBar)(this.UIManager.GetWidget ("/menubar3")));
 		this.menubar3.Name = "menubar3";
 		this.vbox1.Add (this.menubar3);
-		global::Gtk.Box.BoxChild w2 = ((global::Gtk.Box.BoxChild)(this.vbox1 [this.menubar3]));
+		global::Gtk.Box.BoxChild w2 = ((global::Gtk.Box.BoxChild)(this.vbox1[this.menubar3]));
 		w2.Position = 0;
 		w2.Expand = false;
 		w2.Fill = false;
 		// Container child vbox1.Gtk.Box+BoxChild
-		this.UIManager.AddUiFromString ("<ui><toolbar name=\'tbrMenuBar\'><toolitem name=\'tbbOpen\' action=\'tbbOpen\'/><toolit" +
-                "em name=\'tbbClose\' action=\'tbbClose\'/><toolitem name=\'tbbStartServer\' action=\'tb" +
-                "bStartServer\'/><toolitem name=\'tbbStopServer\' action=\'tbbStopServer\'/></toolbar>" +
-                "</ui>");
+		this.UIManager.AddUiFromString ("<ui><toolbar name='tbrMenuBar'><toolitem name='tbbOpen' action='tbbOpen'/><toolitem name='tbbClose' action='tbbClose'/><toolitem name='tbbStartServer' action='tbbStartServer'/><toolitem name='tbbStopServer' action='tbbStopServer'/></toolbar></ui>");
 		this.tbrMenuBar = ((global::Gtk.Toolbar)(this.UIManager.GetWidget ("/tbrMenuBar")));
 		this.tbrMenuBar.TooltipMarkup = "Start Server";
 		this.tbrMenuBar.Name = "tbrMenuBar";
@@ -107,7 +126,7 @@ public partial class MainWindow
 		this.tbrMenuBar.ToolbarStyle = ((global::Gtk.ToolbarStyle)(0));
 		this.tbrMenuBar.IconSize = ((global::Gtk.IconSize)(1));
 		this.vbox1.Add (this.tbrMenuBar);
-		global::Gtk.Box.BoxChild w3 = ((global::Gtk.Box.BoxChild)(this.vbox1 [this.tbrMenuBar]));
+		global::Gtk.Box.BoxChild w3 = ((global::Gtk.Box.BoxChild)(this.vbox1[this.tbrMenuBar]));
 		w3.Position = 1;
 		w3.Expand = false;
 		w3.Fill = false;
@@ -127,7 +146,7 @@ public partial class MainWindow
 		this.trvApplicationTreeView.HeadersVisible = false;
 		this.GtkScrolledWindow.Add (this.trvApplicationTreeView);
 		this.hpaned1.Add (this.GtkScrolledWindow);
-		global::Gtk.Paned.PanedChild w5 = ((global::Gtk.Paned.PanedChild)(this.hpaned1 [this.GtkScrolledWindow]));
+		global::Gtk.Paned.PanedChild w5 = ((global::Gtk.Paned.PanedChild)(this.hpaned1[this.GtkScrolledWindow]));
 		w5.Resize = false;
 		// Container child hpaned1.Gtk.Paned+PanedChild
 		this.GtkScrolledWindow1 = new global::Gtk.ScrolledWindow ();
@@ -140,14 +159,14 @@ public partial class MainWindow
 		this.GtkScrolledWindow1.Add (this.txvTextView);
 		this.hpaned1.Add (this.GtkScrolledWindow1);
 		this.vbox1.Add (this.hpaned1);
-		global::Gtk.Box.BoxChild w8 = ((global::Gtk.Box.BoxChild)(this.vbox1 [this.hpaned1]));
+		global::Gtk.Box.BoxChild w8 = ((global::Gtk.Box.BoxChild)(this.vbox1[this.hpaned1]));
 		w8.Position = 2;
 		// Container child vbox1.Gtk.Box+BoxChild
 		this.statusbar1 = new global::Gtk.Statusbar ();
 		this.statusbar1.Name = "statusbar1";
 		this.statusbar1.Spacing = 6;
 		this.vbox1.Add (this.statusbar1);
-		global::Gtk.Box.BoxChild w9 = ((global::Gtk.Box.BoxChild)(this.vbox1 [this.statusbar1]));
+		global::Gtk.Box.BoxChild w9 = ((global::Gtk.Box.BoxChild)(this.vbox1[this.statusbar1]));
 		w9.Position = 3;
 		w9.Expand = false;
 		w9.Fill = false;

@@ -5,6 +5,7 @@ using Ideas.Scada.Common;
 using Ideas.Server.Manager;
 using Ideas.Scada.Common.DataSources;
 using System.Diagnostics;
+using System.IO;
 
 public partial class MainWindow : Gtk.Window
 {
@@ -79,6 +80,10 @@ public partial class MainWindow : Gtk.Window
 	
 	protected void UpdateTextView ()
 	{
+		StreamReader scadaFile = new StreamReader(scadaApplication.FilePath);
+		string fileString = scadaFile.ReadToEnd();
+		
+		txvTextView.
 
 	}
 	
@@ -93,12 +98,12 @@ public partial class MainWindow : Gtk.Window
 		// Closes current application if any
 		closeApplication();
 
-		Gdk.Pixbuf icnApplicationIcon = IconFactory.LookupDefault("scada").RenderIcon(null, TextDirection.None, StateType.Active, IconSize.Menu, null, null);
-		Gdk.Pixbuf icnFolderIcon = IconFactory.LookupDefault("folder").RenderIcon(null, TextDirection.None, StateType.Active, IconSize.Menu, null, null);
-		Gdk.Pixbuf icnScreenIcon =  IconFactory.LookupDefault("screen").RenderIcon(null, TextDirection.None, StateType.Active, IconSize.Menu, null, null);
-		Gdk.Pixbuf icnProjectIcon = IconFactory.LookupDefault("folder").RenderIcon(null, TextDirection.None, StateType.Active, IconSize.Menu, null, null);
-		Gdk.Pixbuf icnTagsWebserviceIcon = IconFactory.LookupDefault("tagswebservice").RenderIcon(null, TextDirection.None, StateType.Active, IconSize.Menu, null, null);
-		Gdk.Pixbuf icnTagsDatabaseIcon =  IconFactory.LookupDefault("tagsdatabase").RenderIcon(null, TextDirection.None, StateType.Active, IconSize.Menu, null, null);
+		Gdk.Pixbuf icnApplicationIcon = IconFactory.LookupDefault("scada").RenderIcon(new Style(), TextDirection.None, StateType.Active, IconSize.Menu, null, null);
+		Gdk.Pixbuf icnFolderIcon = IconFactory.LookupDefault("folder").RenderIcon(new Style(), TextDirection.None, StateType.Active, IconSize.Menu, null, null);
+		Gdk.Pixbuf icnScreenIcon =  IconFactory.LookupDefault("screen").RenderIcon(new Style(), TextDirection.None, StateType.Active, IconSize.Menu, null, null);
+		Gdk.Pixbuf icnProjectIcon = IconFactory.LookupDefault("folder").RenderIcon(new Style(), TextDirection.None, StateType.Active, IconSize.Menu, null, null);
+		Gdk.Pixbuf icnTagsWebserviceIcon = IconFactory.LookupDefault("tagswebservice").RenderIcon(new Style(), TextDirection.None, StateType.Active, IconSize.Menu, null, null);
+		Gdk.Pixbuf icnTagsDatabaseIcon =  IconFactory.LookupDefault("tagsdatabase").RenderIcon(new Style(), TextDirection.None, StateType.Active, IconSize.Menu, null, null);
 		
 		Gtk.CellRendererPixbuf cellIcon = new Gtk.CellRendererPixbuf ();
 		TreeViewColumn colIcon = new TreeViewColumn ();
