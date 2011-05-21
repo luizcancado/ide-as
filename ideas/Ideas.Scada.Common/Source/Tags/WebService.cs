@@ -30,10 +30,11 @@ namespace Ideas.Common.Tags
 		{		
 			XSPWebSource websource = new XSPWebSource(IPAddress.Any, this.ServerPort);
 			
-			webAppServer = new ApplicationServer(websource, serverRootPath);
+			webAppServer = new ApplicationServer(websource);
 					
 			// Adds application to the webserver
-			webAppServer.AddApplication("localhost", this.ServerPort, "/", serverRootPath);
+			//webAppServer.AddApplication("localhost", this.ServerPort, "/", serverRootPath);
+			webAppServer.AddApplicationsFromCommandLine(this.ServerPort + ":/:" + serverRootPath);
 			
 			// Starts server instance
 			webAppServer.Start(true);
@@ -47,6 +48,7 @@ namespace Ideas.Common.Tags
 			if(webAppServer != null)
 			{
 				webAppServer.Stop();
+				webAppServer.UnloadAll();
 			}
 		}
 		
