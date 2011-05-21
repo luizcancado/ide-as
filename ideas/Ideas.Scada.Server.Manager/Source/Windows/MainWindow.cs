@@ -93,12 +93,12 @@ public partial class MainWindow : Gtk.Window
 		// Closes current application if any
 		closeApplication();
 
-		Gdk.Pixbuf icnApplicationIcon = new Gdk.Pixbuf(this.GetType().Assembly, "Ideas.Scada.Server.Manager.Resources.Icons.Interface.16.scada.png");
-		Gdk.Pixbuf icnFolderIcon =  new Gdk.Pixbuf(this.GetType().Assembly, "Ideas.Scada.Server.Manager.Resources.Icons.Interface.16.folder.svg");
-		Gdk.Pixbuf icnScreenIcon =  new Gdk.Pixbuf(this.GetType().Assembly, "Ideas.Scada.Server.Manager.Resources.Icons.Interface.16.screen.svg");
-		Gdk.Pixbuf icnProjectIcon =  new Gdk.Pixbuf(this.GetType().Assembly, "Ideas.Scada.Server.Manager.Resources.Icons.Interface.16.folder.svg");
-		Gdk.Pixbuf icnTagsWebserviceIcon =  new Gdk.Pixbuf(this.GetType().Assembly, "Ideas.Scada.Server.Manager.Resources.Icons.Interface.16.webservice.svg");
-		Gdk.Pixbuf icnTagsDatabaseIcon =  new Gdk.Pixbuf(this.GetType().Assembly, "Ideas.Scada.Server.Manager.Resources.Icons.Interface.16.database.svg");
+		Gdk.Pixbuf icnApplicationIcon = IconFactory.LookupDefault("scada").RenderIcon(null, TextDirection.None, StateType.Active, IconSize.Menu, null, null);
+		Gdk.Pixbuf icnFolderIcon = IconFactory.LookupDefault("folder").RenderIcon(null, TextDirection.None, StateType.Active, IconSize.Menu, null, null);
+		Gdk.Pixbuf icnScreenIcon =  IconFactory.LookupDefault("screen").RenderIcon(null, TextDirection.None, StateType.Active, IconSize.Menu, null, null);
+		Gdk.Pixbuf icnProjectIcon = IconFactory.LookupDefault("folder").RenderIcon(null, TextDirection.None, StateType.Active, IconSize.Menu, null, null);
+		Gdk.Pixbuf icnTagsWebserviceIcon = IconFactory.LookupDefault("tagswebservice").RenderIcon(null, TextDirection.None, StateType.Active, IconSize.Menu, null, null);
+		Gdk.Pixbuf icnTagsDatabaseIcon =  IconFactory.LookupDefault("tagsdatabase").RenderIcon(null, TextDirection.None, StateType.Active, IconSize.Menu, null, null);
 		
 		Gtk.CellRendererPixbuf cellIcon = new Gtk.CellRendererPixbuf ();
 		TreeViewColumn colIcon = new TreeViewColumn ();
