@@ -35,15 +35,23 @@
     <Reference Include="System.Xml" />
     <Reference Include="LumenWorks.Framework.IO, Version=3.7.2.0, Culture=neutral, PublicKeyToken=null">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>Libraries\LumenWorks.Framework.IO.dll</HintPath>
+      <HintPath>..\References\LumenWorks.Framework.IO.dll</HintPath>
     </Reference>
     <Reference Include="Mono.Data.Sqlite, Version=2.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>Libraries\Mono.Data.Sqlite.dll</HintPath>
+      <HintPath>..\References\Mono.Data.Sqlite.dll</HintPath>
+    </Reference>
+    <Reference Include="NDesk.Options, Version=0.2.1.0, Culture=neutral, PublicKeyToken=null">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\References\NDesk.Options.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.Security, Version=2.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\References\Mono.Security.dll</HintPath>
     </Reference>
     <Reference Include="Mono.WebServer2, Version=0.2.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>Libraries\Mono.WebServer2.dll</HintPath>
+      <HintPath>..\References\Mono.WebServer2.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
