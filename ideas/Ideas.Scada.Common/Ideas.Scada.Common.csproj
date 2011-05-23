@@ -72,29 +72,7 @@
   <ItemGroup>
     <Folder Include="Source\" />
     <Folder Include="Source\Tags\" />
-    <Folder Include="Resources\" />
-    <Folder Include="Resources\TagsWebservice\" />
     <Folder Include="Properties\" />
     <Folder Include="Source\DataSources\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\TagsWebservice\TagsServer.asmx">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Resources\TagsWebservice\Default.aspx">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Resources\TagsWebservice\Default.aspx.cs">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Resources\TagsWebservice\Global.asax">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Resources\TagsWebservice\web.config">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Resources\TagsWebservice\Global.asax.cs">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
 </Project>

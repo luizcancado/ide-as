@@ -46,6 +46,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Source\Kernel.cs" />
     <Compile Include="Source\ServerConfiguration.cs" />
+    <Compile Include="Resources\TagsWebservice\Default.aspx.cs" />
+    <Compile Include="Resources\TagsWebservice\Global.asax.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -58,5 +60,9 @@
     <None Include="..\References\sqlite3.dll">
       <Link>sqlite3.dll</Link>
     </None>
+    <None Include="Resources\TagsWebservice\Default.aspx" />
+    <None Include="Resources\TagsWebservice\Global.asax" />
+    <None Include="Resources\TagsWebservice\TagsServer.asmx" />
+    <None Include="Resources\TagsWebservice\web.config" />
   </ItemGroup>
 </Project>
