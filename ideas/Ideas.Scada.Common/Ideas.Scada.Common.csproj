@@ -35,15 +35,15 @@
     <Reference Include="System.Xml" />
     <Reference Include="LumenWorks.Framework.IO, Version=3.7.2.0, Culture=neutral, PublicKeyToken=null">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>References\LumenWorks.Framework.IO.dll</HintPath>
-    </Reference>
-    <Reference Include="Mono.WebServer2, Version=0.2.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>References\Mono.WebServer2.dll</HintPath>
+      <HintPath>Libraries\LumenWorks.Framework.IO.dll</HintPath>
     </Reference>
     <Reference Include="Mono.Data.Sqlite, Version=2.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>References\Mono.Data.Sqlite.dll</HintPath>
+      <HintPath>Libraries\Mono.Data.Sqlite.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.WebServer2, Version=0.2.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Libraries\Mono.WebServer2.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -56,6 +56,9 @@
     <Compile Include="Source\Tags\WebService.cs" />
     <Compile Include="Source\Tags\Tag.cs" />
     <Compile Include="Source\DataSources\OpenOPC.cs" />
+    <Compile Include="Source\DataSources\DataSourceType.cs" />
+    <Compile Include="Source\DataSources\DataSource.cs" />
+    <Compile Include="Source\Tags\TagGroup.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -67,6 +70,23 @@
     <Folder Include="Source\DataSources\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\TagsWebservice\TagsServer.asmx" />
+    <None Include="Resources\TagsWebservice\TagsServer.asmx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\TagsWebservice\Default.aspx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\TagsWebservice\Default.aspx.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\TagsWebservice\Global.asax">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\TagsWebservice\web.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\TagsWebservice\Global.asax.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 </Project>

@@ -1,65 +1,44 @@
 using System;
-using System.IO;
 using System.Data;
+using System.IO;
 using System.Xml;
 using Mono.Data.Sqlite;
-using LumenWorks.Framework.IO.Csv;
+using Ideas.Scada.Common.DataSources;
+using System.Collections.Generic;
 
 namespace Ideas.Scada.Common.Tags
 {
 	public class DataBase
 	{
-		private string name;
-		private string filePath;
-		private IdeasScadaTagsDataBaseSourceType sourceType;
+		#region MEMBERS
+			
 		private IDbConnection dbcon = null;
 		private IDbCommand dbcmd = null;
 		private string connectionString = "URI=file::memory:,version=3";
+		
+		#endregion
 		
 		/// <summary>
 		/// Constructs the class
 		/// </summary>	
 		public DataBase ()
 		{
-						
+			Start();			
 		}
-		
-		public DataBase (XmlNode xmlTagsDatabasetNode)
-		{
-			string nodeName = xmlTagsDatabasetNode.Attributes["name"].Value;
-			string nodePath = xmlTagsDatabasetNode.Attributes["path"].Value;
-			string nodeStringSourceType = xmlTagsDatabasetNode.Attributes["type"].Value;
-			
-			IdeasScadaTagsDataBaseSourceType nodeSourceType = DataBase.convertSourceTypeFromString(nodeStringSourceType);
-			
-			// Retrieves the Tags Database name
-			this.Name = nodeName;
-			
-			// Retrieves the Tags Database file path
-			this.FilePath = Path.DirectorySeparatorChar.ToString();
-			this.FilePath += nodePath;
-			
-			// Retrieves the Tags Database source type
-			this.SourceType = nodeSourceType;
-		}
-			
-		~DataBase ()
+				
+		~DataBase()
 		{
 			this.Stop();	
 		}
 		
-		public void Start()
+		private void Start()
 		{
 			dbcon = (IDbConnection) new SqliteConnection(connectionString);
 			dbcon.Open();
 			dbcmd = dbcon.CreateCommand();
-			
-			CreateDatabaseStructure();
-			
-			ReadSourceFile(); 
 		}
 		
-		public void Stop()
+		private void Stop()
 		{
 			if(dbcon != null)
 			{
@@ -74,157 +53,199 @@ namespace Ideas.Scada.Common.Tags
 			}
 		}
 		
-		void CreateDatabaseStructure ()
+		void CreateDatasourceStructure (string dataSourceName)
 		{
 			string sql = "";
-			sql += "CREATE TABLE tb"+ this.Name + " ( ";
-            sql += "TagName varchar(50), ";
-            sql += "DataType varchar(50), ";
+			sql += "CREATE TABLE tb" + dataSourceName + " ( ";
+            sql += "TagName varchar(200), ";
+			sql += "TagAddress varchar(200), ";
+            sql += "DataType varchar(200), ";
 			sql += "DateTimeUpdate DATETIME, ";
 			sql += "ClientAccess varchar(3), ";
 			sql += "EngUnits varchar(32), ";
-			sql += "Description varchar(255) ";
-			sql += " ); ";
-								
+			sql += "Description varchar(255), ";
+			sql += "Value varchar(255) ";
+			sql += "); ";
+			
+			dbcmd.Parameters.Clear();
 			dbcmd.CommandText = sql;
 			dbcmd.ExecuteNonQuery();
 		}
 
-		void ReadSourceFile ()
+		public void AddDataSource (DataSource datasource)
 		{
-			TextReader textReader = new StreamReader(this.FilePath);
-			CsvReader csvReader = new CsvReader(textReader, true, ',');
-					
-			while(csvReader.ReadNextRecord())
+			try
 			{
-				// Convert CSV record to Tag
-				Tag tag = new Tag();
-				tag.TagName = csvReader[0];
-				tag.DataType = csvReader[1];
-				tag.ClientAccess = csvReader[2];
-				tag.EngUnits = csvReader[3];
-				tag.Description = csvReader[4];
+				CreateDatasourceStructure(datasource.Name);
+				InsertTagsListToDatasource(datasource.Tags);
+			}
+			catch(Exception e)
+			{
+				string errorMessage = "Could not create database structure for datasource ";
+				errorMessage += "'" + datasource.Name + "'. ";
+				errorMessage += e.Message;
 				
-            	InsertTagToDatabase(tag);				
+				throw new Exception(errorMessage);
 			}
 		}
-
+		
+		private void InsertTagsListToDatasource(TagGroup tags)
+		{
+			foreach (Tag t in tags)
+			{
+				InsertTagToDatasource(t);
+			}
+		}
+		
 		/// <summary>
 		/// Insert tag information in memory database
 		/// </summary>
 		/// <param name="tag">
 		/// A <see cref="Tag"/>
 		/// </param>
-		void InsertTagToDatabase(Tag tag)
+		private void InsertTagToDatasource(Tag tag)
 		{
 			string sql = "";
-			sql += "INSERT INTO tb"+ this.Name + " ( ";
+			sql += "INSERT INTO tb" + tag.datasource + " ( ";
             sql += "TagName, ";
+			sql += "TagAddress, ";
             sql += "DataType, ";
 			sql += "DateTimeUpdate, ";
 			sql += "ClientAccess, ";
 			sql += "EngUnits, ";
-			sql += "Description ";
+			sql += "Description, ";
+			sql += "Value ";
 			sql += " ) values ( ";
 			sql += "@TagName, ";
+			sql += "@TagAddress, ";
             sql += "@DataType, ";
 			sql += "NULL, ";
 			sql += "@ClientAccess, ";
 			sql += "@EngUnits, ";
-			sql += "@Description ";
+			sql += "@Description, ";
+			sql += "NULL ";
 			sql += " );";
+					
+			dbcmd.Parameters.Clear();
 			
 			IDbDataParameter parTagName = dbcmd.CreateParameter();
 			parTagName.ParameterName = "TagName";
 			parTagName.DbType = DbType.String;
-			parTagName.Value = tag.TagName;
+			parTagName.Value = tag.name;
 			dbcmd.Parameters.Add(parTagName);
+			
+			IDbDataParameter parTagAddress = dbcmd.CreateParameter();
+			parTagAddress.ParameterName = "TagAddress";
+			parTagAddress.DbType = DbType.String;
+			parTagAddress.Value = tag.address;
+			dbcmd.Parameters.Add(parTagAddress);
 			
 			IDbDataParameter parDataType = dbcmd.CreateParameter();
 			parDataType.ParameterName = "DataType";
 			parDataType.DbType = DbType.String;
-			parDataType.Value = tag.DataType;
+			parDataType.Value = tag.datatype;
 			dbcmd.Parameters.Add(parDataType);
 			
 			IDbDataParameter parClientAccess = dbcmd.CreateParameter();
 			parClientAccess.ParameterName = "ClientAccess";
 			parClientAccess.DbType = DbType.String;
-			parClientAccess.Value = tag.ClientAccess;
+			parClientAccess.Value = tag.clientaccess;
 			dbcmd.Parameters.Add(parClientAccess);
 			
 			IDbDataParameter parEngUnits = dbcmd.CreateParameter();
 			parEngUnits.ParameterName = "EngUnits";
 			parEngUnits.DbType = DbType.String;
-			parEngUnits.Value = tag.EngUnits;
+			parEngUnits.Value = tag.engunits;
 			dbcmd.Parameters.Add(parEngUnits);
 			
 			IDbDataParameter parDescription = dbcmd.CreateParameter();
 			parDescription.ParameterName = "Description";
 			parDescription.DbType = DbType.String;
-			parDescription.Value = tag.Description;
+			parDescription.Value = tag.description;
 			dbcmd.Parameters.Add(parDescription);
 			
 			dbcmd.CommandText = sql;
 			dbcmd.ExecuteNonQuery();
 		}
 		
-		#region P R O P E R T I E S
-		
-		public string Name 
+		public void WriteTagsListValue(TagGroup tags)
 		{
-			get 
+			foreach (Tag t in tags)
 			{
-				return this.name;
-			}
-			set
-			{
-				this.name = value;
-			}
-		}
-
-		public string FilePath 
-		{
-			get 
-			{
-				return this.filePath;
-			}
-			set
-			{
-				this.filePath = value;
+				WriteTagValue(t);
 			}
 		}
 		
-		public IdeasScadaTagsDataBaseSourceType SourceType 
+		public void WriteTagValue(Tag tag)
 		{
-			get 
-			{
-				return this.sourceType;
-			}
-			set 
-			{
-				sourceType = value;
-			}
-		}		
+			string sql = "" +
+				"UPDATE tb" + tag.datasource + " SET " +
+				"Value = @Value " +
+				"WHERE " +
+				"TagName = @TagName ";
+			
+			dbcmd.Parameters.Clear();
+			
+			IDbDataParameter parTagName = dbcmd.CreateParameter();
+			parTagName.ParameterName = "TagName";
+			parTagName.DbType = DbType.String;
+			parTagName.Value = tag.name;
+			dbcmd.Parameters.Add(parTagName);
+			
+			IDbDataParameter parValue = dbcmd.CreateParameter();
+			parValue.ParameterName = "Value";
+			parValue.DbType = DbType.String;
+			parValue.Value = tag.value;
+			dbcmd.Parameters.Add(parValue);
+			
+			dbcmd.CommandText = sql;
+			dbcmd.ExecuteNonQuery();
+		}
 		
+		public void ReadTagsListValue(TagGroup tags)
+		{
+			for(int i = 0; i < tags.Count; i++)
+			{
+				Tag t = tags[i];
+				ReadTagValue(ref t);
+				
+			}
+		}
+		
+		public void ReadTagValue(ref Tag tag)
+		{
+			string sql = "" +
+				"INSERT INTO @Value " +
+				"SELECT Value " +
+			 	"FROM tb" + tag.datasource + " " +
+			 	"WHERE " +
+			 	"TagName = @TagName ";
+			
+			dbcmd.Parameters.Clear();
+			
+			IDbDataParameter parTagName = dbcmd.CreateParameter();
+			parTagName.ParameterName = "TagName";
+			parTagName.DbType = DbType.String;
+			parTagName.Value = tag.name;
+			dbcmd.Parameters.Add(parTagName);
+			
+			IDbDataParameter parValue = dbcmd.CreateParameter();
+			parValue.ParameterName = "Value";
+			parValue.Direction = ParameterDirection.Output;
+			parValue.DbType = DbType.String;
+			dbcmd.Parameters.Add(parValue);
+			
+			dbcmd.CommandText = sql;
+			dbcmd.ExecuteNonQuery();
+			
+			tag.value = parValue.Value.ToString();
+		}
+		
+		#region PROPERTIES
+		
+				
 		#endregion
 		
-		public static IdeasScadaTagsDataBaseSourceType convertSourceTypeFromString(string strSourceType)
-		{
-			switch(strSourceType.ToLower())
-			{
-				case "csv": 
-					return IdeasScadaTagsDataBaseSourceType.CSV;
-				default:
-					throw new Exception("Unkown server script language: " + strSourceType);
-			}		
-		}
 	}
-	
-		
-	public enum IdeasScadaTagsDataBaseSourceType
-	{
-		CSV
-	}
-	
 }
 

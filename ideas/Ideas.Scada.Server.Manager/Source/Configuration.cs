@@ -2,7 +2,7 @@ using System;
 using System.IO;
 using NDesk.Options;
 
-namespace Ideas.Server.Manager
+namespace Ideas.Scada.Server.Manager
 {
 	public class Configuration
 	{

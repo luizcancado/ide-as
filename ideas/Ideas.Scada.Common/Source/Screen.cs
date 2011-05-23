@@ -7,12 +7,16 @@ namespace Ideas.Scada.Common
 {
 	public class Screen
 	{
+		#region M E M B E R S
+		
 		private string name;
 		private string filePath;
 		private IdeasScadaScreenType type;
 		private IdeasScadaScreenServerScriptLanguage serverScriptLanguage;
 		private IdeasScadaScreenClientScriptLanguage clientScriptLanguage;
-			
+		
+		#endregion 
+		
 		/// <summary>
 		/// Constructs the class
 		/// </summary>	
@@ -21,10 +25,10 @@ namespace Ideas.Scada.Common
 			
 		}
 		
-		public Screen (XmlNode xmlScreenNode)
+		public Screen (XmlNode xmlScreenNode, string projectPath)
 		{
 			string nodeName = xmlScreenNode.Attributes["name"].Value;
-			string nodePath = xmlScreenNode.Attributes["path"].Value;
+			string nodePath = xmlScreenNode.Attributes["filename"].Value;
 			string nodeStringType = xmlScreenNode.Attributes["type"].Value;
 			string nodeStringServerScriptLanguage = xmlScreenNode.Attributes["serverscriptlanguage"].Value;
 			string nodeStringClientScriptLanguage = xmlScreenNode.Attributes["clientscriptlanguage"].Value;
@@ -34,7 +38,7 @@ namespace Ideas.Scada.Common
 			IdeasScadaScreenClientScriptLanguage nodeClientScriptLanguage = convertScreenClientScriptLanguageFromString(nodeStringClientScriptLanguage);
 			
 			this.Name = nodeName;
-			this.FilePath = "screens" + Path.DirectorySeparatorChar;
+			this.FilePath = projectPath + "screens" + Path.DirectorySeparatorChar;
 			this.FilePath += nodePath + Path.DirectorySeparatorChar;
 			
 			this.Type = nodeType;
@@ -84,7 +88,7 @@ namespace Ideas.Scada.Common
 			}
 		}
 		
-		#endregion
+		#endregion 
 		
 		
 		#region P R O P E R T I E S

@@ -26,16 +26,16 @@ namespace Ideas.Scada.Server
 		{
 			try
 			{
-				Console.WriteLine("Loading SCADA application...");
+				Console.WriteLine("Starting scada application server...");
 				
 				// Loads SCADA application
 				scadaApplication.Start();
 				
-				Console.WriteLine(scadaApplication.Name + "It was successfully loaded.");
+				Console.WriteLine("Server started with the application: " + scadaApplication.Name);
 			}
 			catch(Exception e)
 			{
-				Console.WriteLine("Error while loading SCADA application.");
+				Console.WriteLine("Error while starting scada application server.");
 				Console.WriteLine(e.Message);
 			}
 		}

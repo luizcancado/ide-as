@@ -28,12 +28,16 @@ namespace Ideas.Scada.Common
 		{
 			try
 			{
-				XmlTextReader xmlTextReader = new XmlTextReader(scadafile);
-				xmlTextReader.WhitespaceHandling = WhitespaceHandling.None;
+				string xmlContent = "";
+					
+				using (TextReader textReader = new StreamReader(scadafile))
+				{
+					 xmlContent = textReader.ReadToEnd();
+				}
 				
 				XmlDocument xmlScadaFile = new XmlDocument();
 				
-				xmlScadaFile.Load(xmlTextReader);
+				xmlScadaFile.LoadXml(xmlContent);
 			
 				XmlNodeList nodesList = xmlScadaFile.GetElementsByTagName("Application");
 			
@@ -53,8 +57,6 @@ namespace Ideas.Scada.Common
 								
 				// Loads application settings
 				LoadProjectSettings(xmlScadaFile);
-							
-
 			}
 			catch(Exception e)
 			{
@@ -68,7 +70,7 @@ namespace Ideas.Scada.Common
 			
 			foreach(XmlNode node in nodesList)
 			{
-				Project projectToAdd = new Project(node);
+				Project projectToAdd = new Project(node, this.rootPath);
 				
 				Projects.Add(projectToAdd);
 			}
@@ -79,7 +81,7 @@ namespace Ideas.Scada.Common
 			foreach(Project project in this.Projects)
 			{
 				project.TagsWebService.Start();
-				project.TagsDatabase.Start();
+				//project.TagsDatabase.Start();
 			}		
 		}
 				
@@ -88,7 +90,6 @@ namespace Ideas.Scada.Common
 			foreach(Project project in this.Projects)
 			{
 				project.TagsWebService.Stop();
-				project.TagsDatabase.Stop();
 			}	
 		}
 		

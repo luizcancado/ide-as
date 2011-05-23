@@ -3,37 +3,40 @@ using System.Xml;
 using System.IO;
 using System.Collections.Generic;
 using Ideas.Scada.Common.Tags;
-
+using Ideas.Scada.Common.DataSources;
 
 namespace Ideas.Scada.Common
 {
 	public class Project
 	{
+		#region M E M B E R S
+		
 		private string name;
-		private string filePath;
+		private string filePath;	
+		private List<Screen> screens = new List<Screen>();
+		private List<DataSource> datasources = new List<DataSource>();
+		private DataBase tagsDatabase = new DataBase();
+		private WebService tagsWebService;
 		
-		List<Screen> screens = new List<Screen>();
-		
-		DataBase tagsDatabase;
-		WebService tagsWebService;
+		#endregion
 		
 		/// <summary>
 		/// Constructs the class from the Xml Scada file
 		/// </summary>
-		public Project (XmlNode node)
+		public Project (XmlNode node, string appPath)
 		{
 			string nodeName = node.Attributes["name"].Value;
 			string nodePath = node.Attributes["path"].Value;
-			
+						
 			this.Name = nodeName;
-			this.FilePath = nodePath + Path.DirectorySeparatorChar;
+			this.FilePath = appPath + Path.DirectorySeparatorChar;
+			this.FilePath += nodePath + Path.DirectorySeparatorChar;
 			
 			foreach(XmlNode childNode in node.ChildNodes)
 			{
-				LoadProjectScreen(childNode);
-				LoadProjectTagsDatabase(childNode);
-				LoadProjectTagsWebservice(childNode);
-				
+				LoadProjectScreen(childNode, this.FilePath);
+				LoadProjectTagsDatabase(childNode, this.FilePath);
+				LoadProjectTagsWebservice(childNode, this.FilePath);
 			}
 		}
 		
@@ -48,11 +51,11 @@ namespace Ideas.Scada.Common
 		/// <param name="xmlProjectNode">
 		/// A <see cref="XmlNode"/>
 		/// </param>
-		private void LoadProjectScreen(XmlNode xmlScreenNode)
+		private void LoadProjectScreen(XmlNode xmlScreenNode, string projectPath)
 		{
 			if(xmlScreenNode.Name.ToLower() == "screen")
 			{
-				Screen screenToAdd = new Screen(xmlScreenNode);
+				Screen screenToAdd = new Screen(xmlScreenNode, projectPath);
 				
 				this.Screens.Add(screenToAdd);
 			}
@@ -64,16 +67,48 @@ namespace Ideas.Scada.Common
 		/// <param name="xmlProjectNode">
 		/// A <see cref="XmlNode"/>
 		/// </param>
-		private void LoadProjectTagsDatabase(XmlNode xmlTagsDatabasetNode)
+		private void LoadProjectTagsDatabase(XmlNode xmlTagsDatabaseNode, string projectPath)
 		{
-			if(xmlTagsDatabasetNode.Name.ToLower() == "tagsdatabase")
+			if(xmlTagsDatabaseNode.Name.ToLower() == "datasource")
 			{
 				// Instantiate a new tag database to be added to the project
-				DataBase tagsDatabaseToAdd = new DataBase(xmlTagsDatabasetNode);
+				DataSource tagsDatabaseToAdd = 
+					CreateDataSourceFromXMLNode(xmlTagsDatabaseNode, projectPath);
 							
 				// Adds the new tags database to the current project
-				this.TagsDatabase = tagsDatabaseToAdd;
+				this.Datasources.Add(tagsDatabaseToAdd);
+				
+				// Create datasource structure in tagsdatabase
+				this.TagsDatabase.AddDataSource(tagsDatabaseToAdd);
 			}
+		}
+
+		static DataSource CreateDataSourceFromXMLNode (XmlNode xmlTagsDatabaseNode, string projectPath)
+		{
+			DataSource retDataSource = null;
+			string type = "";
+				
+			// Get datasource type string
+			try
+			{
+				type = xmlTagsDatabaseNode.Attributes["type"].Value.ToLower();
+			}
+			catch(Exception e)
+			{
+				throw new Exception("Type not defined for one of the datasources.");
+			}
+			
+			// Associate it with a datasource object
+			switch(type)
+			{
+				case "openopc":
+					retDataSource = new OpenOPC(xmlTagsDatabaseNode, projectPath);
+					break;
+				default:
+					throw new Exception("Unknown datasource type: " + type);
+			}
+			
+			return retDataSource;
 		}
 		
 		/// <summary>
@@ -82,14 +117,14 @@ namespace Ideas.Scada.Common
 		/// <param name="xmlProjectNode">
 		/// A <see cref="XmlNode"/>
 		/// </param>
-		private void LoadProjectTagsWebservice(XmlNode xmlTagsWebserviceNode)
+		private void LoadProjectTagsWebservice(XmlNode xmlTagsWebserviceNode, string projectPath)
 		{
-			if(xmlTagsWebserviceNode.Name.ToLower() == "tagswebservice")
+			if(xmlTagsWebserviceNode.Name.ToLower() == "webservice")
 			{
 				// Instantiate a new tag database to be added to the project
-				WebService tagsWebserviceToAdd = new WebService(xmlTagsWebserviceNode);
+				WebService tagsWebservice = new WebService(xmlTagsWebserviceNode, projectPath);
 												
-				this.TagsWebService = tagsWebserviceToAdd;
+				this.TagsWebService = tagsWebservice;
 			}
 		}
 		
@@ -152,6 +187,15 @@ namespace Ideas.Scada.Common
 			set 
 			{
 				tagsWebService = value;
+			}
+		}
+		
+		public List<DataSource> Datasources {
+			get {
+				return this.datasources;
+			}
+			set {
+				datasources = value;
 			}
 		}
 		

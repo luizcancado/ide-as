@@ -50,8 +50,8 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>References\NDesk.Options.dll</HintPath>
     </Reference>
-    <Reference Include="Mono.Posix" >
-          <SpecificVersion>False</SpecificVersion>
+    <Reference Include="Mono.Posix">
+      <SpecificVersion>False</SpecificVersion>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -64,8 +64,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="gtk-gui\generated.cs" />
-    <Compile Include="gtk-gui\MainWindow.cs" />
-    <Compile Include="gtk-gui\Ideas.Server.Manager.About.cs" />
     <Compile Include="Source\Configuration.cs" />
     <Compile Include="Source\Main.cs" />
     <Compile Include="Source\Dialogs\About.cs" />
@@ -78,14 +76,10 @@
     <Compile Include="Source\Dialogs\Settings\General\IdeasServer.cs" />
     <Compile Include="Source\Dialogs\Splash.cs" />
     <Compile Include="gtk-gui\Ideas.Scada.Server.Manager.Splash.cs" />
+    <Compile Include="gtk-gui\Ideas.Scada.Server.Manager.About.cs" />
+    <Compile Include="gtk-gui\Ideas.Scada.Server.Manager.MainWindow.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <ItemGroup>
-    <ProjectReference Include="..\Ideas.Scada.Common\Ideas.Scada.Common.csproj">
-      <Project>{24677F3D-E07D-4BC2-885C-F8CAF90F214D}</Project>
-      <Name>Ideas.Scada.Common</Name>
-    </ProjectReference>
-  </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\" />
     <Folder Include="Resources\" />
@@ -107,5 +101,11 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Icons\Interface\16\webservice.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Ideas.Scada.Common\Ideas.Scada.Common.csproj">
+      <Project>{24677F3D-E07D-4BC2-885C-F8CAF90F214D}</Project>
+      <Name>Ideas.Scada.Common</Name>
+    </ProjectReference>
   </ItemGroup>
 </Project>

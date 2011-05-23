@@ -35,7 +35,7 @@
       </source>
     </icon-set>
   </icon-factory>
-  <widget class="Gtk.Window" id="MainWindow" design-size="607 419">
+  <widget class="Gtk.Window" id="Ideas.Scada.Server.Manager.MainWindow" design-size="607 419">
     <action-group name="Default">
       <action id="FileAction">
         <property name="Type">Action</property>
@@ -128,6 +128,13 @@
         <property name="ShortLabel" translatable="yes">Settings...</property>
         <signal name="Activated" handler="OnSettingsActionActivated" />
       </action>
+      <action id="saveAction">
+        <property name="Type">Action</property>
+        <property name="Label" translatable="yes">_Save</property>
+        <property name="ShortLabel" translatable="yes">_Save</property>
+        <property name="StockId">gtk-save</property>
+        <signal name="Activated" handler="OnSaveActionActivated" />
+      </action>
     </action-group>
     <property name="MemberName" />
     <property name="Title" translatable="yes">IDEAS Server Management</property>
@@ -145,6 +152,7 @@
             <node name="menubar3" type="Menubar">
               <node type="Menu" action="FileAction">
                 <node type="Menuitem" action="openAction" />
+                <node type="Menuitem" action="saveAction" />
                 <node type="Menuitem" action="closeAction" />
                 <node type="Separator" />
                 <node type="Menuitem" action="quitAction1" />
@@ -248,7 +256,7 @@
       </widget>
     </child>
   </widget>
-  <widget class="Gtk.Dialog" id="Ideas.Server.Manager.About" design-size="400 300">
+  <widget class="Gtk.Dialog" id="Ideas.Scada.Server.Manager.About" design-size="400 300">
     <property name="MemberName" />
     <property name="WindowPosition">CenterOnParent</property>
     <property name="Buttons">2</property>
@@ -401,10 +409,18 @@
   </widget>
   <widget class="Gtk.Window" id="Ideas.Scada.Server.Manager.Splash" design-size="400 300">
     <property name="MemberName" />
+    <property name="WidthRequest">250</property>
+    <property name="HeightRequest">200</property>
     <property name="Title" translatable="yes">Splash</property>
     <property name="WindowPosition">CenterOnParent</property>
+    <property name="Modal">True</property>
+    <property name="Resizable">False</property>
+    <property name="AllowGrow">False</property>
+    <property name="AcceptFocus">False</property>
     <child>
-      <placeholder />
+      <widget class="Gtk.Image" id="image1">
+        <property name="MemberName" />
+      </widget>
     </child>
   </widget>
 </stetic-interface>

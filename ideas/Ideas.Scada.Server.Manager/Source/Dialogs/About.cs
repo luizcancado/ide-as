@@ -1,6 +1,6 @@
 using System;
 
-namespace Ideas.Server.Manager
+namespace Ideas.Scada.Server.Manager
 {
 	public partial class About : Gtk.Dialog
 	{

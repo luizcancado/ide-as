@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <Application name="SampleApplication">
 	<Project name="SampleProject" path="SampleProject">
-		<Screen name="Tela" path="tela.svg" type="svg" serverscriptlanguage="cs" clientscriptlanguage="js" />
-        <Screen name="Misturador" path="Misturador_Tintas.svg" type="svg" serverscriptlanguage="cs" clientscriptlanguage="js" />
-		<TagsWebService name="SampleTagWebservice" address="localhost" port="8090" />
-		<TagsDataBase name="SampleTagDatabase" path="configs/tagsdatabase.csv" type="csv" />
+		<Screen name="Diagnostico" filename="Diagnostico.svg" type="svg" serverscriptlanguage="cs" clientscriptlanguage="js" />
+        <Screen name="MisturadorTintas" filename="MisturadorTintas.svg" type="svg" serverscriptlanguage="cs" clientscriptlanguage="js" />
+		<Webservice name="SampleWebservice" address="127.0.0.1" port="8090" />
+		<Datasource name="S7_1214C" type="openopc" filename="S7_1214C.csv" filetype="csv" server="192.168.0.169" instance="Kepware.KEPServerEX.V5" pythonpath="python" openopcpath="/home/luiz/Desktop/OpenOPC/src/opc.py" />
     </Project>
 </Application>

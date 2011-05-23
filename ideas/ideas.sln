@@ -41,6 +41,6 @@ Global
 		{905EBE7A-466E-4357-8ECC-437854B5A3C6}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
-		StartupItem = Ideas.Scada.Server.Manager\Ideas.Scada.Server.Manager.csproj
+		StartupItem = Ideas.Scada.Server\Ideas.Scada.Server.csproj
 	EndGlobalSection
 EndGlobal

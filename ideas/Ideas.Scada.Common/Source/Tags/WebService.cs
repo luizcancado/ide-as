@@ -2,6 +2,8 @@ using System;
 using System.Net;
 using System.Xml;
 using Mono.WebServer;
+using System.Diagnostics;
+using System.IO;
 
 
 namespace Ideas.Scada.Common.Tags
@@ -9,10 +11,12 @@ namespace Ideas.Scada.Common.Tags
 	public class WebService
 	{
 		private string name;
+		private bool isStarted = false;
 		private int serverPort;
 		private string serverAddress;
 		private string serverRootPath;
-		private ApplicationServer webAppServer;	
+		private Process prcWebServer;
+//		private ApplicationServer webAppServer;	
 		
 		/// <summary>
 		/// Constructs the class
@@ -22,19 +26,22 @@ namespace Ideas.Scada.Common.Tags
 			
 		}
 		
-		public WebService (XmlNode xmlTagsWebserviceNode)
+		public WebService (
+			XmlNode node, 
+			string projectPath)
 		{
-			string nodeName = xmlTagsWebserviceNode.Attributes["name"].Value;
-			string nodeServerPort = xmlTagsWebserviceNode.Attributes["port"].Value;
-			string nodeServerAddress = xmlTagsWebserviceNode.Attributes["address"].Value;
+			string nodeName = node.Attributes["name"].Value;
+			string nodeServerPort = node.Attributes["port"].Value;
+			string nodeServerAddress = node.Attributes["address"].Value;
 					
 			this.Name = nodeName;
 			this.ServerPort = Convert.ToInt32(nodeServerPort);
 			this.ServerAddress = nodeServerAddress;
-			this.ServerRootPath = "screens";
+			this.ServerRootPath = 
+				projectPath + Path.DirectorySeparatorChar;
 		}
 		
-		#region PUBLIC METHODS
+		#region P U B L I C   M E T H O D S 
 		
 		
 		/// <summary>
@@ -42,16 +49,44 @@ namespace Ideas.Scada.Common.Tags
 		/// </summary>
 		public void Start()
 		{		
-			XSPWebSource websource = new XSPWebSource(IPAddress.Any, this.ServerPort);
-			
-			webAppServer = new ApplicationServer(websource);
-					
-			// Adds application to the webserver
-			//webAppServer.AddApplication("localhost", this.ServerPort, "/", serverRootPath);
-			webAppServer.AddApplicationsFromCommandLine(this.ServerPort + ":/:" + serverRootPath);
-			
-			// Starts server instance
-			webAppServer.Start(true);
+			try 
+			{
+				
+	//			XSPWebSource websource = new XSPWebSource(IPAddress.Any, this.ServerPort);
+	//			
+	//			webAppServer = new ApplicationServer(websource);
+	//					
+	//			// Adds application to the webserver
+	//			//webAppServer.AddApplication("localhost", this.ServerPort, "/", serverRootPath);
+	//			webAppServer.AddApplicationsFromCommandLine(this.ServerPort + ":/:" + serverRootPath);
+	//			
+	//			// Starts server instance
+	//			webAppServer.Start(true);
+				
+				// Mount argument string
+				string infoWebServerArguments = "" +
+					" --port " + serverPort + 
+					" --address " + serverAddress + 
+					" --root \"" + serverRootPath + "\"";
+				
+				// Configurate XSP WebServer execution
+				ProcessStartInfo infoWebServer = new ProcessStartInfo();	
+				infoWebServer.FileName = "xsp2";
+				infoWebServer.Arguments = infoWebServerArguments;
+				infoWebServer.UseShellExecute = false;
+				
+				// Executes XSP WebServer
+				prcWebServer = Process.Start(infoWebServer);
+				
+				// Copy infrastructural files to WebServer root directory
+				MountWebSiteStructure();
+				
+				this.isStarted = true;
+			}
+			catch(Exception e)
+			{
+				throw new Exception("ERROR: Could not start webservice: " + e.Message);
+			}
 		}
 		
 		/// <summary>
@@ -59,11 +94,63 @@ namespace Ideas.Scada.Common.Tags
 		/// </summary>
 		public void Stop()
 		{
-			if(webAppServer != null)
+//			if(webAppServer != null)
+//			{
+//				webAppServer.Stop();
+//				webAppServer.UnloadAll();
+//			}
+			try
 			{
-				webAppServer.Stop();
-				webAppServer.UnloadAll();
+				if(isStarted)
+				{
+					MountWebSiteStructure();
+					prcWebServer.Kill();
+				}
 			}
+			catch(Exception e)
+			{
+				throw new Exception("ERROR: Could not stop webservice: " + e.Message);
+			}
+		}
+
+		public void MountWebSiteStructure ()
+		{
+			string destPath = 
+				this.serverRootPath + Path.DirectorySeparatorChar;
+			
+			string sourcePath = 
+				AppDomain.CurrentDomain.BaseDirectory +
+				"Resources" + Path.DirectorySeparatorChar +
+				"TagsWebservice" + Path.DirectorySeparatorChar;
+			
+			string[] sourceFiles = Directory.GetFiles(sourcePath);
+						
+			foreach(string s in sourceFiles)
+			{
+				string filename = Path.GetFileName(s);
+				File.Copy(s, destPath + filename);	
+			}
+			
+		}
+		
+		public void UnMountWebSiteStructure ()
+		{
+			string destPath = 
+				this.serverRootPath + Path.DirectorySeparatorChar;
+			
+			string sourcePath = 
+				AppDomain.CurrentDomain.BaseDirectory +
+				"Resources" + Path.DirectorySeparatorChar +
+				"TagsWebservice" + Path.DirectorySeparatorChar;
+			
+			string[] sourceFiles = Directory.GetFiles(sourcePath);
+						
+			foreach(string s in sourceFiles)
+			{
+				string filename = Path.GetFileName(s);
+				File.Delete(destPath + filename);	
+			}
+			
 		}
 		
 		#endregion
@@ -118,7 +205,12 @@ namespace Ideas.Scada.Common.Tags
 			}
 		}
 		
-		#endregion PROPERTIES
+		public bool IsStarted {
+			get {
+				return this.isStarted;
+			}
+		}
+		#endregion 
 	}
 	
 }

@@ -1,6 +1,7 @@
 using Gtk;
+using Ideas.Scada.Server.Manager;
 
-namespace Ideas.Server.Manager
+namespace Idea.Scada.Server.Manager
 {
 	class MainClass
 	{

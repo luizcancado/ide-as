@@ -6,7 +6,7 @@ namespace Ideas.Scada.Server
 	{
 		public static void Main (string[] args)
 		{
-			Kernel appKernel;
+			Kernel appKernel = null;
 			
 			if(args.Length == 0)
 			{
@@ -28,11 +28,31 @@ namespace Ideas.Scada.Server
 				}
 				
 				ServerConfiguration config = new ServerConfiguration(newargs);
-
-				// Runs application kernel
-				appKernel = new Kernel(config);
-				appKernel.Run();
+				
+				Console.WriteLine("Loading scada application...");
+				
+				try
+				{
+					// Loads configuration to the application kernel
+					appKernel = new Kernel(config);
+					
+					Console.WriteLine("Application successfully loaded.");
+				}
+				catch(Exception e)
+				{
+					Console.WriteLine("ERROR while loading scada application.");
+					Console.WriteLine(e.Message);
+				}
+				
+				
+				if(appKernel != null)
+				{
+					// Runs application kernel
+					appKernel.Run();
+				}
 			}
+			
+			Console.ReadKey();
 		}
 	}
 }

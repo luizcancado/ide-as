@@ -4,13 +4,25 @@ namespace Ideas.Scada.Server.Manager
 {
 	public partial class Splash
 	{
+		private global::Gtk.Image image1;
+
 		protected virtual void Build ()
 		{
 			global::Stetic.Gui.Initialize (this);
 			// Widget Ideas.Scada.Server.Manager.Splash
+			this.WidthRequest = 250;
+			this.HeightRequest = 200;
 			this.Name = "Ideas.Scada.Server.Manager.Splash";
 			this.Title = global::Mono.Unix.Catalog.GetString ("Splash");
 			this.WindowPosition = ((global::Gtk.WindowPosition)(4));
+			this.Modal = true;
+			this.Resizable = false;
+			this.AllowGrow = false;
+			this.AcceptFocus = false;
+			// Container child Ideas.Scada.Server.Manager.Splash.Gtk.Container+ContainerChild
+			this.image1 = new global::Gtk.Image ();
+			this.image1.Name = "image1";
+			this.Add (this.image1);
 			if ((this.Child != null)) {
 				this.Child.ShowAll ();
 			}
