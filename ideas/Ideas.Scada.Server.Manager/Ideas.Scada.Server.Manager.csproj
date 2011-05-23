@@ -48,7 +48,7 @@
     <Reference Include="System.Xml" />
     <Reference Include="NDesk.Options, Version=0.2.1.0, Culture=neutral, PublicKeyToken=null">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>References\NDesk.Options.dll</HintPath>
+      <HintPath>Libraries\NDesk.Options.dll</HintPath>
     </Reference>
     <Reference Include="Mono.Posix">
       <SpecificVersion>False</SpecificVersion>
