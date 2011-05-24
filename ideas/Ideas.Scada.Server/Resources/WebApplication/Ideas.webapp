@@ -1,0 +1,12 @@
+<apps>
+	<web-application>
+		<name>Root</name>
+		<vpath>/</vpath>
+		<path>.</path>
+	</web-application>
+	<web-application>
+		<name>Screens</name>
+		<vpath>/screens</vpath>
+		<path>%%_SCREENS_PATH_%%</path>
+	</web-application>
+</apps>
