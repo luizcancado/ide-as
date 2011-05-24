@@ -10,13 +10,18 @@ namespace Ideas.Scada.Common.Tags
 {
 	public class WebService
 	{
+		#region MEMBERS
+		
 		private string name;
+		private Project project;
 		private bool isStarted = false;
 		private int serverPort;
 		private string serverAddress;
 		private string screensPath;
 		private Process prcWebServer;
 //		private ApplicationServer webAppServer;	
+		
+		#endregion
 		
 		/// <summary>
 		/// Constructs the class
@@ -28,17 +33,18 @@ namespace Ideas.Scada.Common.Tags
 		
 		public WebService (
 			XmlNode node, 
-			string projectPath)
+			Project parentProject)
 		{
 			string nodeName = node.Attributes["name"].Value;
 			string nodeServerPort = node.Attributes["port"].Value;
 			string nodeServerAddress = node.Attributes["address"].Value;
 					
 			this.Name = nodeName;
+			this.Project = parentProject;
 			this.ServerPort = Convert.ToInt32(nodeServerPort);
 			this.ServerAddress = nodeServerAddress;
 			this.ScreensPath = 
-				projectPath + "screens";
+				parentProject.FilePath + "screens";
 		}
 		
 		#region P U B L I C   M E T H O D S 
@@ -186,6 +192,14 @@ namespace Ideas.Scada.Common.Tags
 			}
 		}
 
+		public Project Project {
+			get {
+				return this.project;
+			}
+			set {
+				project = value;
+			}
+		}
 		public string ServerAddress
 		{
 			get 

@@ -11,9 +11,10 @@ namespace Ideas.Scada.Common
 		
 		private string name;
 		private string filePath;
-		private IdeasScadaScreenType type;
-		private IdeasScadaScreenServerScriptLanguage serverScriptLanguage;
-		private IdeasScadaScreenClientScriptLanguage clientScriptLanguage;
+		private Project project;
+		private ScreenType type;
+		private ScreenServerScriptLanguage serverScriptLanguage;
+		private ScreenClientScriptLanguage clientScriptLanguage;
 		
 		#endregion 
 		
@@ -25,22 +26,22 @@ namespace Ideas.Scada.Common
 			
 		}
 		
-		public Screen (XmlNode xmlScreenNode, string projectPath)
+		public Screen (XmlNode node, Project parentProject)
 		{
-			string nodeName = xmlScreenNode.Attributes["name"].Value;
-			string nodePath = xmlScreenNode.Attributes["filename"].Value;
-			string nodeStringType = xmlScreenNode.Attributes["type"].Value;
-			string nodeStringServerScriptLanguage = xmlScreenNode.Attributes["serverscriptlanguage"].Value;
-			string nodeStringClientScriptLanguage = xmlScreenNode.Attributes["clientscriptlanguage"].Value;
-			
-			IdeasScadaScreenType nodeType = convertScreenTypeFromString(nodeStringType);
-			IdeasScadaScreenServerScriptLanguage nodeServerScriptLanguage = convertScreenServerScriptLanguageFromString(nodeStringServerScriptLanguage);
-			IdeasScadaScreenClientScriptLanguage nodeClientScriptLanguage = convertScreenClientScriptLanguageFromString(nodeStringClientScriptLanguage);
+			string nodeName = node.Attributes["name"].Value;
+			string nodePath = node.Attributes["filename"].Value;
+			string nodeStringType = node.Attributes["type"].Value;
+			string stringServerScriptLanguage = node.Attributes["serverscriptlanguage"].Value;
+			string stringClientScriptLanguage = node.Attributes["clientscriptlanguage"].Value;
+						
+			ScreenType nodeType = convertScreenTypeFromString(nodeStringType);
+			ScreenServerScriptLanguage nodeServerScriptLanguage = ConvertStringToScreenServerScriptLanguage(stringServerScriptLanguage);
+			ScreenClientScriptLanguage nodeClientScriptLanguage = ConvertStringToScreenClientScriptLanguage(stringClientScriptLanguage);
 			
 			this.Name = nodeName;
-			this.FilePath = projectPath + "screens" + Path.DirectorySeparatorChar;
+			this.FilePath = parentProject.FilePath + "screens" + Path.DirectorySeparatorChar;
 			this.FilePath += nodePath + Path.DirectorySeparatorChar;
-			
+			this.Project = parentProject;
 			this.Type = nodeType;
 			this.ServerScriptLanguage = nodeServerScriptLanguage;
 			this.ClientScriptLanguage = nodeClientScriptLanguage;
@@ -49,40 +50,40 @@ namespace Ideas.Scada.Common
 	
 		#region S T A T I C   M E T H O D S 
 
-		public static IdeasScadaScreenType convertScreenTypeFromString(string strType)
+		public static ScreenType convertScreenTypeFromString(string strType)
 		{
 			switch(strType.ToLower())
 			{
 				case "svg": 
-					return IdeasScadaScreenType.SVG;
+					return ScreenType.SVG;
 				default:
 					throw new Exception("Unkown screen type: " + strType);
 			}
 		}
 		
-		public static IdeasScadaScreenClientScriptLanguage convertScreenClientScriptLanguageFromString(string strClientScriptLanguage)
+		public static ScreenClientScriptLanguage ConvertStringToScreenClientScriptLanguage(string strClientScriptLanguage)
 		{
 			switch(strClientScriptLanguage.ToLower())
 			{
 				case "javascript": 
 				case "js": 
-					return IdeasScadaScreenClientScriptLanguage.Javascript;
+					return ScreenClientScriptLanguage.Javascript;
 				default:
 					throw new Exception("Unkown client script language: " + strClientScriptLanguage);
 			}
 		}
 		
-		public static IdeasScadaScreenServerScriptLanguage convertScreenServerScriptLanguageFromString(string strServerScriptLanguage)
+		public static ScreenServerScriptLanguage ConvertStringToScreenServerScriptLanguage(string strServerScriptLanguage)
 		{
 			switch(strServerScriptLanguage.ToLower())
 			{
 				case "csharp": 
 				case "c#": 
 				case "cs": 
-					return IdeasScadaScreenServerScriptLanguage.CSharp;
+					return ScreenServerScriptLanguage.CSharp;
 				case "visualbasic": 
 				case "vb": 
-					return IdeasScadaScreenServerScriptLanguage.VisualBasic;
+					return ScreenServerScriptLanguage.VisualBasic;
 				default:
 					throw new Exception("Unkown server script language: " + strServerScriptLanguage);
 			}
@@ -105,6 +106,14 @@ namespace Ideas.Scada.Common
 			}
 		}
 
+		public Project Project {
+			get {
+				return this.project;
+			}
+			set {
+				project = value;
+			}
+		}
 		public string FilePath 
 		{
 			get 
@@ -117,7 +126,7 @@ namespace Ideas.Scada.Common
 			}
 		}
 		
-		public IdeasScadaScreenClientScriptLanguage ClientScriptLanguage 
+		public ScreenClientScriptLanguage ClientScriptLanguage 
 		{
 			get 
 			{
@@ -129,7 +138,7 @@ namespace Ideas.Scada.Common
 			}
 		}
 
-		public IdeasScadaScreenServerScriptLanguage ServerScriptLanguage 
+		public ScreenServerScriptLanguage ServerScriptLanguage 
 		{
 			get 
 			{
@@ -141,7 +150,7 @@ namespace Ideas.Scada.Common
 			}
 		}
 
-		public IdeasScadaScreenType Type 
+		public ScreenType Type 
 		{
 			get 
 			{
@@ -156,18 +165,18 @@ namespace Ideas.Scada.Common
 		#endregion
 	}
 	
-	public enum IdeasScadaScreenType 
+	public enum ScreenType 
 	{
 		SVG
 	}
 	
-	public enum IdeasScadaScreenServerScriptLanguage 
+	public enum ScreenServerScriptLanguage 
 	{
 		CSharp,
 		VisualBasic
 	}
 	
-	public enum IdeasScadaScreenClientScriptLanguage 
+	public enum ScreenClientScriptLanguage 
 	{
 		Javascript
 	}

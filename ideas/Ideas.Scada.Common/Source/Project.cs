@@ -9,7 +9,7 @@ namespace Ideas.Scada.Common
 {
 	public class Project
 	{
-		#region M E M B E R S
+		#region MEMBERS
 		
 		private string name;
 		private string filePath;	
@@ -17,7 +17,8 @@ namespace Ideas.Scada.Common
 		private List<DataSource> datasources = new List<DataSource>();
 		private DataBase tagsDatabase = new DataBase();
 		private WebService tagsWebService;
-		
+		private string initialScreenName;
+			
 		#endregion
 		
 		/// <summary>
@@ -27,16 +28,18 @@ namespace Ideas.Scada.Common
 		{
 			string nodeName = node.Attributes["name"].Value;
 			string nodePath = node.Attributes["path"].Value;
-						
+			string initScreen = node.Attributes["initscreen"].Value;
+			
 			this.Name = nodeName;
 			this.FilePath = appPath + Path.DirectorySeparatorChar;
 			this.FilePath += nodePath + Path.DirectorySeparatorChar;
-			
+			this.InitialScreenName = initScreen;
+					
 			foreach(XmlNode childNode in node.ChildNodes)
 			{
-				LoadProjectScreen(childNode, this.FilePath);
-				LoadProjectTagsDatabase(childNode, this.FilePath);
-				LoadProjectTagsWebservice(childNode, this.FilePath);
+				LoadProjectScreen(childNode);
+				LoadProjectTagsDatabase(childNode);
+				LoadProjectTagsWebservice(childNode);
 			}
 		}
 		
@@ -51,11 +54,11 @@ namespace Ideas.Scada.Common
 		/// <param name="xmlProjectNode">
 		/// A <see cref="XmlNode"/>
 		/// </param>
-		private void LoadProjectScreen(XmlNode xmlScreenNode, string projectPath)
+		private void LoadProjectScreen(XmlNode xmlScreenNode)
 		{
 			if(xmlScreenNode.Name.ToLower() == "screen")
 			{
-				Screen screenToAdd = new Screen(xmlScreenNode, projectPath);
+				Screen screenToAdd = new Screen(xmlScreenNode, this);
 				
 				this.Screens.Add(screenToAdd);
 			}
@@ -67,13 +70,13 @@ namespace Ideas.Scada.Common
 		/// <param name="xmlProjectNode">
 		/// A <see cref="XmlNode"/>
 		/// </param>
-		private void LoadProjectTagsDatabase(XmlNode xmlTagsDatabaseNode, string projectPath)
+		private void LoadProjectTagsDatabase(XmlNode node)
 		{
-			if(xmlTagsDatabaseNode.Name.ToLower() == "datasource")
+			if(node.Name.ToLower() == "datasource")
 			{
 				// Instantiate a new tag database to be added to the project
 				DataSource tagsDatabaseToAdd = 
-					CreateDataSourceFromXMLNode(xmlTagsDatabaseNode, projectPath);
+					CreateDataSourceFromXMLNode(node);
 							
 				// Adds the new tags database to the current project
 				this.Datasources.Add(tagsDatabaseToAdd);
@@ -83,7 +86,7 @@ namespace Ideas.Scada.Common
 			}
 		}
 
-		static DataSource CreateDataSourceFromXMLNode (XmlNode xmlTagsDatabaseNode, string projectPath)
+		private DataSource CreateDataSourceFromXMLNode (XmlNode node)
 		{
 			DataSource retDataSource = null;
 			string type = "";
@@ -91,7 +94,7 @@ namespace Ideas.Scada.Common
 			// Get datasource type string
 			try
 			{
-				type = xmlTagsDatabaseNode.Attributes["type"].Value.ToLower();
+				type = node.Attributes["type"].Value.ToLower();
 			}
 			catch(Exception e)
 			{
@@ -102,7 +105,7 @@ namespace Ideas.Scada.Common
 			switch(type)
 			{
 				case "openopc":
-					retDataSource = new OpenOPC(xmlTagsDatabaseNode, projectPath);
+					retDataSource = new OpenOPC(node, this);
 					break;
 				default:
 					throw new Exception("Unknown datasource type: " + type);
@@ -117,12 +120,12 @@ namespace Ideas.Scada.Common
 		/// <param name="xmlProjectNode">
 		/// A <see cref="XmlNode"/>
 		/// </param>
-		private void LoadProjectTagsWebservice(XmlNode xmlTagsWebserviceNode, string projectPath)
+		private void LoadProjectTagsWebservice(XmlNode xmlTagsWebserviceNode)
 		{
 			if(xmlTagsWebserviceNode.Name.ToLower() == "webservice")
 			{
 				// Instantiate a new tag database to be added to the project
-				WebService tagsWebservice = new WebService(xmlTagsWebserviceNode, projectPath);
+				WebService tagsWebservice = new WebService(xmlTagsWebserviceNode, this);
 												
 				this.TagsWebService = tagsWebservice;
 			}
@@ -153,6 +156,15 @@ namespace Ideas.Scada.Common
 				filePath = value;
 			}
 		}
+
+		public string InitialScreenName {
+			get {
+				return this.initialScreenName;
+			}
+			set {
+				initialScreenName = value;
+			}
+		}		
 		
 		public List<Screen> Screens 
 		{

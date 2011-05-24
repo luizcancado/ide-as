@@ -11,23 +11,28 @@ namespace Ideas.Scada.Common.DataSources
 	{
 		private string name;
 		private string filePath;
+		private Project project;
 		private DataSourceFileType fileType;
 		private DataSourceType type;		
 		private TagGroup tags = new TagGroup();
 		
 		public DataSource ()
 		{
-			name = "";
-			filePath = "";
+			this.Name = "";
+			this.FilePath = "";
+			this.Project = null;
+			
 		}
 		
 		public DataSource(
 			XmlNode node, 
-			string projectPath) : this()
+			Project parentProject) : this()
 		{
-			name = node.Attributes["name"].Value;
+			this.Name = node.Attributes["name"].Value;
+			this.Project = parentProject;
+			
 			filePath = 
-				projectPath +
+				parentProject.FilePath +
 				"datasources" + Path.DirectorySeparatorChar +
 				node.Attributes["filename"].Value;
 			
@@ -108,7 +113,15 @@ namespace Ideas.Scada.Common.DataSources
 				type = value;
 			}
 		}
-		
+
+		public Project Project {
+			get {
+				return this.project;
+			}
+			set {
+				project = value;
+			}
+		}		
 		
 		public string FilePath 
 		{

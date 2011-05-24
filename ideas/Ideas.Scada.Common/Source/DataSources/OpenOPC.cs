@@ -50,8 +50,8 @@ namespace Ideas.Scada.Common.DataSources
 		
 		public OpenOPC (
 			XmlNode node, 
-			string projectPath
-			) : base(node, projectPath)
+			Project parentProject
+			) : base(node, parentProject)
 		{
 			this.serverHost = node.Attributes["server"].Value;
 			this.serverInstance = node.Attributes["instance"].Value;
