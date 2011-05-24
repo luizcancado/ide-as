@@ -14,7 +14,7 @@ namespace Ideas.Scada.Common.Tags
 		private bool isStarted = false;
 		private int serverPort;
 		private string serverAddress;
-		private string serverRootPath;
+		private string screensPath;
 		private Process prcWebServer;
 //		private ApplicationServer webAppServer;	
 		
@@ -37,8 +37,8 @@ namespace Ideas.Scada.Common.Tags
 			this.Name = nodeName;
 			this.ServerPort = Convert.ToInt32(nodeServerPort);
 			this.ServerAddress = nodeServerAddress;
-			this.ServerRootPath = 
-				projectPath + Path.DirectorySeparatorChar;
+			this.ScreensPath = 
+				projectPath + "screens";
 		}
 		
 		#region P U B L I C   M E T H O D S 
@@ -63,24 +63,33 @@ namespace Ideas.Scada.Common.Tags
 	//			// Starts server instance
 	//			webAppServer.Start(true);
 				
+				// Create WebServer at ./Resources/WebApplication
+				string serverRoot = 
+					AppDomain.CurrentDomain.BaseDirectory +
+					"Resources" + Path.DirectorySeparatorChar +
+					"WebApplication";
+				
+				// Generates a config file to start the WebServer
+				GenerateAppConfigFile(serverRoot, screensPath);
+				
 				// Mount argument string
 				string infoWebServerArguments = "" +
+					" --nonstop" + 
 					" --port " + serverPort + 
-					" --address " + serverAddress + 
-					" --root \"" + serverRootPath + "\"";
-				
+					" --address " + serverAddress +
+					" --root \"" + serverRoot + "\"" +
+					" --appconfigfile Ideas.webapp ";
+					
 				// Configurate XSP WebServer execution
 				ProcessStartInfo infoWebServer = new ProcessStartInfo();	
 				infoWebServer.FileName = "xsp2";
 				infoWebServer.Arguments = infoWebServerArguments;
 				infoWebServer.UseShellExecute = false;
+				infoWebServer.RedirectStandardOutput = true;
 				
 				// Executes XSP WebServer
 				prcWebServer = Process.Start(infoWebServer);
-				
-				// Copy infrastructural files to WebServer root directory
-				MountWebSiteStructure();
-				
+						
 				this.isStarted = true;
 			}
 			catch(Exception e)
@@ -99,11 +108,11 @@ namespace Ideas.Scada.Common.Tags
 //				webAppServer.Stop();
 //				webAppServer.UnloadAll();
 //			}
+			
 			try
 			{
 				if(isStarted)
 				{
-					MountWebSiteStructure();
 					prcWebServer.Kill();
 				}
 			}
@@ -112,45 +121,41 @@ namespace Ideas.Scada.Common.Tags
 				throw new Exception("ERROR: Could not stop webservice: " + e.Message);
 			}
 		}
-
-		public void MountWebSiteStructure ()
-		{
-			string destPath = 
-				this.serverRootPath + Path.DirectorySeparatorChar;
-			
-			string sourcePath = 
-				AppDomain.CurrentDomain.BaseDirectory +
-				"Resources" + Path.DirectorySeparatorChar +
-				"TagsWebservice" + Path.DirectorySeparatorChar;
-			
-			string[] sourceFiles = Directory.GetFiles(sourcePath);
-						
-			foreach(string s in sourceFiles)
-			{
-				string filename = Path.GetFileName(s);
-				File.Copy(s, destPath + filename);	
-			}
-			
-		}
 		
-		public void UnMountWebSiteStructure ()
+		public string GenerateAppConfigFile (string targetPath, string screensPath)
 		{
-			string destPath = 
-				this.serverRootPath + Path.DirectorySeparatorChar;
 			
-			string sourcePath = 
-				AppDomain.CurrentDomain.BaseDirectory +
-				"Resources" + Path.DirectorySeparatorChar +
-				"TagsWebservice" + Path.DirectorySeparatorChar;
+			string targetFile = 
+				targetPath + 
+				Path.DirectorySeparatorChar + "Ideas.webapp";
 			
-			string[] sourceFiles = Directory.GetFiles(sourcePath);
-						
-			foreach(string s in sourceFiles)
+			// Deletes file if it exists
+			if(File.Exists(targetFile))
 			{
-				string filename = Path.GetFileName(s);
-				File.Delete(destPath + filename);	
+				File.Delete(targetFile);
 			}
 			
+			string fileContent = "";
+			fileContent += "<apps>";
+			fileContent += "	<web-application>";
+			fileContent += "		<name>Root</name>";
+			fileContent += "		<vpath>/</vpath>";
+			fileContent += "		<path>.</path>";
+			fileContent += "	</web-application>";
+			fileContent += "	<web-application>";
+			fileContent += "		<name>Screens</name>";
+			fileContent += "		<vpath>/screens</vpath>";
+			fileContent += "		<path>" + screensPath + "</path>";
+			fileContent += "	</web-application>";
+			fileContent += "</apps>";
+			
+			// Write the file back with the correct screens path
+			StreamWriter writer = new StreamWriter(File.OpenWrite(targetFile));
+			writer.Write(fileContent);
+			writer.Close();
+			
+			// Return filename
+			return targetFile;
 		}
 		
 		#endregion
@@ -193,15 +198,15 @@ namespace Ideas.Scada.Common.Tags
 			}
 		}
 		
-		public string ServerRootPath 
+		public string ScreensPath 
 		{
 			get 
 			{
-				return this.serverRootPath;
+				return this.screensPath;
 			}
 			set
 			{
-				serverRootPath = value;
+				screensPath = value;
 			}
 		}
 		
