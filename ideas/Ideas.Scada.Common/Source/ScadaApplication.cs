@@ -158,7 +158,7 @@ namespace Ideas.Scada.Common
 		
 		public void WriteTag(string projectName, string datasourceName, string tagName, string tagValue)
 		{
-			Tag tag;
+			Tag tag = new Tag();
 			tag.datasource = datasourceName;
 			tag.name = tagName;
 			tag.value = tagValue;
