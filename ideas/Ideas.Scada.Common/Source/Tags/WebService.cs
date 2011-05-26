@@ -4,7 +4,7 @@ using System.Xml;
 using Mono.WebServer;
 using System.Diagnostics;
 using System.IO;
-
+using log4net;
 
 namespace Ideas.Scada.Common.Tags
 {
@@ -21,7 +21,9 @@ namespace Ideas.Scada.Common.Tags
 		private Process prcWebServer;
 //		private ApplicationServer webAppServer;	
 		
-		#endregion
+		private static readonly ILog log = LogManager.GetLogger(typeof(WebService));
+		
+		#endregion MEMBERS
 		
 		/// <summary>
 		/// Constructs the class
@@ -35,6 +37,8 @@ namespace Ideas.Scada.Common.Tags
 			XmlNode node, 
 			Project parentProject)
 		{
+			log.Info("Reading WebService information from SCADA file...");
+			
 			string nodeName = node.Attributes["name"].Value;
 			string nodeServerPort = node.Attributes["port"].Value;
 			string nodeServerAddress = node.Attributes["address"].Value;
@@ -45,18 +49,21 @@ namespace Ideas.Scada.Common.Tags
 			this.ServerAddress = nodeServerAddress;
 			this.ScreensPath = 
 				parentProject.FilePath + "screens";
+			
+			log.Info("Finished reading WebService information from SCADA file.");
 		}
 		
-		#region P U B L I C   M E T H O D S 
+		#region PUBLIC METHODS 
 		
 		
 		/// <summary>
 		/// Initiates tags webservice
 		/// </summary>
 		public void Start()
-		{		
+		{					
 			try 
 			{
+				
 				
 	//			XSPWebSource websource = new XSPWebSource(IPAddress.Any, this.ServerPort);
 	//			
@@ -69,12 +76,14 @@ namespace Ideas.Scada.Common.Tags
 	//			// Starts server instance
 	//			webAppServer.Start(true);
 				
+				log.Info("Configuring WebService...");
+				
 				// Create WebServer at ./Resources/WebApplication
 				string serverRoot = 
 					AppDomain.CurrentDomain.BaseDirectory +
 					"Resources" + Path.DirectorySeparatorChar +
 					"WebApplication";
-				
+							
 				// Generates a config file to start the WebServer
 				GenerateAppConfigFile(serverRoot, screensPath);
 				
@@ -93,15 +102,30 @@ namespace Ideas.Scada.Common.Tags
 				infoWebServer.UseShellExecute = false;
 				infoWebServer.RedirectStandardOutput = true;
 				
+				log.Info("Client access address: http://" + this.ServerAddress + ":" + this.ServerPort);
+				log.Info("Path to screens:" + this.ScreensPath);
+				
+				log.Info("WebService configured.");
+				
+				log.Debug("WebService configuration:");
+				log.Debug(infoWebServer.FileName + " " + infoWebServer.Arguments);
+								
+				log.Info("Starting WebService...");
+				
 				// Executes XSP WebServer
 				prcWebServer = Process.Start(infoWebServer);
-						
+				
+				log.Info("WebService started.");
+				
 				this.isStarted = true;
 			}
 			catch(Exception e)
 			{
+				log.Error("It was not possible to start the WebService at: " + this.ServerAddress + ":" + this.ServerPort);
+				log.Error(e.Message);
 				throw new Exception("ERROR: Could not start webservice: " + e.Message);
 			}
+		
 		}
 		
 		/// <summary>
@@ -119,46 +143,62 @@ namespace Ideas.Scada.Common.Tags
 			{
 				if(isStarted)
 				{
+					log.Info("Stoping WebService...");
+					
 					prcWebServer.Kill();
+					
+					log.Info("WebService stopped.");
 				}
 			}
 			catch(Exception e)
 			{
-				throw new Exception("ERROR: Could not stop webservice: " + e.Message);
+				log.Error("It was not possible to stop the WebService from: " + this.ServerAddress + ":" + this.ServerPort);
+				log.Error(e.Message);
+				throw new Exception("Could not stop webservice: " + e.Message);
 			}
+			
+			
 		}
 		
 		public string GenerateAppConfigFile (string targetPath, string screensPath)
 		{
-			
+		
 			string targetFile = 
 				targetPath + 
 				Path.DirectorySeparatorChar + "Ideas.webapp";
 			
+			log.Debug("Generating webapp configuration file at: " + targetFile);
+			log.Debug("Screens path: " + screensPath);
+			
 			// Deletes file if it exists
 			if(File.Exists(targetFile))
 			{
+				log.Debug("Deleting current webapp file at: " + targetFile);
 				File.Delete(targetFile);
 			}
 			
 			string fileContent = "";
-			fileContent += "<apps>";
-			fileContent += "	<web-application>";
-			fileContent += "		<name>Root</name>";
-			fileContent += "		<vpath>/</vpath>";
-			fileContent += "		<path>.</path>";
-			fileContent += "	</web-application>";
-			fileContent += "	<web-application>";
-			fileContent += "		<name>Screens</name>";
-			fileContent += "		<vpath>/screens</vpath>";
-			fileContent += "		<path>" + screensPath + "</path>";
-			fileContent += "	</web-application>";
+			fileContent += "<apps>\n";
+			fileContent += "	<web-application>\n";
+			fileContent += "		<name>Root</name>\n";
+			fileContent += "		<vpath>/</vpath>\n";
+			fileContent += "		<path>.</path>\n";
+			fileContent += "	</web-application>\n";
+			fileContent += "	<web-application>\n";
+			fileContent += "		<name>Screens</name>\n";
+			fileContent += "		<vpath>/screens</vpath>\n";
+			fileContent += "		<path>" + screensPath + "</path>\n";
+			fileContent += "	</web-application>\n";
 			fileContent += "</apps>";
+			
+			log.Debug("Writing new webapp file at: " + targetFile);
 			
 			// Write the file back with the correct screens path
 			StreamWriter writer = new StreamWriter(File.OpenWrite(targetFile));
 			writer.Write(fileContent);
 			writer.Close();
+			
+			log.Debug("Writing file finished. File closed.");
 			
 			// Return filename
 			return targetFile;

@@ -1,11 +1,21 @@
 using System;
+using log4net;
+using log4net.Config;
+using System.IO;
 
 namespace Ideas.Scada.Server
 {
 	class MainClass
 	{
+		// Define a static logger variable so that it references the
+	    // Logger instance named "MyApp".
+	    private static readonly ILog log = LogManager.GetLogger(typeof(MainClass));
+		
 		public static void Main (string[] args)
-		{
+		{		
+			// Set up configuration from the logging config file
+			XmlConfigurator.ConfigureAndWatch(new FileInfo("Logging.conf"));
+			
 			Kernel appKernel = null;
 			
 			if(args.Length == 0)
@@ -27,24 +37,22 @@ namespace Ideas.Scada.Server
 					newargs = args;
 				}
 				
+				// Reads configuration
 				ServerConfiguration config = new ServerConfiguration(newargs);
-				
-				Console.WriteLine("Loading scada application...");
 				
 				try
 				{
 					// Loads configuration to the application kernel
 					appKernel = new Kernel(config);
 					
-					Console.WriteLine("Application successfully loaded.");
 				}
 				catch(Exception e)
 				{
-					Console.WriteLine("ERROR while loading scada application.");
-					Console.WriteLine(e.Message);
+					log.Fatal("Quitting server: Could not loading scada application.");
+					log.Fatal(e.Message);
 				}
 				
-				
+				// Check if Kernel was successfully created
 				if(appKernel != null)
 				{
 					// Runs application kernel

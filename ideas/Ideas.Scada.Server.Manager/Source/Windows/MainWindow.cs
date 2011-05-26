@@ -106,11 +106,6 @@ namespace Ideas.Scada.Server.Manager
 			Gdk.Pixbuf icnTagsDatabaseIcon =  IconFactory.LookupDefault("tagsdatabase").RenderIcon(new Style(), TextDirection.None, StateType.Active, IconSize.Menu, null, null);
 			
 			Gtk.CellRendererPixbuf cellIcon = new Gtk.CellRendererPixbuf ();
-			TreeViewColumn colIcon = new TreeViewColumn ();
-			colIcon.Title = "Icon";
-			colIcon.PackStart (cellIcon, true);
-	  		colIcon.AddAttribute (cellIcon, "pixbuf", 0);
-			
 			Gtk.CellRendererText cellItem = new Gtk.CellRendererText ();
 			TreeViewColumn colItem = new TreeViewColumn ();
 			colItem.Title = "Application";
@@ -184,6 +179,10 @@ namespace Ideas.Scada.Server.Manager
 			aboutDialog.Show();
 		}
 		
+		
+		/// <summary>
+		/// Start an instance of Ideas.Scada.Server
+		/// </summary>
 		private void startServers()
 		{	
 			ProcessStartInfo serverProcessInfo = new ProcessStartInfo();
@@ -197,6 +196,9 @@ namespace Ideas.Scada.Server.Manager
 			tbbStartServer.Sensitive = false;	
 		}
 		
+		/// <summary>
+		/// Stops the actual instance of Idea.Scada.Server
+		/// </summary>
 		private void stopServers()
 		{
 			try
@@ -217,6 +219,9 @@ namespace Ideas.Scada.Server.Manager
 			}
 		}
 		
+		/// <summary>
+		/// Open dialog to choose the SCADA application file
+		/// </summary>
 		private void OpenApplication()
 		{
 			FileChooserDialog fileChooserDialog = 
@@ -251,7 +256,10 @@ namespace Ideas.Scada.Server.Manager
 			
 			enableToolBarButtons();
 		}
-	
+		
+		/// <summary>
+		/// Clear the tree view widget
+		/// </summary>
 		void CleanTreeView ()
 		{
 			foreach(TreeViewColumn column in trvApplicationTreeView.Columns)
@@ -260,6 +268,9 @@ namespace Ideas.Scada.Server.Manager
 			}
 		}
 		
+		/// <summary>
+		/// Close any opened SCADA application
+		/// </summary>
 		private void CloseApplication()
 		{
 			if(scadaApplication != null)
