@@ -261,6 +261,7 @@ namespace Ideas.Scada.Common.Tags
 			fileContent += "	</system.web> \n";
 			fileContent += "	<appSettings> \n";
 			fileContent += "		<add key=\"InitialScreen\" value=\"" + initialScreenURL + "\"/> \n";
+			fileContent += "		<add key=\"Screens\" value=\"" + initialScreenURL + "\"/> \n";
 			fileContent += "	</appSettings> \n";
 			fileContent += "</configuration> \n";
 

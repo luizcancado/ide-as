@@ -36,7 +36,7 @@ function updateVars()
 	for(i = 0; i < 20; i++)
 	{
 		TAGS[i] = Math.floor(Math.random()*101);
-		TAGS[i] = callWebService();
+		//TAGS[i] = callWebService();
 	}
 
 	updateStats();
@@ -56,10 +56,7 @@ function updateStats()
 	}
 }
   
-       
-            
-
-
+                   
 // Web Service functionality
 
 // Calls web service with url and callback function. Callback will
