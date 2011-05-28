@@ -72,6 +72,7 @@
     <Compile Include="Source\DataSources\DataSource.cs" />
     <Compile Include="Source\Tags\TagGroup.cs" />
     <Compile Include="Source\ProjectCollection.cs" />
+    <Compile Include="Source\ScreenCollection.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

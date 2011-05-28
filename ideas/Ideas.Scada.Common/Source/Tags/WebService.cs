@@ -84,9 +84,12 @@ namespace Ideas.Scada.Common.Tags
 					"Resources" + Path.DirectorySeparatorChar +
 					"WebApplication";
 							
-				// Generates a config file to start the WebServer
+				// Generate a webapp config file to start the WebServer
 				GenerateAppConfigFile(serverRoot, screensPath);
 				
+				// Generate a web.config file with specific configuration for the application
+				GenerateWebConfigFile(serverRoot);
+					
 				// Mount argument string
 				string infoWebServerArguments = "" +
 					" --nonstop" + 
@@ -115,9 +118,15 @@ namespace Ideas.Scada.Common.Tags
 				// Executes XSP WebServer
 				prcWebServer = Process.Start(infoWebServer);
 				
-				log.Info("WebService started.");
-				
-				this.isStarted = true;
+				if(prcWebServer.HasExited)
+				{
+					throw new Exception("Unable to start WebServer. Check XSP installation.");
+				}
+				else
+				{
+					log.Info("WebService started.");
+					this.isStarted = true;
+				}
 			}
 			catch(Exception e)
 			{
@@ -202,6 +211,68 @@ namespace Ideas.Scada.Common.Tags
 			
 			// Return filename
 			return targetFile;
+		}
+		
+		public void GenerateWebConfigFile (string targetPath)
+		{
+			//XmlDocument xmlWebConfig = new XmlDocument();
+			
+			string initialScreenURL = 
+				//"screens/" + 
+				this.Project.Screens[this.Project.InitialScreenName].FilePath;
+			
+			string targetFile = 
+				targetPath + 
+				Path.DirectorySeparatorChar + "Web.config";
+			
+			log.Debug("Generating webconfig file...");
+			
+			// Deletes file if it exists
+			if(File.Exists(targetFile))
+			{
+				File.Delete(targetFile);
+				log.Debug("Deleted current Webconfig file at: " + targetFile);
+			}
+			
+		
+			
+			string fileContent = "";
+			fileContent += "<?xml version=\"1.0\"?> \n";
+			fileContent += "<configuration> \n";
+			fileContent += "	<system.web> \n";
+			fileContent += "		<compilation defaultLanguage=\"C#\" debug=\"true\"> \n";
+			fileContent += "			<assemblies> \n";
+			fileContent += "			</assemblies> \n";
+			fileContent += "		</compilation> \n";
+			fileContent += "		<customErrors mode=\"Off\"> \n";
+			fileContent += "		</customErrors> \n";
+			fileContent += "		<authentication mode=\"None\"> \n";
+			fileContent += "		</authentication> \n";
+			fileContent += "		<authorization> \n";
+			fileContent += "			<allow users=\"*\" /> \n";
+			fileContent += "		</authorization> \n";
+			fileContent += "		<httpHandlers> \n";
+			fileContent += "		</httpHandlers> \n";
+			fileContent += "		<trace enabled=\"false\" localOnly=\"true\" pageOutput=\"false\" requestLimit=\"10\" traceMode=\"SortByTime\" /> \n";
+			fileContent += "		<sessionState mode=\"InProc\" cookieless=\"false\" timeout=\"20\" /> \n";
+			fileContent += "		<globalization requestEncoding=\"utf-8\" responseEncoding=\"utf-8\" /> \n";
+			fileContent += "		<pages> \n";
+			fileContent += "		</pages> \n";
+			fileContent += "	</system.web> \n";
+			fileContent += "	<appSettings> \n";
+			fileContent += "		<add key=\"InitialScreen\" value=\"" + initialScreenURL + "\"/> \n";
+			fileContent += "	</appSettings> \n";
+			fileContent += "</configuration> \n";
+
+			
+			log.Debug("Writing new webconfig file at: " + targetFile);
+			
+			// Write the file back with the correct screens path
+			StreamWriter writer = new StreamWriter(File.OpenWrite(targetFile));
+			writer.Write(fileContent);
+			writer.Close();
+			
+			log.Debug("Webconfig generation finished.");
 		}
 		
 		#endregion

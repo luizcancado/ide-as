@@ -16,14 +16,13 @@ namespace Ideas.ScadaApplication
             return random.Next(0, 100);
 		}
   
-  
         [WebMethod]
         public int GetTagValue (string tagname)
         {
             Random random = new Random();
             
             return random.Next(0, 100);
-        }      
+        }
  
 		[WebMethod]
 		public void SetTagValue (string tagname, string value)

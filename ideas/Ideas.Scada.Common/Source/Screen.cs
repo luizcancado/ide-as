@@ -11,6 +11,7 @@ namespace Ideas.Scada.Common
 		
 		private string name;
 		private string filePath;
+		private string fileName;
 		private Project project;
 		private ScreenType type;
 		private ScreenServerScriptLanguage serverScriptLanguage;
@@ -29,7 +30,7 @@ namespace Ideas.Scada.Common
 		public Screen (XmlNode node, Project parentProject)
 		{
 			string nodeName = node.Attributes["name"].Value;
-			string nodePath = node.Attributes["filename"].Value;
+			string nodeFileName = node.Attributes["filename"].Value;
 			string nodeStringType = node.Attributes["type"].Value;
 			string stringServerScriptLanguage = node.Attributes["serverscriptlanguage"].Value;
 			string stringClientScriptLanguage = node.Attributes["clientscriptlanguage"].Value;
@@ -39,8 +40,9 @@ namespace Ideas.Scada.Common
 			ScreenClientScriptLanguage nodeClientScriptLanguage = ConvertStringToScreenClientScriptLanguage(stringClientScriptLanguage);
 			
 			this.Name = nodeName;
+			this.FileName = nodeFileName;
 			this.FilePath = parentProject.FilePath + "screens" + Path.DirectorySeparatorChar;
-			this.FilePath += nodePath + Path.DirectorySeparatorChar;
+			this.FilePath += nodeFileName;
 			this.Project = parentProject;
 			this.Type = nodeType;
 			this.ServerScriptLanguage = nodeServerScriptLanguage;
@@ -103,6 +105,15 @@ namespace Ideas.Scada.Common
 			set
 			{
 				this.name = value;
+			}
+		}
+
+		public string FileName {
+			get {
+				return this.fileName;
+			}
+			set {
+				fileName = value;
 			}
 		}
 

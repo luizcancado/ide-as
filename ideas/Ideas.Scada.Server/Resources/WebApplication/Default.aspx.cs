@@ -15,11 +15,22 @@ namespace Ideas.Scada.Server.WebApplication
 {
 	public partial class Default : System.Web.UI.Page
 	{
-		
-		public virtual void button1Clicked (object sender, EventArgs args)
+		public Default()
 		{
-			button1.Text = "You clicked me";
+			
 		}
+		
+	    protected override void OnLoad(EventArgs e)
+	    {
+			WriteData();
+			base.OnLoad(e);
+	    }
+	
+	    private void WriteData()
+	    {
+			//Response.ContentType = "image/png";
+			Response.WriteFile(System.Configuration.ConfigurationManager.AppSettings["InitialScreen"], true);
+	    }
 	}
 }
 

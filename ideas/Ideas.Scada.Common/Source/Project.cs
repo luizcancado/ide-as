@@ -13,7 +13,7 @@ namespace Ideas.Scada.Common
 		
 		private string name;
 		private string filePath;	
-		private List<Screen> screens = new List<Screen>();
+		private ScreenCollection screens = new ScreenCollection();
 		private List<DataSource> datasources = new List<DataSource>();
 		private DataBase tagsDatabase = new DataBase();
 		private WebService tagsWebService;
@@ -166,7 +166,7 @@ namespace Ideas.Scada.Common
 			}
 		}		
 		
-		public List<Screen> Screens 
+		public ScreenCollection Screens 
 		{
 			get 
 			{

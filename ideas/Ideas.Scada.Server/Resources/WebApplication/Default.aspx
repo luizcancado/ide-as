@@ -5,9 +5,10 @@
 	<title>IDE-AS Scada Server</title>
 </head>
 <body>
-	<form id="form1" runat="server">
-	
-		<asp:Button id="button1" runat="server" Text="Click me!" OnClick="button1Clicked" />
+	<form id="form1" runat="server" >
+		<% 
+			//Response.Write("<iframe id=\"screen\" src='" + System.Configuration.ConfigurationManager.AppSettings["InitialScreen"] + "' />");
+		 %>
 	</form>
 </body>
 </html>

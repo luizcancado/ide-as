@@ -11,7 +11,7 @@ namespace Ideas.Scada.Common
 				
 		private Project GetByProjectName(string projName)
 		{
-			for(int i =0; i< base.Count ;i++)
+			for(int i = 0; i< base.Count; i++)
 			{
 				if(base[i].Name == projName)
 				{
@@ -27,14 +27,6 @@ namespace Ideas.Scada.Common
 			get
 			{
 				return GetByProjectName(tagName);
-			}
-		}
-		
-		public Project this[int i]
-		{
-			get
-			{
-				return base[i];
 			}
 		}
 	}

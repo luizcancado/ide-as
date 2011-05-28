@@ -44,6 +44,7 @@
   <ItemGroup>
     <Folder Include="Source\" />
     <Folder Include="Properties\" />
+    <Folder Include="Resources\WebApplication\js\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Source\Main.cs" />
@@ -71,9 +72,6 @@
     <None Include="Resources\WebApplication\TagsServer.asmx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Resources\WebApplication\web.config">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Include="Resources\WebApplication\bin\Ideas.Scada.Server.WebApplication.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -90,6 +88,12 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Logging.conf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\WebApplication\Web.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\WebApplication\js\Ideas-Scada-Client-Common.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
