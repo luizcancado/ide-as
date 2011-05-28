@@ -15,7 +15,7 @@
    id="svgdoc"
    version="1.1"
    inkscape:version="0.48.1 r9760"
-   sodipodi:docname="Diagnostico.svg.html">
+   sodipodi:docname="Diagnostico.svg">
 	
 	<title
    id="title3024">Tela</title>
@@ -55,8 +55,8 @@
    id="namedview3146"
    showgrid="false"
    inkscape:zoom="4"
-   inkscape:cx="59.505087"
-   inkscape:cy="20.188485"
+   inkscape:cx="94.037969"
+   inkscape:cy="69.501454"
    inkscape:window-x="1366"
    inkscape:window-y="24"
    inkscape:window-maximized="1"
@@ -369,19 +369,6 @@
      x="29.714478"
      y="61.478378">Diagnostico</tspan></text>
 
-<text
-   xml:space="preserve"
-   style="font-size:48.930233px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
-   x="27.844482"
-   y="59.142441"
-   id="text3977"
-   sodipodi:linespacing="125%"><tspan
-     sodipodi:role="line"
-     id="tspan3979"
-     x="27.844482"
-     y="59.142441">
-     Diagnostico
-     </tspan></text>
 
      
 <g
@@ -397,20 +384,19 @@
    id="rect4073-8"
    style="color:#000000;fill:#cccccc;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
 	
-	<text
-   sodipodi:linespacing="125%"
-   id="text4093"
-   y="583.06006"
-   x="-19.141832"
-   style="font-size:23.89980698px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans-serif"
+	
+<text
    xml:space="preserve"
-   transform="scale(0.99582529,1.0041922)">   <tspan
-   style="font-size:17.92485428px"
-   y="583.06006"
-   x="-19.141832"
-   id="tspan4095"
-   sodipodi:role="line">    Processo   </tspan>  </text>
-
+   style="font-size:24px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+   x="26"
+   y="583.95862"
+   id="text3127"
+   sodipodi:linespacing="125%"><tspan
+     sodipodi:role="line"
+     id="tspan3129"
+     x="26"
+     y="583.95862"
+     style="font-size:16px">Processo</tspan></text>
 </g>	     
 <image
    y="8"
@@ -420,4 +406,15 @@
    height="68.09375"
    width="72.152321" />
 	   
+<text
+   xml:space="preserve"
+   style="font-size:48.930233px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#f9f9f9;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+   x="26.714478"
+   y="59.498817"
+   id="text3977-8-3"
+   sodipodi:linespacing="125%"><tspan
+     sodipodi:role="line"
+     id="tspan3979-7-4"
+     x="26.714478"
+     y="59.498817">Diagnostico</tspan></text>
 </svg>
