@@ -9,13 +9,16 @@
    xmlns:xlink="http://www.w3.org/1999/xlink"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   enable-background="new"
    sodipodi:docname="MisturadorTintas.svg"
    inkscape:version="0.48.1 r9760"
    version="1.1"
+
    id="svg4591"
    height="768"
-   width="1200">
+   width="1280"
+   style="enable-background:new">
+  <title
+     id="title3">Misturador de Tintas</title>
   <defs
      id="defs4593">
     <inkscape:perspective
@@ -66,7 +69,7 @@
        id="path-effect8026"
        is_visible="true"
        count="5"
-       startpoint_edge_variation="0.8;-2120824779"
+       startpoint_edge_variation="0.8;2120824780"
        startpoint_spacing_variation="0;1"
        endpoint_edge_variation="0;1"
        endpoint_spacing_variation="0;1"
@@ -193,7 +196,7 @@
        id="path-effect7912"
        is_visible="true"
        direction="512.80616,278.46042 , 8.3009417,0"
-       dist_rdm="74.1;-2130657333"
+       dist_rdm="74.1;2130657334"
        growth="0"
        do_bend="true"
        bender="512.80616,283.46042 , 5,0"
@@ -433,41 +436,44 @@
     <marker
        inkscape:stockid="SemiCircleOut"
        orient="auto"
-       refY="0.0"
-       refX="0.0"
+       refY="0"
+       refX="0"
        id="SemiCircleOut"
        style="overflow:visible">
       <path
          id="path6494"
-         d="M -2.5,-0.80913858 C -2.5,1.9508614 -4.7400000,4.1908614 -7.5,4.1908614 L -7.5,-5.8091386 C -4.7400000,-5.8091386 -2.5,-3.5691386 -2.5,-0.80913858 z "
-         style="fill-rule:evenodd;stroke:#000000;stroke-width:1.0pt;marker-start:none;marker-end:none"
-         transform="scale(0.6) translate(7.125493,0.763446)" />
+         d="m -2.5,-0.80913858 c 0,2.75999998 -2.24,4.99999998 -5,4.99999998 l 0,-10 c 2.76,0 5,2.24 5,5.00000002 z"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;marker-start:none;marker-end:none"
+         transform="matrix(0.6,0,0,0.6,4.2752958,0.4580676)"
+         inkscape:connector-curvature="0" />
     </marker>
     <marker
        inkscape:stockid="Arrow1Lend"
        orient="auto"
-       refY="0.0"
-       refX="0.0"
+       refY="0"
+       refX="0"
        id="Arrow1Lend"
-       style="overflow:visible;">
+       style="overflow:visible">
       <path
          id="path6315"
-         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
-         style="fill-rule:evenodd;stroke:#000000;stroke-width:1.0pt;marker-start:none;"
-         transform="scale(0.8) rotate(180) translate(12.5,0)" />
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 z"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;marker-start:none"
+         transform="matrix(-0.8,0,0,-0.8,-10,0)"
+         inkscape:connector-curvature="0" />
     </marker>
     <marker
        inkscape:stockid="Arrow1Lstart"
        orient="auto"
-       refY="0.0"
-       refX="0.0"
+       refY="0"
+       refX="0"
        id="Arrow1Lstart"
        style="overflow:visible">
       <path
          id="path6312"
-         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
-         style="fill-rule:evenodd;stroke:#000000;stroke-width:1.0pt;marker-start:none"
-         transform="scale(0.8) translate(12.5,0)" />
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 z"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;marker-start:none"
+         transform="matrix(0.8,0,0,0.8,10,0)"
+         inkscape:connector-curvature="0" />
     </marker>
     <linearGradient
        id="linearGradient6299">
@@ -850,10 +856,10 @@
        inkscape:collect="always"
        xlink:href="#linearGradient6082"
        id="linearGradient6086"
-       x1="82.567996"
-       y1="724.47215"
+       x1="82.567993"
+       y1="724.47217"
        x2="240.78061"
-       y2="724.47215"
+       y2="724.47217"
        gradientUnits="userSpaceOnUse" />
     <linearGradient
        gradientTransform="matrix(-0.34931678,-0.93700465,0.93700471,-0.34931677,128.07929,344.03149)"
@@ -1385,6 +1391,68 @@
        y1="31.730001"
        x2="33.991459"
        y2="24.658934" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3969"
+       id="linearGradient3975"
+       x1="611"
+       y1="88"
+       x2="611"
+       y2="-62.163246"
+       gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       inkscape:collect="always"
+       id="linearGradient3969">
+      <stop
+         style="stop-color:#666666;stop-opacity:1;"
+         offset="0"
+         id="stop3971" />
+      <stop
+         style="stop-color:#666666;stop-opacity:0;"
+         offset="1"
+         id="stop3973" />
+    </linearGradient>
+    <linearGradient
+       gradientTransform="matrix(0.51956848,0,0,0.70391642,-339.97882,149.58255)"
+       y2="-62.163246"
+       x2="611"
+       y1="88"
+       x1="611"
+       gradientUnits="userSpaceOnUse"
+       id="linearGradient3151"
+       xlink:href="#linearGradient3969"
+       inkscape:collect="always" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3961"
+       id="linearGradient3967"
+       x1="292"
+       y1="599"
+       x2="292"
+       y2="484"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="translate(0,168.29141)" />
+    <linearGradient
+       id="linearGradient3961">
+      <stop
+         style="stop-color:#01002c;stop-opacity:1;"
+         offset="0"
+         id="stop3963" />
+      <stop
+         style="stop-color:#ffffff;stop-opacity:0;"
+         offset="1"
+         id="stop3965" />
+    </linearGradient>
+    <linearGradient
+       y2="484"
+       x2="292"
+       y1="599"
+       x1="292"
+       gradientTransform="matrix(0.51956848,0,0,0.70391642,-339.45928,268.72685)"
+       gradientUnits="userSpaceOnUse"
+       id="linearGradient3171"
+       xlink:href="#linearGradient3961"
+       inkscape:collect="always" />
   </defs>
   <sodipodi:namedview
      id="base"
@@ -1393,14 +1461,14 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.27524473"
-     inkscape:cx="837.59726"
-     inkscape:cy="181.81678"
+     inkscape:zoom="4.4039156"
+     inkscape:cx="135.14969"
+     inkscape:cy="53.547975"
      inkscape:document-units="px"
      inkscape:current-layer="g4305"
      showgrid="false"
-     inkscape:window-width="1366"
-     inkscape:window-height="744"
+     inkscape:window-width="1280"
+     inkscape:window-height="776"
      inkscape:window-x="0"
      inkscape:window-y="24"
      inkscape:window-maximized="1"
@@ -2723,6 +2791,71 @@
          d="m 108.18046,415.84542 c 8.52666,0 15.45548,-2.0634 15.45548,-4.6179 0,-0.51279 -0.3061,-1.00897 -0.82086,-1.47012 0.143,0.25286 0.25798,0.5133 0.25798,0.7783 0,2.5545 -6.92881,4.6179 -15.45546,4.6179 -6.81498,0 -12.58514,-1.3291 -14.634619,-3.16508 1.235564,2.18466 7.555369,3.8569 15.197479,3.8569 z"
          style="fill:url(#linearGradient4355);fill-opacity:1;stroke:none"
          inkscape:connector-curvature="0" />
+      <rect
+         ry="0"
+         rx="18.786657"
+         y="149.58257"
+         x="-339.45926"
+         height="60.536812"
+         width="665.04767"
+         id="rect3164"
+         style="color:#000000;fill:url(#linearGradient3151);fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+      <text
+         xml:space="preserve"
+         style="font-size:29.5909729px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#cccccc;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+         x="-377.75266"
+         y="165.69101"
+         id="text3977-8"
+         sodipodi:linespacing="125%"
+         transform="scale(0.85913391,1.1639629)"><tspan
+           sodipodi:role="line"
+           x="-377.75266"
+           y="165.69101"
+           id="tspan4390">Processo</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-size:29.5909729px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#f9f9f9;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+         x="-379.39444"
+         y="164.27199"
+         id="text3977-8-3"
+         sodipodi:linespacing="125%"
+         transform="scale(0.85913391,1.1639629)"><tspan
+           sodipodi:role="line"
+           id="tspan3979-7-4"
+           x="-379.39444"
+           y="164.27199">Processo</tspan></text>
+      <rect
+         ry="0"
+         rx="18.786657"
+         y="660.10443"
+         x="-339.45926"
+         height="30.972322"
+         width="665.04767"
+         id="rect3164-1"
+         style="color:#000000;fill:url(#linearGradient3171);fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+      <g
+         id="g3453">
+        <rect
+           style="color:#000000;fill:#cccccc;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+           id="rect4073-8"
+           width="64.558243"
+           height="22.359699"
+           x="-333.74405"
+           y="663.70685"
+           rx="3.6852524"
+           ry="4.2308245" />
+        <flowRoot
+           transform="matrix(0.51956848,0,0,0.70391642,-339.48193,147.78239)"
+           style="font-size:24px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+           id="flowRoot3449"
+           xml:space="preserve"><flowRegion
+             id="flowRegion3451"><rect
+               y="732.03381"
+               x="17.983078"
+               height="35.966183"
+               width="113.65983"
+               id="rect3453" /></flowRegion><flowPara
+             id="flowPara3455">Processo</flowPara></flowRoot>      </g>
     </g>
     <rect
        y="401.39478"

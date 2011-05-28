@@ -28,7 +28,7 @@ namespace Ideas.Scada.Server.WebApplication
 	
 	    private void WriteData()
 	    {
-			//Response.ContentType = "image/png";
+			Response.ContentType = "image/svg+xml";
 			Response.WriteFile(System.Configuration.ConfigurationManager.AppSettings["InitialScreen"], true);
 	    }
 	}

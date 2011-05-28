@@ -225,6 +225,8 @@ namespace Ideas.Scada.Common.Tags
 				targetPath + 
 				Path.DirectorySeparatorChar + "Web.config";
 			
+			string projectScreenList = GetProjectScreenList();
+			
 			log.Debug("Generating webconfig file...");
 			
 			// Deletes file if it exists
@@ -261,7 +263,7 @@ namespace Ideas.Scada.Common.Tags
 			fileContent += "	</system.web> \n";
 			fileContent += "	<appSettings> \n";
 			fileContent += "		<add key=\"InitialScreen\" value=\"" + initialScreenURL + "\"/> \n";
-			fileContent += "		<add key=\"Screens\" value=\"" + initialScreenURL + "\"/> \n";
+			fileContent += "		<add key=\"Screens\" value=\"" + projectScreenList + "\"/> \n";
 			fileContent += "	</appSettings> \n";
 			fileContent += "</configuration> \n";
 
@@ -274,6 +276,18 @@ namespace Ideas.Scada.Common.Tags
 			writer.Close();
 			
 			log.Debug("Webconfig generation finished.");
+		}
+		
+		private string GetProjectScreenList()
+		{
+			string projScreen = "";
+			
+			foreach(Screen scr in this.Project.Screens)
+			{
+				projScreen += scr.Name + "," + scr.FilePath + ";";
+			}
+			
+			return projScreen;
 		}
 		
 		#endregion
