@@ -57,7 +57,7 @@ function updateVars()
 
 	updateStats();
 	
-	setTimeout ( "updateVars()", 5000 );
+	setTimeout ( "updateVars()", 100 );
 }
     
 function updateStats()
@@ -68,7 +68,7 @@ function updateStats()
 		var object = svgDocument.getElementById("Label" + (i + 1));
 		if(object != null)
 		{
-			object.firstChild.data = TAGS[i];
+			object.firstChild.data = TAGS[key];
 		}
 	   
 	   i++;

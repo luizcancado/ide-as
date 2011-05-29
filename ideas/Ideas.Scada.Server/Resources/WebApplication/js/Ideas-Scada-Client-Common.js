@@ -56,6 +56,6 @@ function ReadTagList()
 {	
 	for(key in TAGS)
 	{
-	   TAGS[key] = ReadTag(key);
+	   ReadTag(key);
 	}
 }
