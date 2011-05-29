@@ -20,6 +20,19 @@ var textbutton1;
 //now create a new button instance
 function initScreen(evt)
 {
+		$.ajax({
+		    type: "GET",
+		    url: "/screens/Diagnostico.svg.asmx/GetTagValue?tagname=teste",
+		    //data: "{}",
+		    contentType: "text/xml; charset=utf-8",
+		    dataType: "xml",
+		    success: function(xml) {	 
+		      // Insert the returned HTML into the <div>.
+		      alert("Resultado: " + $(xml).find('int').text());
+		    }
+		  });
+
+
 		textbutton1 = 
 			new button(
 				"Botao1",
@@ -28,8 +41,8 @@ function initScreen(evt)
 				"rect",
 				"Click me",
 				undefined,
-				100,
-				100,
+				500,
+				300,
 				100,
 				30,
 				{"font-family":"Arial,Helvetica","fill":"navy","font-size":12},

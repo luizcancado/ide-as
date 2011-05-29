@@ -105,5 +105,16 @@
     <None Include="Resources\WebApplication\js\CartoNet-GUI-Timer.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="Resources\WebApplication\js\CartoNet-GUI-ColourPicker.js" />
+    <None Include="Resources\WebApplication\js\CartoNet-GUI-Combobox.js" />
+    <None Include="Resources\WebApplication\js\CartoNet-GUI-MapApp.js" />
+    <None Include="Resources\WebApplication\js\CartoNet-GUI-Scrollbar.js" />
+    <None Include="Resources\WebApplication\js\CartoNet-GUI-SelectionList.js" />
+    <None Include="Resources\WebApplication\js\CartoNet-GUI-Slider.js" />
+    <None Include="Resources\WebApplication\js\CartoNet-GUI-TabGroup.js" />
+    <None Include="Resources\WebApplication\js\CartoNet-GUI-Textbox.js" />
+    <None Include="Resources\WebApplication\js\CartoNet-GUI-TextFlow.js" />
+    <None Include="Resources\WebApplication\js\CartoNet-GUI-Window.js" />
+    <None Include="Resources\WebApplication\js\jquery-1.6.1.min.js" />
   </ItemGroup>
 </Project>

@@ -5,9 +5,9 @@ using System.Web.Services;
  
 namespace Ideas.ScadaApplication
 {
-	[WebService (Namespace = "http://tempuri.org/", 
-	             Description = "Server-side code for the screen \"Diagnostico\"")]
+	[WebService(Namespace = "http://tempuri.org/")]
 	[WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]
+	[System.Web.Script.Services.ScriptService]
 	public class Diagnostico : WebService
 	{
 		[WebMethod]
