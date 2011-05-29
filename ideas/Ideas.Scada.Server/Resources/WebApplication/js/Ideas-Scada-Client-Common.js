@@ -9,6 +9,7 @@
 	Description: A sample client-side script to demonstrate IDEAS application structure.
 */
 
+var TAGS;
 
 var Ideas = {
     
@@ -18,11 +19,13 @@ var Ideas = {
     }   
 }
 
-function GotoScreen() 
+
+function GotoScreen(scr) 
 {
-    window.location('/?s=MisturadorTintas');
+    window.location('/?s=' + scr);
 }
 
+// Function to handle SVG onLoad event
 function init(evt) 
 {
 	if ( window.svgDocument == null )
@@ -31,108 +34,28 @@ function init(evt)
 	}
 
 	initScreen();
-	
-	updateVars();
 }
 
-var TAGS = [];
- 
-function updateVars() 
-{
-	for(i = 0; i < 20; i++)
+// Function to retrieve tag data from webservice
+function ReadTag(tagName) 
+{	
+	$.ajax({
+	    type: "GET",
+	    url: "/screens/Diagnostico.svg.asmx/GetTagValue?tagname=" + tagName,
+	    contentType: "text/xml; charset=utf-8",
+	    dataType: "xml",
+	    success: 
+	    	function(xml) {	 
+	     		TAGS[tagName] = $(xml).find('int').text();
+	    	}
+	  });
+}
+
+
+function ReadTagList()
+{	
+	for(key in TAGS)
 	{
-		TAGS[i] = Math.floor(Math.random()*101);
-		//TAGS[i] = callWebService();
-	}
-
-	updateStats();
-	
-	setTimeout ( "updateVars()", 1000 );
-}
-    
-function updateStats()
-{
-	for(i = 0; i < 20; i++)
-	{
-		var object = svgDocument.getElementById("Label" + (i + 1));
-		if(object != null)
-		{
-			object.firstChild.data = TAGS[i];
-		}
+	   TAGS[key] = ReadTag(key);
 	}
 }
-  
-                   
-// Web Service functionality
-
-// Calls web service with url and callback function. Callback will
-// be executed when XMLHttpRequest object returns from web service call.
-function callWebService(url, callback)
-{
-    var xmlDoc = null;
-    
-    if (window.XMLHttpRequest) 
-    {
-        xmlDoc = new XMLHttpRequest(); //Newer browsers
-       
-    }
-
-    if (xmlDoc) 
-    {
-        //callback for readystate
-        xmlDoc.onreadystatechange = function() { stateChange(xmlDoc, callback); };
-        xmlDoc.open("GET", url, true); //set for async "get"
-        xmlDoc.send(null); //execute asynchronous call to web service
-    }
-    else 
-    {
-        if(callback)   
-            callback(false, "unable to create XMLHttpRequest object");
-    }
-}
-
-
-// Updates readystate by callback
-function stateChange(xmlDoc, callback)
-{
-    if (xmlDoc.readyState == 4) 
-    {
-        var text = "";
-
-        if (xmlDoc.status == 200) 
-        {
-            //select node containing data
-            var nd = xmlDoc.responseXML.documentElement.getElementsByTagName("date_time");
-           
-            if (nd && nd.length == 1)
-            { //IE use .text, others .textContent
-                text = nd[0].textContent;
-            }
-        }
-
-        // Perform callback with data if callback function signature was provided, 
-        // alternately we could perform UI update right here vs a callback.
-        if(callback != null)
-            callback(text != "", text);
-	}
-}
-
-// Callback pointer supplied to callWebService function to
-// display results of web service call
-function callbackTest(result, data)
-{
-    if (result)
-        alert("Success " + data);
-    else
-        alert("Web service call failed " + data);
-}     
-
-        
-            
-                
-                    
-                       
-
-
-
-

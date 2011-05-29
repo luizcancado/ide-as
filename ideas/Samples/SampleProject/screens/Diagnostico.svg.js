@@ -20,38 +20,63 @@ var textbutton1;
 //now create a new button instance
 function initScreen(evt)
 {
-		$.ajax({
-		    type: "GET",
-		    url: "/screens/Diagnostico.svg.asmx/GetTagValue?tagname=teste",
-		    //data: "{}",
-		    contentType: "text/xml; charset=utf-8",
-		    dataType: "xml",
-		    success: function(xml) {	 
-		      // Insert the returned HTML into the <div>.
-		      alert("Resultado: " + $(xml).find('int').text());
-		    }
-		  });
+	textbutton1 = 
+		new button(
+			"Botao1",
+			"Botao",
+			GotoScreen,
+			"rect",
+			"Click me",
+			undefined,
+			500,
+			300,
+			100,
+			30,
+			{"font-family":"Arial,Helvetica","fill":"navy","font-size":12},
+			{"fill":"lightsteelblue"},
+			{"fill":"white"},
+			{"fill":"navy"},
+			1);
 
+	RegisterTags();
 
-		textbutton1 = 
-			new button(
-				"Botao1",
-				"Botao",
-				GotoScreen,
-				"rect",
-				"Click me",
-				undefined,
-				500,
-				300,
-				100,
-				30,
-				{"font-family":"Arial,Helvetica","fill":"navy","font-size":12},
-				{"fill":"lightsteelblue"},
-				{"fill":"white"},
-				{"fill":"navy"},
-				1);
-
+	updateVars();
 }
+
+function RegisterTags()
+{
+	TAGS = {
+		AUTOMATICO: 0,
+		EMERGENCIA: 0
+	}
+}
+
+function updateVars() 
+{
+	ReadTagList();
+
+	updateStats();
+	
+	setTimeout ( "updateVars()", 5000 );
+}
+    
+function updateStats()
+{
+	i = 0;
+	for(key in TAGS)
+	{
+		var object = svgDocument.getElementById("Label" + (i + 1));
+		if(object != null)
+		{
+			object.firstChild.data = TAGS[i];
+		}
+	   
+	   i++;
+	}
+}
+
+
+// Event Circle - Functions -- START
 
 function updateCounters() 
 {
@@ -92,3 +117,5 @@ function msOut (evt) {
 	mouseOut++;
 	updateCounters();
 }
+
+// Event Circle - Functions -- END

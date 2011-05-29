@@ -115,6 +115,8 @@
     <None Include="Resources\WebApplication\js\CartoNet-GUI-Textbox.js" />
     <None Include="Resources\WebApplication\js\CartoNet-GUI-TextFlow.js" />
     <None Include="Resources\WebApplication\js\CartoNet-GUI-Window.js" />
-    <None Include="Resources\WebApplication\js\jquery-1.6.1.min.js" />
+    <None Include="Resources\WebApplication\js\jquery-1.6.1.min.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 </Project>
