@@ -96,5 +96,14 @@
     <None Include="Resources\WebApplication\js\Ideas-Scada-Client-Common.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="Resources\WebApplication\js\CartoNet-GUI-Button.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\WebApplication\js\CartoNet-GUI-HelperFunctions.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\WebApplication\js\CartoNet-GUI-Timer.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 </Project>

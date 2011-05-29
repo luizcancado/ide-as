@@ -104,6 +104,7 @@ namespace Ideas.Scada.Common.Tags
 				infoWebServer.Arguments = infoWebServerArguments;
 				infoWebServer.UseShellExecute = false;
 				infoWebServer.RedirectStandardOutput = true;
+				infoWebServer.RedirectStandardInput = true;
 				
 				log.Info("Client access address: http://" + this.ServerAddress + ":" + this.ServerPort);
 				log.Info("Path to screens:" + this.ScreensPath);
@@ -219,7 +220,7 @@ namespace Ideas.Scada.Common.Tags
 			
 			string initialScreenURL = 
 				//"screens/" + 
-				this.Project.Screens[this.Project.InitialScreenName].FilePath;
+				this.Project.Screens[this.Project.InitialScreenName].Name;
 			
 			string targetFile = 
 				targetPath + 
@@ -286,6 +287,8 @@ namespace Ideas.Scada.Common.Tags
 			{
 				projScreen += scr.Name + "," + scr.FilePath + ";";
 			}
+			
+			projScreen = projScreen.TrimEnd(new char[] {';'});
 			
 			return projScreen;
 		}

@@ -22,14 +22,41 @@ namespace Ideas.Scada.Server.WebApplication
 		
 	    protected override void OnLoad(EventArgs e)
 	    {
-			WriteData();
+			if(Request.QueryString["s"] != null)
+			{
+				DisplayScreen(Request.QueryString["s"].Trim());
+			}
+			else
+			{
+				DisplayScreen(System.Configuration.ConfigurationManager.AppSettings["InitialScreen"]);
+			}
+			
 			base.OnLoad(e);
 	    }
+		
+		private void DisplayScreen(string screenName)
+		{
+			string screens = System.Configuration.ConfigurationManager.AppSettings["Screens"];
+			string[] screenList = screens.Split(';');
+			
+			foreach (string scr in screenList)
+			{
+				string[] s = scr.Split(',');
+				string scrName = s[0];
+				string scrPath = s[1];
+				
+				if(scrName.Equals(screenName, StringComparison.CurrentCultureIgnoreCase))
+				{
+					WriteSVGScreen(scrPath);	
+					break;
+				}				
+			}
+		}
 	
-	    private void WriteData()
+	    private void WriteSVGScreen(string screenFile)
 	    {
 			Response.ContentType = "image/svg+xml";
-			Response.WriteFile(System.Configuration.ConfigurationManager.AppSettings["InitialScreen"], true);
+			Response.WriteFile(screenFile, true);
 	    }
 	}
 }

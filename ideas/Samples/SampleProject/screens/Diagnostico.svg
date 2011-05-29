@@ -13,29 +13,25 @@
    width="1280"
    height="768"
    id="svgdoc"
+   viewbox="0 0 1280 768"
    version="1.1"
    inkscape:version="0.48.1 r9760"
    sodipodi:docname="Diagnostico.svg">
 	
-	<title
-   id="title3024">Tela</title>
-	<script
-   xlink:href="Diagnostico.svg.js"
-   id="script3026"
-   type="text/ecmascript" />
-	<script
-   xlink:href="../js/Ideas-Scada-Client-Common.js"
-   id="script3028"
-   type="text/ecmascript" />
+	<title id="title3024">Tela</title>
+   
+	<script xlink:href="/js/Ideas-Scada-Client-Common.js" id="script3028" type="text/ecmascript" />
+	<script xlink:href="/js/CartoNet-GUI-Button.js" id="script3028" type="text/ecmascript" />
+	<script xlink:href="/js/CartoNet-GUI-HelperFunctions.js" id="script3028" type="text/ecmascript" />
+	<script xlink:href="/js/CartoNet-GUI-Timer.js" id="script3028" type="text/ecmascript" />
+	<script xlink:href="/screens/Diagnostico.svg.js" id="script3026" type="text/ecmascript" />
 	
-	<metadata
-   id="metadata3148">
+	
+	<metadata id="metadata3148">
 		<rdf:RDF>
-			<cc:Work
-   rdf:about="">
+			<cc:Work rdf:about="">
 		       	<dc:format>image/svg+xml</dc:format>
-		       	<dc:type
-   rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+		       	<dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
 		       	<dc:title>Tela</dc:title>
        		</cc:Work>
    		</rdf:RDF>
@@ -148,7 +144,7 @@
  
 	<!-- Background --> 
 	 
-  
+  <g id="Botao" />
 	 
 	<circle
    d="m 412.04724,263.09055 c 0,22.09139 -17.90861,40 -40,40 -22.09139,0 -40,-17.90861 -40,-40 0,-22.09139 17.90861,-40 40,-40 22.09139,0 40,17.90861 40,40 z"

@@ -9,13 +9,36 @@
 	Description: A sample client-side script to demonstrate IDEAS application structure.
 */
 
-
 var click = 0;
 var mouseDown = 0; 
 var mouseUp = 0;
 var mouseOver = 0;
 var mouseMove = 0;
 var mouseOut = 0;
+var textbutton1;
+
+//now create a new button instance
+function initScreen(evt)
+{
+		textbutton1 = 
+			new button(
+				"Botao1",
+				"Botao",
+				GotoScreen,
+				"rect",
+				"Click me",
+				undefined,
+				100,
+				100,
+				100,
+				30,
+				{"font-family":"Arial,Helvetica","fill":"navy","font-size":12},
+				{"fill":"lightsteelblue"},
+				{"fill":"white"},
+				{"fill":"navy"},
+				1);
+
+}
 
 function updateCounters() 
 {

@@ -12,11 +12,15 @@
 
 var Ideas = {
     
-    GetTagValue: function (tagName) 
+    GotoURL: function (url) 
     {
-        return "";
-    }
-    
+        window.location(url);
+    }   
+}
+
+function GotoScreen() 
+{
+    window.location('/?s=MisturadorTintas');
 }
 
 function init(evt) 
@@ -25,7 +29,9 @@ function init(evt)
 	{
 		svgDocument = evt.target.ownerDocument;
 	}
-	 alert('teste') ;
+
+	initScreen();
+	
 	updateVars();
 }
 
