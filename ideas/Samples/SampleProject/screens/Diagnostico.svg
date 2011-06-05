@@ -246,164 +246,184 @@
 	 
 
 	<text
-   x="285.2178"
-   y="161.44231"
-   id="Label1"
-   style="font-size:18.19803047px">??????????</text>
+	   x="285.2178"
+	   y="161.44231"
+	   id="AUTOMATICO_value"
+	   style="font-size:18.19803047px">[AUTOMATICO]</text>
 
 
  
 	<text
    x="285.2178"
    y="184.18982"
-   id="Label2"
-   style="font-size:18.19803047px">??????????</text>
+   id="BICO_A_value"
+   style="font-size:18.19803047px">[BICO_A]</text>
 
 
  
 	<text
    x="285.2178"
    y="206.93735"
-   id="Label3"
-   style="font-size:18.19803047px">??????????</text>
+   id="BICO_B_value"
+   style="font-size:18.19803047px">[BICO_B]</text>
 
 
  
 	<text
    x="285.2178"
    y="229.68488"
-   id="Label4"
-   style="font-size:18.19803047px">??????????</text>
+   id="DESLIGA_ESTEIRA_value"
+   style="font-size:18.19803047px">[DESLIGA_ESTEIRA]</text>
 
 
  
 	<text
    x="285.2178"
    y="252.4324"
-   id="Label5"
-   style="font-size:18.19803047px">??????????</text>
+   id="EMERGENCIA_value"
+   style="font-size:18.19803047px">[EMERGENCIA]</text>
 
 
  
 	<text
    x="285.2178"
    y="275.17993"
-   id="Label6"
-   style="font-size:18.19803047px">??????????</text>
+   id="ESTEIRA_LIGADA_value"
+   style="font-size:18.19803047px">[ESTEIRA_LIGADA]</text>
 
 
 
 	<text
    x="285.2178"
    y="297.92749"
-   id="Label7"
-   style="font-size:18.19803047px">??????????</text>
+   id="LIGA_ESTEIRA_value"
+   style="font-size:18.19803047px">[LIGA_ESTEIRA]</text>
 
 
 
 	<text
    x="285.2178"
    y="320.67502"
-   id="Label8"
-   style="font-size:18.19803047px">??????????</text>
+   id="MANUAL_value"
+   style="font-size:18.19803047px">[MANUAL]</text>
 
 
 
 	<text
    x="285.2178"
    y="343.42255"
-   id="Label9"
-   style="font-size:18.19803047px">??????????</text>
+   id="MISTURADOR_value"
+   style="font-size:18.19803047px">[MISTURADOR]</text>
 
 
 
 	<text
    x="285.2178"
    y="366.1701"
-   id="Label10"
-   style="font-size:18.19803047px">??????????</text>
+   id="PRODUTO_A_value"
+   style="font-size:18.19803047px">[PRODUTO_A]</text>
 
 
 
 	<text
    x="285.2178"
    y="388.91763"
-   id="Label11"
-   style="font-size:18.19803047px">??????????</text>
+   id="PRODUTO_B_value"
+   style="font-size:18.19803047px">[PRODUTO_B]</text>
 
 
 
 	<text
    x="285.2178"
    y="411.66516"
-   id="Label12"
-   style="font-size:18.19803047px">??????????</text>
+   id="PRODUTO_C_value"
+   style="font-size:18.19803047px">[PRODUTO_C]</text>
 
 
 
 	<text
    x="285.2178"
    y="434.41269"
-   id="Label13"
-   style="font-size:18.19803047px">??????????</text>
+   id="S1_value"
+   style="font-size:18.19803047px">[S2]</text>
 
 
 
 	<text
    x="285.2178"
    y="457.16025"
-   id="Label14"
-   style="font-size:18.19803047px">??????????</text>
+   id="S2_value"
+   style="font-size:18.19803047px">[S2]</text>
 
 
 
 	<text
    x="285.2178"
    y="479.90778"
-   id="Label15"
-   style="font-size:18.19803047px">??????????</text>
+   id="S3_value"
+   style="font-size:18.19803047px">[S3]</text>
 
 
 
 	<text
    x="285.2178"
    y="502.65527"
-   id="Label16"
-   style="font-size:18.19803047px">??????????</text>
+   id="S4_value"
+   style="font-size:18.19803047px">[S4]</text>
 
 
 
 	<text
    x="285.2178"
    y="525.40283"
-   id="Label17"
-   style="font-size:18.19803047px">??????????</text>
+   id="S5_value"
+   style="font-size:18.19803047px">[S5]</text>
 
 
 
 	<text
    x="285.2178"
    y="548.15033"
-   id="Label18"
-   style="font-size:18.19803047px">??????????</text>
+   id="T_MISTURADOR_value"
+   style="font-size:18.19803047px">[T_MISTURADOR]</text>
 
 
 
 	<text
    x="285.2178"
    y="570.89795"
-   id="Label19"
-   style="font-size:18.19803047px">??????????</text>
-
-
+   id="T_PROD_A_BICO_A_value"
+   style="font-size:18.19803047px">[T_PROD_A_BICO_A]</text>
 
 	<text
    x="285.2178"
    y="593.64545"
-   id="Label20"
-   style="font-size:18.19803047px">??????????</text>
+   id="T_PROD_A_BICO_B_value"
+   style="font-size:18.19803047px">[T_PROD_A_BICO_B]</text>
 
-
+   <text
+   x="283.06573"
+   y="617.81073"
+   id="T_PROD_B_BICO_A_value"
+   style="font-size:18.19803047px">[T_PROD_B_BICO_A]</text>
+   
+<text
+   x="283.06573"
+   y="639.45819"
+   id="T_PROD_B_BICO_B_value"
+   style="font-size:18.19803047px">[T_PROD_B_BICO_B]</text>
+   
+<text
+   x="283.06573"
+   y="661.10571"
+   id="T_PROD_C_BICO_A_value"
+   style="font-size:18.19803047px">[T_PROD_C_BICO_A]</text>
+   
+<text
+   x="283.06573"
+   y="682.75317"
+   id="T_PROD_C_BICO_B_value"
+   style="font-size:18.19803047px">[T_PROD_C_BICO_B]</text>
 
 	
  
@@ -2406,26 +2426,10 @@ YII=
    style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
    d="m 228.5,675 c 45,0 44,0 44,0"
    id="path4079"
-   inkscape:connector-curvature="0" /><text
-   x="283.06573"
-   y="617.81073"
-   id="Label1-0-7"
-   style="font-size:18.19803047px">??????????</text>
-<text
-   x="283.06573"
-   y="639.45819"
-   id="Label1-0-59"
-   style="font-size:18.19803047px">??????????</text>
-<text
-   x="283.06573"
-   y="661.10571"
-   id="Label1-0-66"
-   style="font-size:18.19803047px">??????????</text>
-<text
-   x="283.06573"
-   y="682.75317"
-   id="Label1-0-29"
-   style="font-size:18.19803047px">??????????</text>
+   inkscape:connector-curvature="0" />
+   
+
+   
 <text
    x="32.690659"
    y="158.91888"

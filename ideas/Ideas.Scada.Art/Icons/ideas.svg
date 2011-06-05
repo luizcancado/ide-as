@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generator: Adobe Illustrator 12.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 51448)  -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   height="137.522"
+   id="Layer_1"
+   inkscape:version="0.48.1 r9760"
+   sodipodi:docname="tasto_10_architetto_fran_01.svg"
+   sodipodi:version="0.32"
+   space="preserve"
+   style="overflow:visible;enable-background:new 0 0 137.561 137.522;"
+   version="1.1"
+   viewBox="0 0 137.561 137.522"
+   width="137.561">
+  <metadata
+     id="metadata3">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:title></dc:title>
+        <dc:description />
+        <dc:subject>
+          <rdf:Bag>
+            <rdf:li>unsorted</rdf:li>
+          </rdf:Bag>
+        </dc:subject>
+        <dc:publisher>
+          <cc:Agent
+             rdf:about="http://www.openclipart.org/">
+            <dc:title>Open Clip Art Library</dc:title>
+          </cc:Agent>
+        </dc:publisher>
+        <dc:creator>
+          <cc:Agent>
+            <dc:title>Architetto Francesco Rollandin</dc:title>
+          </cc:Agent>
+        </dc:creator>
+        <dc:rights>
+          <cc:Agent>
+            <dc:title>Architetto Francesco Rollandin</dc:title>
+          </cc:Agent>
+        </dc:rights>
+        <dc:date />
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <cc:license
+           rdf:resource="http://web.resource.org/cc/PublicDomain" />
+        <dc:language>en</dc:language>
+      </cc:Work>
+      <cc:License
+         rdf:about="http://web.resource.org/cc/PublicDomain">
+        <cc:permits
+           rdf:resource="http://web.resource.org/cc/Reproduction" />
+        <cc:permits
+           rdf:resource="http://web.resource.org/cc/Distribution" />
+        <cc:permits
+           rdf:resource="http://web.resource.org/cc/DerivativeWorks" />
+      </cc:License>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs27">
+    <linearGradient
+       inkscape:collect="always"
+       id="linearGradient3806">
+      <stop
+         style="stop-color:#e6e6e6;stop-opacity:1"
+         offset="0"
+         id="stop3808" />
+      <stop
+         style="stop-color:#800000;stop-opacity:1"
+         offset="1"
+         id="stop3810" />
+    </linearGradient>
+    <linearGradient
+       inkscape:collect="always"
+       id="linearGradient3798">
+      <stop
+         style="stop-color:#ffffff;stop-opacity:1"
+         offset="0"
+         id="stop3800" />
+      <stop
+         style="stop-color:#800000;stop-opacity:1"
+         offset="1"
+         id="stop3802" />
+    </linearGradient>
+    <radialGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3798"
+       id="radialGradient3804"
+       cx="58.350628"
+       cy="50.57906"
+       fx="58.350628"
+       fy="50.57906"
+       r="11.403328"
+       gradientTransform="matrix(-0.07660126,6.7116727,-2.4948044,-0.0284735,187.48609,-381.37496)"
+       gradientUnits="userSpaceOnUse" />
+    <radialGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3806"
+       id="radialGradient3812"
+       cx="55.79731"
+       cy="93.757446"
+       fx="55.79731"
+       fy="93.757446"
+       r="11.6735"
+       gradientTransform="matrix(0.11150257,2.1575178,-2.3414325,0.12100747,269.10248,-37.532344)"
+       gradientUnits="userSpaceOnUse" />
+  </defs>
+  <sodipodi:namedview
+     bordercolor="#666666"
+     borderopacity="1.0"
+     id="base"
+     inkscape:current-layer="g3"
+     inkscape:cx="23.47829"
+     inkscape:cy="68.441051"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:window-height="744"
+     inkscape:window-width="1366"
+     inkscape:window-x="0"
+     inkscape:window-y="24"
+     inkscape:zoom="2.6177629"
+     pagecolor="#ffffff"
+     showgrid="false"
+     inkscape:window-maximized="1" />
+  <g
+     id="g3">
+    <path
+       d="m -186.41871,61.095889 c 0,35.047 27.489,65.293001 62.416,68.504001 34.938998,3.211 67.632998,-21.357 74.023998,-55.910001 6.391,-34.546 -15.17,-69.3430002 -49.026,-78.8370002 -33.866998,-9.4979998 -70.462998,8.941 -82.951998,41.8180002 -2.958,7.786 -4.462,16.097 -4.462,24.425"
+       id="path5"
+       style="fill:#970f00"
+       inkscape:connector-curvature="0" />
+    <radialGradient
+       cx="68.7954"
+       cy="68.7383"
+       gradientUnits="userSpaceOnUse"
+       id="XMLID_2_"
+       r="63.9294"
+       gradientTransform="matrix(0.12160656,0,0,0.12160656,-137.83181,42.805877)">
+      <stop
+         id="stop8"
+         offset="0"
+         style="stop-color:#F28888" />
+      <stop
+         id="stop10"
+         offset="1"
+         style="stop-color:#D82A2A" />
+    </radialGradient>
+    <path
+       d="M56.402,29.004c0,12.468,2.023,25.46,3.989,37.73   c0.611,3.81,6.289,34.225,12.748,19.444c6.113-13.989,6.633-31.416,7.934-46.428c0.374-4.312,1.738-10.094,0.152-14.32   C76.878,13.842,56.402,15.899,56.402,29.004 M59.232,29.004c0-9.723,15.119-11.221,19.028-3.301   c2.143,4.336,0.3,11.619-0.168,16.177c-1.413,13.733-2.669,28.264-6.791,41.504c-0.96,3.083-2.245,6.081-3.875,1.675   c-2.043-5.521-2.899-11.584-3.847-17.364C61.503,55.065,59.232,41.844,59.232,29.004"
+       id="path18"
+       style="fill-rule:evenodd;clip-rule:evenodd;fill:#970F00;" />
+    <path
+       d="M55.695,107.186c0,16.873,26.18,16.873,26.18,0   C81.875,90.309,55.695,90.307,55.695,107.186 M58.528,107.186c0-13.229,20.511-13.229,20.511,0   C79.039,120.412,58.528,120.412,58.528,107.186"
+       id="path20"
+       style="fill-rule:evenodd;clip-rule:evenodd;fill:#970F00;" />
+    <path
+       d="M80.459,29.004c0,12.923-2.271,26.35-4.382,39.055   c-0.511,3.066-5.097,29.739-9.896,17.146c-5.206-13.656-6.03-29.752-7.442-44.173c-0.443-4.519-2.079-11.104-0.213-15.484   C62.677,15.795,80.459,17.606,80.459,29.004"
+       id="path22"
+       style="fill-rule:evenodd;clip-rule:evenodd;fill:url(#radialGradient3804);fill-opacity:1" />
+    <path
+       d="M80.459,107.186c0,15.054-23.347,15.054-23.347,0   C57.112,92.129,80.459,92.129,80.459,107.186"
+       id="path24"
+       style="fill-rule:evenodd;clip-rule:evenodd;fill:url(#radialGradient3812);fill-opacity:1" />
+    <path
+       d="m -137.24007,51.164625 c 0,4.236773 3.53741,7.774552 7.77418,7.774552 4.23666,0 7.77419,-3.537779 7.77419,-7.774552 0,-4.236529 -3.53753,-7.774064 -7.77419,-7.774064 -4.23665,1.22e-4 -7.77418,3.537535 -7.77418,7.774064"
+       id="path12"
+       style="fill:url(#XMLID_2_)"
+       inkscape:connector-curvature="0" />
+    <path
+       d="m -95.855542,1.1259822 c 1.75775,0.437706 3.78087,-2.559712 5.30467,-3.322648 2.84683,-1.424403 6.40269,-0.762936 8.98178,1.176711 2.72817,2.052604 4.66859,5.99388 4.96695,9.863124 9.6e-4,0.01101 9.6e-4,0.01316 2e-4,0.0057 -0.20155,-2.342877 -0.0654,-4.545532 -0.80662,-6.810407 -1.22802,-3.753894 -3.88364,-6.693638 -7.08548,-7.875135 -3.31058,-1.220985 -6.93084,-0.44369 -9.78284,1.883407 -0.88057,0.718424 -4.27026,4.40841998 -1.57866,5.07922"
+       id="path16"
+       style="fill:#ef5656"
+       inkscape:connector-curvature="0" />
+    <path
+       d="m -71.766222,83.945421 c 1.757756,0.43771 3.780873,-2.55971 5.304671,-3.32264 2.846835,-1.424407 6.402694,-0.76294 8.981783,1.17671 2.728166,2.0526 4.668593,5.99388 4.966953,9.86312 9.55e-4,0.011 9.55e-4,0.0132 1.99e-4,0.006 -0.201557,-2.34287 -0.0654,-4.54553 -0.806624,-6.81041 -1.228023,-3.75389 -3.883637,-6.693633 -7.085483,-7.87513 -3.310573,-1.220985 -6.930836,-0.44369 -9.78284,1.883406 -0.880566,0.718424 -4.27025,4.408424 -1.578659,5.079224"
+       id="path16-2"
+       style="fill:#ef5656;overflow:visible"
+       inkscape:connector-curvature="0" />
+  </g>
+</svg>

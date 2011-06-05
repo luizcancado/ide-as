@@ -19,7 +19,7 @@ namespace Ideas.Scada.Common.Tags
 		private string serverAddress;
 		private string screensPath;
 		private Process prcWebServer;
-//		private ApplicationServer webAppServer;	
+		private ApplicationServer webAppServer;	
 		
 		private static readonly ILog log = LogManager.GetLogger(typeof(WebService));
 		
@@ -62,20 +62,7 @@ namespace Ideas.Scada.Common.Tags
 		public void Start()
 		{					
 			try 
-			{
-				
-				
-	//			XSPWebSource websource = new XSPWebSource(IPAddress.Any, this.ServerPort);
-	//			
-	//			webAppServer = new ApplicationServer(websource);
-	//					
-	//			// Adds application to the webserver
-	//			//webAppServer.AddApplication("localhost", this.ServerPort, "/", serverRootPath);
-	//			webAppServer.AddApplicationsFromCommandLine(this.ServerPort + ":/:" + serverRootPath);
-	//			
-	//			// Starts server instance
-	//			webAppServer.Start(true);
-				
+			{	
 				log.Info("Configuring WebService...");
 				
 				// Create WebServer at ./Resources/WebApplication
@@ -90,44 +77,7 @@ namespace Ideas.Scada.Common.Tags
 				// Generate a web.config file with specific configuration for the application
 				GenerateWebConfigFile(serverRoot);
 					
-				// Mount argument string
-				string infoWebServerArguments = "" +
-					" --nonstop" + 
-					" --port " + serverPort + 
-					" --address " + serverAddress +
-					" --root \"" + serverRoot + "\"" +
-					" --appconfigfile Ideas.webapp ";
-					
-				// Configurate XSP WebServer execution
-				ProcessStartInfo infoWebServer = new ProcessStartInfo();	
-				infoWebServer.FileName = "xsp2";
-				infoWebServer.Arguments = infoWebServerArguments;
-				infoWebServer.UseShellExecute = false;
-				infoWebServer.RedirectStandardOutput = true;
-				infoWebServer.RedirectStandardInput = true;
-				
-				log.Info("Client access address: http://" + this.ServerAddress + ":" + this.ServerPort);
-				log.Info("Path to screens:" + this.ScreensPath);
-				
-				log.Info("WebService configured.");
-				
-				log.Debug("WebService configuration:");
-				log.Debug(infoWebServer.FileName + " " + infoWebServer.Arguments);
-								
-				log.Info("Starting WebService...");
-				
-				// Executes XSP WebServer
-				prcWebServer = Process.Start(infoWebServer);
-				
-				if(prcWebServer.HasExited)
-				{
-					throw new Exception("Unable to start WebServer. Check XSP installation.");
-				}
-				else
-				{
-					log.Info("WebService started.");
-					this.isStarted = true;
-				}
+				StartWebServerFromClass(serverRoot);
 			}
 			catch(Exception e)
 			{
@@ -143,11 +93,7 @@ namespace Ideas.Scada.Common.Tags
 		/// </summary>
 		public void Stop()
 		{
-//			if(webAppServer != null)
-//			{
-//				webAppServer.Stop();
-//				webAppServer.UnloadAll();
-//			}
+			
 			
 			try
 			{
@@ -155,7 +101,16 @@ namespace Ideas.Scada.Common.Tags
 				{
 					log.Info("Stoping WebService...");
 					
-					prcWebServer.Kill();
+					if(prcWebServer != null)
+					{
+						prcWebServer.Kill();
+					}
+					
+					if(webAppServer != null)
+					{
+						webAppServer.Stop();
+						webAppServer.UnloadAll();
+					}
 					
 					log.Info("WebService stopped.");
 				}
@@ -192,7 +147,7 @@ namespace Ideas.Scada.Common.Tags
 			fileContent += "	<web-application>\n";
 			fileContent += "		<name>Root</name>\n";
 			fileContent += "		<vpath>/</vpath>\n";
-			fileContent += "		<path>.</path>\n";
+			fileContent += "		<path>" + targetPath + "</path>\n";
 			fileContent += "	</web-application>\n";
 			fileContent += "	<web-application>\n";
 			fileContent += "		<name>Screens</name>\n";
@@ -292,6 +247,74 @@ namespace Ideas.Scada.Common.Tags
 			log.Debug("Webconfig generation finished.");
 		}
 		
+		
+		/// <summary>
+		/// TODO: write a comment.
+		/// </summary>
+		/// <param name="serverRoot"> 
+		/// A string 
+		/// </param>
+		private void StartWebServerFromClass (string serverRoot)
+		{
+			
+			XSPWebSource websource = new XSPWebSource(IPAddress.Any, this.ServerPort);
+			
+			webAppServer = new ApplicationServer(websource);
+			
+			// Adds application to the webserver
+			webAppServer.AddApplicationsFromConfigFile(serverRoot + Path.DirectorySeparatorChar + "Ideas.webapp");
+			
+			// Starts server instance
+			webAppServer.Start(true);
+		}
+		
+		
+		/// <summary>
+		/// TODO: write a comment.
+		/// </summary>
+		/// <param name="serverRoot"> A string </param>
+		private void StartWebServerFromExec (string serverRoot)
+		{
+			// Mount argument string
+			string infoWebServerArguments = "" +
+				" --nonstop" + 
+				" --port " + serverPort + 
+				" --address " + serverAddress +
+				" --root \"" + serverRoot + "\"" +
+				" --appconfigfile Ideas.webapp ";
+				
+			// Configurate XSP WebServer execution
+			ProcessStartInfo infoWebServer = new ProcessStartInfo();	
+			infoWebServer.FileName = "xsp2";
+			infoWebServer.Arguments = infoWebServerArguments;
+			infoWebServer.UseShellExecute = false;
+			infoWebServer.RedirectStandardOutput = true;
+			infoWebServer.RedirectStandardInput = true;
+			
+			log.Info("Client access address: http://" + this.ServerAddress + ":" + this.ServerPort);
+			log.Info("Path to screens:" + this.ScreensPath);
+			
+			log.Info("WebService configured.");
+			
+			log.Debug("WebService configuration:");
+			log.Debug(infoWebServer.FileName + " " + infoWebServer.Arguments);
+							
+			log.Info("Starting WebService...");
+			
+			// Executes XSP WebServer
+			prcWebServer = Process.Start(infoWebServer);
+			
+			if(prcWebServer.HasExited)
+			{
+				throw new Exception("Unable to start WebServer. Check XSP installation.");
+			}
+			else
+			{
+				log.Info("WebService started.");
+				this.isStarted = true;
+			}
+		}
+
 		private string GetProjectScreenList()
 		{
 			string projScreen = "";

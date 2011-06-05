@@ -33,15 +33,48 @@ function init(evt)
 		svgDocument = evt.target.ownerDocument;
 	}
 
+	RegisterTags();
+
 	initScreen();
 }
+
+function RegisterTags()
+{
+	TAGS = {
+        AUTOMATICO: "",
+        BICO_A: "",                             
+        BICO_B: "",                             
+        DESLIGA_ESTEIRA: "",                    
+        EMERGENCIA: "",                         
+        ESTEIRA_LIGADA: "",                     
+        LIGA_ESTEIRA: "",                       
+        MANUAL: "",                             
+        MISTURADOR: "",                         
+        PRODUTO_A: "",                          
+        PRODUTO_B: "",                          
+        PRODUTO_C: "",                          
+        S1: "",                                
+        S2: "",                                
+        S3: "",                                
+        S4: "",                                
+        S5: "",                                
+        T_MISTURADOR: "",                       
+        T_PROD_A_BICO_A: "",                    
+        T_PROD_A_BICO_B: "",                    
+        T_PROD_B_BICO_A: "",                    
+        T_PROD_B_BICO_B: "",                    
+        T_PROD_C_BICO_A: "",                    
+        T_PROD_C_BICO_B: ""                   	
+	}
+}
+
 
 // Function to retrieve tag data from webservice
 function ReadTag(tagName) 
 {	
 	$.ajax({
 	    type: "GET",
-	    url: "/screens/Diagnostico.svg.asmx/GetTagValue?tagname=" + tagName,
+	    url: "/TagsServer.asmx/GetTagValue?tagname=" + tagName,
 	    contentType: "text/xml; charset=utf-8",
 	    dataType: "xml",
 	    success: 
