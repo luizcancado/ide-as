@@ -45,19 +45,20 @@ namespace Ideas.Scada.Server
 					// Loads configuration to the application kernel
 					appKernel = new Kernel(config);
 					
+					// Check if Kernel was successfully created
+					if(appKernel != null)
+					{
+						// Runs application kernel
+						appKernel.Run();
+					}
+					
 				}
 				catch(Exception e)
 				{
-					log.Fatal("Quitting server: Could not loading scada application.");
+					log.Fatal("Server could not be started.");
 					log.Fatal(e.Message);
-				}
+				}			
 				
-				// Check if Kernel was successfully created
-				if(appKernel != null)
-				{
-					// Runs application kernel
-					appKernel.Run();
-				}
 			}
 			
 			Console.ReadKey();

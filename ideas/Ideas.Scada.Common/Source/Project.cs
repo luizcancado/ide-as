@@ -4,6 +4,8 @@ using System.IO;
 using System.Collections.Generic;
 using Ideas.Scada.Common.Tags;
 using Ideas.Scada.Common.DataSources;
+using System.Threading;
+using log4net;
 
 namespace Ideas.Scada.Common
 {
@@ -14,11 +16,12 @@ namespace Ideas.Scada.Common
 		private string name;
 		private string filePath;	
 		private ScreenCollection screens = new ScreenCollection();
-		private List<DataSource> datasources = new List<DataSource>();
+		private DataSourceCollection datasources = new DataSourceCollection();
 		private DataBase tagsDatabase = new DataBase();
 		private WebService tagsWebService;
 		private string initialScreenName;
-			
+		private static readonly ILog log = LogManager.GetLogger(typeof(Project));
+		
 		#endregion
 		
 		/// <summary>
@@ -131,6 +134,39 @@ namespace Ideas.Scada.Common
 			}
 		}
 		
+		public void Start()
+		{
+			log.Info("Starting WebService from " + this.Name + "... ");
+			
+			this.TagsWebService.Start();
+			
+			log.Info("WebService from project " + this.Name + " is started. ");
+					
+			foreach(DataSource ds in this.Datasources)
+			{
+				log.Info("Starting DataSource " + ds.Name + "... ");
+				
+				ds.Open();
+				
+				log.Info("DataSource " + ds.Name + " is started. ");
+			}
+		}
+		
+		public void Stop()
+		{
+			log.Info("Stopping WebService from " + this.Name + "... ");
+			
+			this.TagsWebService.Stop();
+			
+			log.Info("WebService from project " + this.Name + " is stopped. ");
+		}
+
+		public void Write (Tag tag)
+		{
+			this.TagsDatabase.WriteTagValue(tag);
+		}
+		
+		
 		#region PROPERTIES
 		
 		public string Name 
@@ -202,7 +238,7 @@ namespace Ideas.Scada.Common
 			}
 		}
 		
-		public List<DataSource> Datasources {
+		public DataSourceCollection Datasources {
 			get {
 				return this.datasources;
 			}

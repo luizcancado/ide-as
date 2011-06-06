@@ -93,8 +93,6 @@ namespace Ideas.Scada.Common.Tags
 		/// </summary>
 		public void Stop()
 		{
-			
-			
 			try
 			{
 				if(isStarted)
@@ -265,7 +263,7 @@ namespace Ideas.Scada.Common.Tags
 			webAppServer.AddApplicationsFromConfigFile(serverRoot + Path.DirectorySeparatorChar + "Ideas.webapp");
 			
 			// Starts server instance
-			webAppServer.Start(true);
+			webAppServer.Start(false);
 		}
 		
 		
@@ -328,6 +326,14 @@ namespace Ideas.Scada.Common.Tags
 			
 			return projScreen;
 		}
+		
+		#endregion
+		
+		#region DELEGATES
+		
+		// Declare a delegate type for processing a book:
+   		public delegate void OnStartedDelegate(WebService webService);
+		
 		
 		#endregion
 		

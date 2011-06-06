@@ -1,5 +1,6 @@
 using System;
 using Ideas.Scada.Common;
+using System.Threading;
 
 namespace Ideas.Scada.Server
 {
@@ -24,7 +25,7 @@ namespace Ideas.Scada.Server
 		/// </summary>
 		public void Run()
 		{
-			// Loads SCADA application
+			// Start SCADA server
 			scadaApplication.Start();
 		}
 	}

@@ -4,6 +4,8 @@ using System.Diagnostics;
 using Ideas.Scada.Common.Tags;
 using System.Collections.Generic;
 using System.Xml;
+using LumenWorks.Framework.IO.Csv;
+using System.Globalization;
 
 namespace Ideas.Scada.Common.DataSources
 {
@@ -15,9 +17,7 @@ namespace Ideas.Scada.Common.DataSources
 		private string openOPCPath;
 		private string pythonPath;
 		private string serverInstance;
-		
-		private bool isopen = false;
-		
+				
 		public OpenOPC () : base()
 		{
 			base.Type = DataSourceType.OpenOPC;
@@ -71,26 +71,34 @@ namespace Ideas.Scada.Common.DataSources
 					openOPCPath +
 					" -H " + serverHost + 
 					" -s " + serverInstance + 
-					" -r " + GetTagsAddressList();
+					" -r " + GetTagsAddressList() +
+					" -L 1 -o csv ";
 				
 				// Configurate OpenOPC client execution
-				ProcessStartInfo infoOpenOPC = new ProcessStartInfo();	
-				infoOpenOPC.FileName = pythonPath;
-				infoOpenOPC.Arguments = infoOpenOPCArguments;
-				infoOpenOPC.RedirectStandardOutput = true;
-				infoOpenOPC.UseShellExecute = false;
+				prcOpenOPC = new Process();
+				prcOpenOPC.StartInfo.FileName = pythonPath;
+				prcOpenOPC.StartInfo.Arguments = infoOpenOPCArguments;
+				prcOpenOPC.StartInfo.RedirectStandardOutput = true;
+				prcOpenOPC.StartInfo.UseShellExecute = false;
 				
 				// Executes OpenOPC client script
-				prcOpenOPC = Process.Start(infoOpenOPC);
-				strReader =  prcOpenOPC.StandardOutput;
+				prcOpenOPC.OutputDataReceived += OnOutputDataReceived;
+				prcOpenOPC.Start();
+				prcOpenOPC.BeginOutputReadLine();
+				//strReader =  prcOpenOPC.StandardOutput;
 				
-				// Set instance with as with an open connection
-				isopen = true;
+				// Call base class Open method
+				base.Open();
 			}
 			catch(Exception e)
 			{
 				throw new Exception("Could not connect OpenOPC client to server: " + e.Message);
 			}
+		}
+		
+		private void OnOutputDataReceived(object sender, DataReceivedEventArgs e)
+		{
+			UpdateTagsFromCsv(e.Data);
 		}
 		
 		public override void Close()
@@ -103,11 +111,41 @@ namespace Ideas.Scada.Common.DataSources
 					strReader.Dispose();
 					
 					prcOpenOPC.Kill();
+					
+					base.Close();
 				}
 			}
 			catch(Exception e)
 			{
 				throw new Exception("Could not close OpenOPC client: " + e.Message);
+			}
+		}
+
+		void UpdateTagsFromCsv (string data)
+		{
+			TextReader textReader = new StringReader(data);
+			CsvReader csvReader = new CsvReader(textReader, false, ',');
+					
+			while(csvReader.ReadNextRecord())
+			{
+				// The content read has the form:
+				// Address,Value,Quality,LastChangeDate
+				// Channel1.S7_1200__1214C.S1,False,Good,06/06/11 04:29:57
+				
+				// Find tag by its address
+				Tag tag = this.Tags.GetByTagAddress(csvReader[0]);
+				
+				if(tag != null)
+				{
+					// If it was found, update tag's value and last update date
+					if(tag.value == null || tag.value.Trim() != csvReader[1].Trim())
+					{
+						tag.value = csvReader[1];
+						tag.lastupdate = csvReader[3];
+						Console.WriteLine(tag);
+						base.UpdateDataBase(tag);
+					}
+				}
 			}
 		}
 			
@@ -116,7 +154,7 @@ namespace Ideas.Scada.Common.DataSources
             				
 			try
             {
-				string retString = strReader.ReadLine();
+				
             }
             catch ( Exception e )
             {
@@ -151,26 +189,17 @@ namespace Ideas.Scada.Common.DataSources
 		
 		private string GetTagsAddressList ()
 		{
-			string addresslist = "";
+			string addresslist = " ";
 			
 			// Create a string with the tags addresses separated by space 
 			foreach (Tag t in base.Tags)
 			{
-				addresslist += " " + t.address;
+				addresslist += "\"" + t.address + "\" ";
 			}
 			
 			return addresslist;
 		}
 		
-		public bool IsOpen {
-			get {
-				return this.isopen;
-			}
-			set {
-				isopen = value;
-			}
-		}
-
 		public string OpenOPCPath {
 			get {
 				return this.openOPCPath;

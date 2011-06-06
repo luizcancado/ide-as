@@ -20,7 +20,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Externalconsole>true</Externalconsole>
-    <Commandlineparameters>"/home/luiz/Projects/Ideas/Samples/SampleApplication.scada"</Commandlineparameters>
+    <Commandlineparameters>"C:\Documents and Settings\Luiz\Desktop\ideas\Samples\SampleApplication.scada"</Commandlineparameters>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>none</DebugType>

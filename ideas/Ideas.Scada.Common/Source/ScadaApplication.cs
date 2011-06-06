@@ -4,6 +4,7 @@ using System.IO;
 using System.Collections.Generic;
 using Ideas.Scada.Common.Tags;
 using log4net;
+using System.Threading;
 
 namespace Ideas.Scada.Common
 {
@@ -13,7 +14,6 @@ namespace Ideas.Scada.Common
 		string filePath;
 		string name;
 		ProjectCollection projects = new ProjectCollection();
-		
 		private static readonly ILog log = LogManager.GetLogger(typeof(ScadaApplication));
 		
 		/// <summary>
@@ -126,11 +126,17 @@ namespace Ideas.Scada.Common
 				log.Info("Starting scada application " + this.Name);
 				
 				foreach(Project project in this.Projects)
-				{
-					project.TagsWebService.Start();	
+				{			
+					log.Info("Starting project " + project.Name + "... ");
+				
+					project.Start();
+					
+					log.Info("Project " + project.Name + " is started. ");
 				}
 
 				log.Info("Server started with the application: " + this.Name);
+				
+				Thread.Sleep(0);
 			}
 			catch(Exception e)
 			{
@@ -141,19 +147,18 @@ namespace Ideas.Scada.Common
 				// Rethrows exception to upper level
 				throw e;
 			}
-			
 		}
 				
 		public void Stop()
 		{
 			foreach(Project project in this.Projects)
 			{
-				log.Info("Stopping WebService... ");
+				log.Info("Stopping project " + project.Name + "... ");
 				
-				project.TagsWebService.Stop();
+				project.Stop();
 				
-				log.Info("WebService stopped. ");
-			}	
+				log.Info("Project " + project.Name + " is stopped. ");
+			}
 		}
 		
 		public void WriteTag(string projectName, string datasourceName, string tagName, string tagValue)

@@ -4,7 +4,8 @@ using System.IO;
 using Ideas.Scada.Common.Tags;
 using LumenWorks.Framework.IO.Csv;
 using System.Xml;
-	
+using System.Timers;
+
 namespace Ideas.Scada.Common.DataSources
 {
 	public abstract class DataSource
@@ -15,9 +16,16 @@ namespace Ideas.Scada.Common.DataSources
 		private DataSourceFileType fileType;
 		private DataSourceType type;		
 		private TagGroup tags = new TagGroup();
+		protected bool isOpen;
+		protected Timer updateDataBaseTimer;
 		
 		public DataSource ()
 		{
+			// Create a Timer instance
+			updateDataBaseTimer = new Timer (500);
+			updateDataBaseTimer.Elapsed += OnUpdateDataBaseTimerElapsed;
+			updateDataBaseTimer.Enabled = false;
+			
 			this.Name = "";
 			this.FilePath = "";
 			this.Project = null;
@@ -40,13 +48,32 @@ namespace Ideas.Scada.Common.DataSources
 			this.FileType = ConvertToDataSourceFileType(fileType);
 		}
 		
-		public abstract void Open();
+		public virtual void Open()
+		{
+			// Set instance as with an open connection
+			updateDataBaseTimer.Enabled = true;
+			//readTimer.Start();
+			this.IsOpen = true;
+		}
 		
-		public abstract void Close();
+		public virtual void Close()
+		{
+			// Set instance as with an closed connection
+			updateDataBaseTimer.Enabled = false;
+			this.IsOpen = false;
+		}
 		
 		public abstract TagGroup Read();
 		
 		public abstract void Write(Tag tag);
+		
+		private void OnUpdateDataBaseTimerElapsed(object sender, ElapsedEventArgs args)
+		{
+			foreach(Tag t in this.Tags)
+			{
+				this.Project.Write(t);
+			}
+		}
 		
 		protected void ReadSourceFile ()
 		{
@@ -94,6 +121,11 @@ namespace Ideas.Scada.Common.DataSources
 				default:
 					throw new Exception("Unkown server script language: " + strSourceType);
 			}		
+		}
+
+		public void UpdateDataBase (Tag tag)
+		{
+			this.Project.Write(tag);
 		}
 		
 		public string Name {
@@ -153,6 +185,15 @@ namespace Ideas.Scada.Common.DataSources
 			}
 			set {
 				tags = value;
+			}
+		}
+
+		public bool IsOpen {
+			get {
+				return this.isOpen;
+			}
+			set {
+				isOpen = value;
 			}
 		}
 	}
