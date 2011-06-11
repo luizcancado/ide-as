@@ -14,8 +14,8 @@ namespace Ideas.Scada.Common.Tags
 			
 		private IDbConnection dbcon = null;
 		private IDbCommand dbcmd = null;
-		//private string connectionString = "URI=file::memory:,version=3";
-		private string connectionString = "URI=file:Ideas.TagsDatabase.db,version=3";
+		private string connectionString = "URI=file::memory:,version=3";
+		//private string connectionString = "URI=file:Ideas.TagsDatabase.db,version=3";
 		
 		#endregion
 		

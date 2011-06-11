@@ -1,0 +1,10 @@
+2011-06-10  Luiz Cançado  <luizcancado@gmail.com>
+
+	* gui.stetic:
+	* generated.cs:
+	* Ideas.Scada.Server.Manager.About.cs:
+	* Ideas.Scada.Server.Manager.Splash.cs:
+	* Ideas.Scada.Server.Manager.MainWindow.cs:
+	* Ideas.Scada.Server.Manager.Settings.SettingsMain.cs:
+	* Ideas.Scada.Server.Manager.Settings.General.IdeasServer.cs: 
+

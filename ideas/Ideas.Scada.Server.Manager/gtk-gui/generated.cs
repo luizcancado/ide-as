@@ -6,7 +6,7 @@ namespace Stetic
 	{
 		private static bool initialized;
 
-		internal static void Initialize (Gtk.Widget iconRenderer)
+		static internal void Initialize (Gtk.Widget iconRenderer)
 		{
 			if ((Stetic.Gui.initialized == false)) {
 				Stetic.Gui.initialized = true;
@@ -29,6 +29,7 @@ namespace Stetic
 	internal class BinContainer
 	{
 		private Gtk.Widget child;
+
 		private Gtk.UIManager uimanager;
 
 		public static BinContainer Attach (Gtk.Bin bin)
@@ -70,8 +71,7 @@ namespace Stetic
 			if ((this.uimanager != null)) {
 				Gtk.Widget w;
 				w = this.child.Toplevel;
-				if (((w != null) 
-                            && typeof(Gtk.Window).IsInstanceOfType (w))) {
+				if (((w != null) && typeof(Gtk.Window).IsInstanceOfType (w))) {
 					((Gtk.Window)(w)).AddAccelGroup (this.uimanager.AccelGroup);
 					this.uimanager = null;
 				}

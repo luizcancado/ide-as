@@ -185,12 +185,11 @@ namespace Ideas.Scada.Server.Manager
 		/// </summary>
 		private void startServers()
 		{	
-			ProcessStartInfo serverProcessInfo = new ProcessStartInfo();
-			serverProcessInfo.FileName = "/home/luiz/Projects/Ideas/Ideas.Scada.Server/bin/Debug/Ideas.Scada.Server.exe";
-			serverProcessInfo.Arguments = scadaApplication.FilePath;
-			serverProcessInfo.WorkingDirectory = System.IO.Path.GetDirectoryName(scadaApplication.FilePath);
-					
-			serverProcess = Process.Start(serverProcessInfo);
+			serverProcess.StartInfo.FileName = "/home/luiz/Projects/Ideas/Ideas.Scada.Server/bin/Debug/Ideas.Scada.Server.exe";
+			serverProcess.StartInfo.Arguments = scadaApplication.FilePath;
+			serverProcess.StartInfo.WorkingDirectory = System.IO.Path.GetDirectoryName(scadaApplication.FilePath);		
+			
+			serverProcess.Start();
 			
 			tbbStopServer.Sensitive = true;
 			tbbStartServer.Sensitive = false;	
@@ -203,11 +202,11 @@ namespace Ideas.Scada.Server.Manager
 		{
 			try
 			{
-				serverProcess.WaitForExit();
+				serverProcess.Kill();
 			}
 			catch(Exception e)
 			{
-				serverProcess.Kill();
+				
 			}
 			finally
 			{

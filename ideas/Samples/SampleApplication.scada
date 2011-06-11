@@ -4,6 +4,6 @@
 		<Screen name="Diagnostico" initial="true" filename="Diagnostico.svg" type="svg" serverscriptlanguage="cs" clientscriptlanguage="js" />
 		<Screen name="MisturadorTintas" filename="MisturadorTintas.svg" type="svg" serverscriptlanguage="cs" clientscriptlanguage="js" />
 		<Webservice name="SampleWebservice" address="192.168.0.172" port="8090" />
-		<Datasource name="S7_1214C" type="openopc" filename="S7_1214C.csv" filetype="csv" server="192.168.0.169" instance="Kepware.KEPServerEX.V5" pythonpath="C:\OpenOPC\bin\opc.exe" openopcpath="" />
-    </Project>
+		<Datasource name="S7_1214C" type="openopc" filename="S7_1214C.csv" filetype="csv" server="192.168.0.169" instance="Kepware.KEPServerEX.V5" pythonpath="python" openopcpath="/home/luiz/Desktop/OpenOPC/src/opc.py" />
+	</Project>
 </Application>

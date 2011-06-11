@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Xml;
 using LumenWorks.Framework.IO.Csv;
 using System.Globalization;
+using log4net;
 
 namespace Ideas.Scada.Common.DataSources
 {
@@ -17,7 +18,8 @@ namespace Ideas.Scada.Common.DataSources
 		private string openOPCPath;
 		private string pythonPath;
 		private string serverInstance;
-				
+		private static readonly ILog log = LogManager.GetLogger(typeof(OpenOPC));
+		
 		public OpenOPC () : base()
 		{
 			base.Type = DataSourceType.OpenOPC;
@@ -142,7 +144,9 @@ namespace Ideas.Scada.Common.DataSources
 					{
 						tag.value = csvReader[1];
 						tag.lastupdate = csvReader[3];
-						Console.WriteLine(tag);
+						//Console.WriteLine(tag);
+						log.Info("Read new tag value: " + tag.name + " = " + tag.value);
+						
 						base.UpdateDataBase(tag);
 					}
 				}
