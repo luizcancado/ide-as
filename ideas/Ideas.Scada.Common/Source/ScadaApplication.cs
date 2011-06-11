@@ -30,11 +30,16 @@ namespace Ideas.Scada.Common
 				
 				LoadFromXML(scadafile);
 				
-				log.Info("Finished loading scada application.");
+				log.Info("Finished loading scada application");
 			}
 			catch(Exception e)
 			{
-				log.Error("Loading scada application...");
+				string errMessage = "Could not load SCADA application";
+				
+				log.Error(errMessage);
+				log.Error(e.Message);
+				
+				throw new Exception(errMessage + ": " + e.Message);
 			}
 		}
 		
@@ -50,7 +55,7 @@ namespace Ideas.Scada.Common
 				
 				using (TextReader textReader = new StreamReader(scadafile))
 				{
-					 xmlContent = textReader.ReadToEnd();
+					xmlContent = textReader.ReadToEnd();
 					textReader.Close();
 					textReader.Dispose();
 				}
@@ -116,7 +121,7 @@ namespace Ideas.Scada.Common
 				log.Info(projectName + " loaded.");
 				
 				Projects.Add(projectToAdd);
-			}
+			} 
 		}
 		
 		public void Start()

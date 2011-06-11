@@ -6,15 +6,9 @@
   </configuration>
   <import>
     <widget-library name="glade-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
-    <widget-library name="Mono.TextEditor, Version=1.0.0.0, Culture=neutral" />
     <widget-library name="../bin/Debug/Ideas.Server.Manager.exe" internal="true" />
   </import>
   <icon-factory>
-    <icon-set id="scada">
-      <source>
-        <property name="Image">file:./Resources/Icons/Interface/16/scada.png</property>
-      </source>
-    </icon-set>
     <icon-set id="tagswebservice">
       <source>
         <property name="Image">file:./Resources/Icons/Interface/16/webservice.png</property>
@@ -33,6 +27,17 @@
     <icon-set id="screen">
       <source>
         <property name="Image">file:./Resources/Icons/Interface/16/screen.png</property>
+      </source>
+    </icon-set>
+    <icon-set id="ideas">
+      <source>
+        <property name="Image">resource:Ideas.Scada.Server.Manager.Resources.Icons.Interface.16.ideas.png</property>
+      </source>
+      <source>
+        <property name="Image">resource:Ideas.Scada.Server.Manager.Resources.Icons.Interface.24.ideas.png</property>
+      </source>
+      <source>
+        <property name="Image">resource:Ideas.Scada.Server.Manager.Resources.Icons.Interface.32.ideas.png</property>
       </source>
     </icon-set>
   </icon-factory>
@@ -88,11 +93,11 @@
         <property name="StockId">gtk-close</property>
         <signal name="Activated" handler="OnCloseActionActivated" />
       </action>
-      <action id="tbbOpen">
+      <action id="OpenAction">
         <property name="Type">Action</property>
         <property name="Label" translatable="yes">Open</property>
         <property name="ShortLabel" translatable="yes">Open</property>
-        <property name="StockId">gtk-open</property>
+        <property name="StockId">folder</property>
         <property name="Tooltip" translatable="yes">Open...</property>
         <signal name="Activated" handler="tbbOpen_Click" />
       </action>
@@ -139,7 +144,7 @@
     </action-group>
     <property name="MemberName" />
     <property name="Title" translatable="yes">IDEAS Server Management</property>
-    <property name="Icon">resource:Ideas.Scada.Server.Manager.Resources.Icons.icon_32x32.png</property>
+    <property name="Icon">resource:Ideas.Scada.Server.Manager.Resources.Icons.Interface.32.ideas.png</property>
     <property name="WindowPosition">Center</property>
     <property name="DefaultWidth">800</property>
     <property name="DefaultHeight">600</property>
@@ -181,7 +186,7 @@
             <property name="ButtonStyle">Icons</property>
             <property name="IconSize">Menu</property>
             <node name="tbrMenuBar" type="Toolbar">
-              <node type="Toolitem" action="tbbOpen" />
+              <node type="Toolitem" action="OpenAction" />
               <node type="Toolitem" action="tbbClose" />
               <node type="Toolitem" action="tbbStartServer" />
               <node type="Toolitem" action="tbbStopServer" />
@@ -198,7 +203,7 @@
           <widget class="Gtk.HPaned" id="hpaned1">
             <property name="MemberName" />
             <property name="CanFocus">True</property>
-            <property name="Position">276</property>
+            <property name="Position">279</property>
             <child>
               <widget class="Gtk.ScrolledWindow" id="GtkScrolledWindow">
                 <property name="MemberName" />
@@ -246,8 +251,8 @@
                 <property name="MemberName" />
                 <property name="ShadowType">In</property>
                 <child>
-                  <widget class="Gtk.NodeView" id="nodeview1">
-                    <property name="MemberName" />
+                  <widget class="Gtk.NodeView" id="nvwLogView">
+                    <property name="MemberName">nvwLogView</property>
                     <property name="CanFocus">True</property>
                     <property name="ShowScrollbars">True</property>
                   </widget>
@@ -257,7 +262,7 @@
             <child>
               <widget class="Gtk.Label" id="label1">
                 <property name="MemberName" />
-                <property name="LabelProp" translatable="yes">page1</property>
+                <property name="LabelProp" translatable="yes">Server Output</property>
               </widget>
               <packing>
                 <property name="type">tab</property>

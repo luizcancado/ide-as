@@ -6,21 +6,30 @@ namespace Stetic
 	{
 		private static bool initialized;
 
-		static internal void Initialize (Gtk.Widget iconRenderer)
+		internal static void Initialize (Gtk.Widget iconRenderer)
 		{
 			if ((Stetic.Gui.initialized == false)) {
 				Stetic.Gui.initialized = true;
 				global::Gtk.IconFactory w1 = new global::Gtk.IconFactory ();
-				global::Gtk.IconSet w2 = new global::Gtk.IconSet (new global::Gdk.Pixbuf (global::System.IO.Path.Combine (global::System.AppDomain.CurrentDomain.BaseDirectory, "./Resources/Icons/Interface/16/scada.png")));
-				w1.Add ("scada", w2);
-				global::Gtk.IconSet w3 = new global::Gtk.IconSet (new global::Gdk.Pixbuf (global::System.IO.Path.Combine (global::System.AppDomain.CurrentDomain.BaseDirectory, "./Resources/Icons/Interface/16/webservice.png")));
-				w1.Add ("tagswebservice", w3);
-				global::Gtk.IconSet w4 = new global::Gtk.IconSet (new global::Gdk.Pixbuf (global::System.IO.Path.Combine (global::System.AppDomain.CurrentDomain.BaseDirectory, "./Resources/Icons/Interface/16/database.png")));
-				w1.Add ("tagsdatabase", w4);
-				global::Gtk.IconSet w5 = new global::Gtk.IconSet (new global::Gdk.Pixbuf (global::System.IO.Path.Combine (global::System.AppDomain.CurrentDomain.BaseDirectory, "./Resources/Icons/Interface/16/folder.png")));
-				w1.Add ("folder", w5);
-				global::Gtk.IconSet w6 = new global::Gtk.IconSet (new global::Gdk.Pixbuf (global::System.IO.Path.Combine (global::System.AppDomain.CurrentDomain.BaseDirectory, "./Resources/Icons/Interface/16/screen.png")));
-				w1.Add ("screen", w6);
+				global::Gtk.IconSet w2 = new global::Gtk.IconSet (new global::Gdk.Pixbuf (global::System.IO.Path.Combine (global::System.AppDomain.CurrentDomain.BaseDirectory, "./Resources/Icons/Interface/16/webservice.png")));
+				w1.Add ("tagswebservice", w2);
+				global::Gtk.IconSet w3 = new global::Gtk.IconSet (new global::Gdk.Pixbuf (global::System.IO.Path.Combine (global::System.AppDomain.CurrentDomain.BaseDirectory, "./Resources/Icons/Interface/16/database.png")));
+				w1.Add ("tagsdatabase", w3);
+				global::Gtk.IconSet w4 = new global::Gtk.IconSet (new global::Gdk.Pixbuf (global::System.IO.Path.Combine (global::System.AppDomain.CurrentDomain.BaseDirectory, "./Resources/Icons/Interface/16/folder.png")));
+				w1.Add ("folder", w4);
+				global::Gtk.IconSet w5 = new global::Gtk.IconSet (new global::Gdk.Pixbuf (global::System.IO.Path.Combine (global::System.AppDomain.CurrentDomain.BaseDirectory, "./Resources/Icons/Interface/16/screen.png")));
+				w1.Add ("screen", w5);
+				global::Gtk.IconSet w6 = new global::Gtk.IconSet ();
+				global::Gtk.IconSource w7 = new global::Gtk.IconSource ();
+				w7.Pixbuf = global::Gdk.Pixbuf.LoadFromResource ("Ideas.Scada.Server.Manager.Resources.Icons.Interface.16.ideas.png");
+				w6.AddSource (w7);
+				global::Gtk.IconSource w8 = new global::Gtk.IconSource ();
+				w8.Pixbuf = global::Gdk.Pixbuf.LoadFromResource ("Ideas.Scada.Server.Manager.Resources.Icons.Interface.24.ideas.png");
+				w6.AddSource (w8);
+				global::Gtk.IconSource w9 = new global::Gtk.IconSource ();
+				w9.Pixbuf = global::Gdk.Pixbuf.LoadFromResource ("Ideas.Scada.Server.Manager.Resources.Icons.Interface.32.ideas.png");
+				w6.AddSource (w9);
+				w1.Add ("ideas", w6);
 				w1.AddDefault ();
 			}
 		}
@@ -29,7 +38,6 @@ namespace Stetic
 	internal class BinContainer
 	{
 		private Gtk.Widget child;
-
 		private Gtk.UIManager uimanager;
 
 		public static BinContainer Attach (Gtk.Bin bin)
@@ -71,7 +79,8 @@ namespace Stetic
 			if ((this.uimanager != null)) {
 				Gtk.Widget w;
 				w = this.child.Toplevel;
-				if (((w != null) && typeof(Gtk.Window).IsInstanceOfType (w))) {
+				if (((w != null) 
+                            && typeof(Gtk.Window).IsInstanceOfType (w))) {
 					((Gtk.Window)(w)).AddAccelGroup (this.uimanager.AccelGroup);
 					this.uimanager = null;
 				}

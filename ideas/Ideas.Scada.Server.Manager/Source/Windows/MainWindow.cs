@@ -98,7 +98,7 @@ namespace Ideas.Scada.Server.Manager
 			// Clean tree view
 			CleanTreeView();
 	
-			Gdk.Pixbuf icnApplicationIcon = IconFactory.LookupDefault("scada").RenderIcon(new Style(), TextDirection.None, StateType.Active, IconSize.Menu, null, null);
+			Gdk.Pixbuf icnApplicationIcon = IconFactory.LookupDefault("ideas").RenderIcon(new Style(), TextDirection.None, StateType.Active, IconSize.Menu, null, null);
 			Gdk.Pixbuf icnFolderIcon = IconFactory.LookupDefault("folder").RenderIcon(new Style(), TextDirection.None, StateType.Active, IconSize.Menu, null, null);
 			Gdk.Pixbuf icnScreenIcon =  IconFactory.LookupDefault("screen").RenderIcon(new Style(), TextDirection.None, StateType.Active, IconSize.Menu, null, null);
 			Gdk.Pixbuf icnProjectIcon = IconFactory.LookupDefault("folder").RenderIcon(new Style(), TextDirection.None, StateType.Active, IconSize.Menu, null, null);
@@ -145,7 +145,7 @@ namespace Ideas.Scada.Server.Manager
 				Gtk.TreeIter tagsDatabaseIter = 
 					applicationTreeStore.AppendValues(
 						projectIter, 
-						new object[] { icnFolderIcon, "Tags DataSources" });
+						new object[] { icnFolderIcon, "DataSources" });
 				
 				foreach(DataSource datasource in project.Datasources)
 				{
@@ -157,7 +157,7 @@ namespace Ideas.Scada.Server.Manager
 				Gtk.TreeIter tagsWebserviceIter = 
 					applicationTreeStore.AppendValues(
 						projectIter, 
-						new object[] { icnFolderIcon, "Tags WebService"});
+						new object[] { icnFolderIcon, "WebService"});
 				
 				applicationTreeStore.AppendValues(
 	                      tagsWebserviceIter, 
@@ -178,27 +178,49 @@ namespace Ideas.Scada.Server.Manager
 			
 			aboutDialog.Show();
 		}
-		
-		
+			
 		/// <summary>
 		/// Start an instance of Ideas.Scada.Server
 		/// </summary>
-		private void startServers()
+		private void StartServersByProcess()
 		{	
-			serverProcess.StartInfo.FileName = "/home/luiz/Projects/Ideas/Ideas.Scada.Server/bin/Debug/Ideas.Scada.Server.exe";
-			serverProcess.StartInfo.Arguments = scadaApplication.FilePath;
-			serverProcess.StartInfo.WorkingDirectory = System.IO.Path.GetDirectoryName(scadaApplication.FilePath);		
+			// Define where the server exec is placed
+			serverProcess = new Process();
+			serverProcess.StartInfo.FileName = 
+				@"C:\Documents and Settings\Luiz\Desktop\ideas\Ideas.Scada.Server\bin\Debug\Ideas.Scada.Server.exe";
+			serverProcess.StartInfo.WorkingDirectory = System.IO.Path.GetDirectoryName(scadaApplication.FilePath);
 			
+			// Pass the (already loaded) scada file as argument
+			serverProcess.StartInfo.Arguments = scadaApplication.FilePath;
+			
+			// Redirects outputs 
+			serverProcess.StartInfo.UseShellExecute = false;
+			serverProcess.StartInfo.RedirectStandardOutput = true;
+			serverProcess.StartInfo.RedirectStandardError = true;
+			serverProcess.OutputDataReceived += OnProcessDataReceived;
+			serverProcess.ErrorDataReceived += OnProcessDataReceived;
+		
+			// Start the Ideas Scada Server instance
 			serverProcess.Start();
 			
+			// Start listening for output messages from the process
+			serverProcess.BeginOutputReadLine();
+			serverProcess.BeginErrorReadLine();
+			
+			// Manipulate toolbar buttons
 			tbbStopServer.Sensitive = true;
 			tbbStartServer.Sensitive = false;	
+		}
+		
+		private void OnProcessDataReceived (object sender, DataReceivedEventArgs e)
+		{
+			
 		}
 		
 		/// <summary>
 		/// Stops the actual instance of Idea.Scada.Server
 		/// </summary>
-		private void stopServers()
+		private void StopServers()
 		{
 			try
 			{
@@ -217,6 +239,8 @@ namespace Ideas.Scada.Server.Manager
 				tbbStartServer.Sensitive = true;	
 			}
 		}
+
+		
 		
 		/// <summary>
 		/// Open dialog to choose the SCADA application file
@@ -272,12 +296,14 @@ namespace Ideas.Scada.Server.Manager
 		/// </summary>
 		private void CloseApplication()
 		{
+			// Check if is there any app loaded or not
 			if(scadaApplication != null)
 			{
 				scadaApplication.Stop();
 				scadaApplication = null;
 			}
 			
+			// Clean the application tree view
 			CleanTreeView ();
 	
 			// Disable tooblar buttons
@@ -286,6 +312,7 @@ namespace Ideas.Scada.Server.Manager
 			// Clear text view
 			txvTextView.Buffer.Text = "";
 			
+			// Refresh
 			this.ShowAll();
 		}
 		
@@ -314,12 +341,12 @@ namespace Ideas.Scada.Server.Manager
 		
 		protected virtual void tbbStartServer_Click (object sender, System.EventArgs e)
 		{
-			startServers();		
+			StartServersByProcess();		
 		}
 		
 		protected virtual void tbbStopServer_Click (object sender, System.EventArgs e)
 		{
-			stopServers();
+			StopServers();
 		}
 		
 		protected virtual void OnCloseActionActivated (object sender, System.EventArgs e)
@@ -359,8 +386,15 @@ namespace Ideas.Scada.Server.Manager
 			}
 			catch(Exception ex)
 			{
-				Console.WriteLine("Cannot save file.");
-				Console.WriteLine(ex.Message);
+				MessageDialog md = 
+					new MessageDialog (
+						null, 
+						DialogFlags.Modal, 
+						MessageType.Error, 
+						ButtonsType.Ok, 
+						ex.Message);
+	            md.Run ();
+			    md.Destroy();
 			}
 			
 			

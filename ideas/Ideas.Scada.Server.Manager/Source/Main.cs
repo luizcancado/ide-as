@@ -40,7 +40,7 @@ namespace Idea.Scada.Server.Manager
 			win.DeleteEvent += delegate { Application.Quit (); };
 			
 			// Creation of the Icon
-			trayIcon = new StatusIcon(Gdk.Pixbuf.LoadFromResource ("Ideas.Scada.Server.Manager.Resources.Icons.icon_16x16.png"));
+			trayIcon = new StatusIcon(Gdk.Pixbuf.LoadFromResource ("Ideas.Scada.Server.Manager.Resources.Icons.Interface.16.ideas.png"));
 			trayIcon.Visible = true;
 			
 			// Show/Hide the window (even from the Panel/Taskbar) when the TrayIcon has been clicked.

@@ -5,13 +5,9 @@ namespace Ideas.Scada.Server.Manager.Settings
 	public partial class SettingsMain
 	{
 		private global::Gtk.HPaned hpaned1;
-
 		private global::Gtk.ScrolledWindow GtkScrolledWindow;
-
 		private global::Gtk.TreeView trvSettingsTree;
-
 		private global::Gtk.Button buttonCancel;
-
 		private global::Gtk.Button buttonOk;
 
 		protected virtual void Build ()
@@ -41,10 +37,10 @@ namespace Ideas.Scada.Server.Manager.Settings
 			this.trvSettingsTree.HeadersVisible = false;
 			this.GtkScrolledWindow.Add (this.trvSettingsTree);
 			this.hpaned1.Add (this.GtkScrolledWindow);
-			global::Gtk.Paned.PanedChild w3 = ((global::Gtk.Paned.PanedChild)(this.hpaned1[this.GtkScrolledWindow]));
+			global::Gtk.Paned.PanedChild w3 = ((global::Gtk.Paned.PanedChild)(this.hpaned1 [this.GtkScrolledWindow]));
 			w3.Resize = false;
 			w1.Add (this.hpaned1);
-			global::Gtk.Box.BoxChild w4 = ((global::Gtk.Box.BoxChild)(w1[this.hpaned1]));
+			global::Gtk.Box.BoxChild w4 = ((global::Gtk.Box.BoxChild)(w1 [this.hpaned1]));
 			w4.Position = 0;
 			// Internal child Ideas.Scada.Server.Manager.Settings.SettingsMain.ActionArea
 			global::Gtk.HButtonBox w5 = this.ActionArea;
@@ -61,7 +57,7 @@ namespace Ideas.Scada.Server.Manager.Settings
 			this.buttonCancel.UseUnderline = true;
 			this.buttonCancel.Label = "gtk-cancel";
 			this.AddActionWidget (this.buttonCancel, -6);
-			global::Gtk.ButtonBox.ButtonBoxChild w6 = ((global::Gtk.ButtonBox.ButtonBoxChild)(w5[this.buttonCancel]));
+			global::Gtk.ButtonBox.ButtonBoxChild w6 = ((global::Gtk.ButtonBox.ButtonBoxChild)(w5 [this.buttonCancel]));
 			w6.Expand = false;
 			w6.Fill = false;
 			// Container child dialog1_ActionArea.Gtk.ButtonBox+ButtonBoxChild
@@ -73,7 +69,7 @@ namespace Ideas.Scada.Server.Manager.Settings
 			this.buttonOk.UseUnderline = true;
 			this.buttonOk.Label = "gtk-ok";
 			this.AddActionWidget (this.buttonOk, -5);
-			global::Gtk.ButtonBox.ButtonBoxChild w7 = ((global::Gtk.ButtonBox.ButtonBoxChild)(w5[this.buttonOk]));
+			global::Gtk.ButtonBox.ButtonBoxChild w7 = ((global::Gtk.ButtonBox.ButtonBoxChild)(w5 [this.buttonOk]));
 			w7.Position = 1;
 			w7.Expand = false;
 			w7.Fill = false;
