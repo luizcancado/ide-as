@@ -5,32 +5,65 @@ namespace Ideas.Scada.Server.Manager
 	public partial class MainWindow
 	{
 		private global::Gtk.UIManager UIManager;
+
 		private global::Gtk.Action FileAction;
+
 		private global::Gtk.Action EditAction;
+
 		private global::Gtk.Action HelpAction;
+
 		private global::Gtk.Action aboutAction;
+
 		private global::Gtk.Action quitAction;
-		private global::Gtk.Action openAction;
+
+		private global::Gtk.Action OpenAction1;
+
 		private global::Gtk.Action quitAction1;
+
 		private global::Gtk.Action closeAction;
+
 		private global::Gtk.Action OpenAction;
+
 		private global::Gtk.Action tbbClose;
+
 		private global::Gtk.Action tbbStartServer;
+
 		private global::Gtk.Action tbbStopServer;
+
 		private global::Gtk.Action SettingsAction;
+
 		private global::Gtk.Action saveAction;
+
+		private global::Gtk.Action ServerAction;
+
+		private global::Gtk.Action StartAction;
+
+		private global::Gtk.Action StopAction;
+
 		private global::Gtk.VBox vbox1;
+
 		private global::Gtk.MenuBar menubar3;
+
 		private global::Gtk.Toolbar tbrMenuBar;
+
 		private global::Gtk.HPaned hpaned1;
+
 		private global::Gtk.ScrolledWindow GtkScrolledWindow;
+
 		private global::Gtk.TreeView trvApplicationTreeView;
+
 		private global::Gtk.ScrolledWindow GtkScrolledWindow1;
+
 		private global::Gtk.TextView txvTextView;
+
 		private global::Gtk.Notebook notebook1;
+
 		private global::Gtk.ScrolledWindow GtkScrolledWindow2;
+
 		private global::Gtk.NodeView nvwLogView;
+
 		private global::Gtk.Label label1;
+
 		private global::Gtk.Statusbar statusbar1;
 
 		protected virtual void Build ()
@@ -54,16 +87,16 @@ namespace Ideas.Scada.Server.Manager
 			this.quitAction = new global::Gtk.Action ("quitAction", global::Mono.Unix.Catalog.GetString ("Exit"), null, "gtk-quit");
 			this.quitAction.ShortLabel = global::Mono.Unix.Catalog.GetString ("Exit");
 			w1.Add (this.quitAction, null);
-			this.openAction = new global::Gtk.Action ("openAction", global::Mono.Unix.Catalog.GetString ("Open..."), null, "gtk-open");
-			this.openAction.ShortLabel = global::Mono.Unix.Catalog.GetString ("Open Application");
-			w1.Add (this.openAction, null);
+			this.OpenAction1 = new global::Gtk.Action ("OpenAction1", global::Mono.Unix.Catalog.GetString ("Open..."), null, "open");
+			this.OpenAction1.ShortLabel = global::Mono.Unix.Catalog.GetString ("Open Application");
+			w1.Add (this.OpenAction1, null);
 			this.quitAction1 = new global::Gtk.Action ("quitAction1", global::Mono.Unix.Catalog.GetString ("Exit"), null, "gtk-quit");
 			this.quitAction1.ShortLabel = global::Mono.Unix.Catalog.GetString ("Exit");
 			w1.Add (this.quitAction1, null);
 			this.closeAction = new global::Gtk.Action ("closeAction", global::Mono.Unix.Catalog.GetString ("Close"), null, "gtk-close");
 			this.closeAction.ShortLabel = global::Mono.Unix.Catalog.GetString ("Close Application");
 			w1.Add (this.closeAction, null);
-			this.OpenAction = new global::Gtk.Action ("OpenAction", global::Mono.Unix.Catalog.GetString ("Open"), global::Mono.Unix.Catalog.GetString ("Open..."), "folder");
+			this.OpenAction = new global::Gtk.Action ("OpenAction", global::Mono.Unix.Catalog.GetString ("Open"), global::Mono.Unix.Catalog.GetString ("Open..."), "open");
 			this.OpenAction.ShortLabel = global::Mono.Unix.Catalog.GetString ("Open");
 			w1.Add (this.OpenAction, null);
 			this.tbbClose = new global::Gtk.Action ("tbbClose", global::Mono.Unix.Catalog.GetString ("Close"), global::Mono.Unix.Catalog.GetString ("Close"), "gtk-close");
@@ -78,12 +111,21 @@ namespace Ideas.Scada.Server.Manager
 			this.tbbStopServer.Sensitive = false;
 			this.tbbStopServer.ShortLabel = global::Mono.Unix.Catalog.GetString ("Stop");
 			w1.Add (this.tbbStopServer, null);
-			this.SettingsAction = new global::Gtk.Action ("SettingsAction", global::Mono.Unix.Catalog.GetString ("Settings..."), null, null);
+			this.SettingsAction = new global::Gtk.Action ("SettingsAction", global::Mono.Unix.Catalog.GetString ("Settings..."), null, "settings");
 			this.SettingsAction.ShortLabel = global::Mono.Unix.Catalog.GetString ("Settings...");
 			w1.Add (this.SettingsAction, null);
 			this.saveAction = new global::Gtk.Action ("saveAction", global::Mono.Unix.Catalog.GetString ("_Save"), null, "gtk-save");
 			this.saveAction.ShortLabel = global::Mono.Unix.Catalog.GetString ("_Save");
 			w1.Add (this.saveAction, null);
+			this.ServerAction = new global::Gtk.Action ("ServerAction", global::Mono.Unix.Catalog.GetString ("Server"), null, null);
+			this.ServerAction.ShortLabel = global::Mono.Unix.Catalog.GetString ("Server");
+			w1.Add (this.ServerAction, null);
+			this.StartAction = new global::Gtk.Action ("StartAction", global::Mono.Unix.Catalog.GetString ("Start"), null, null);
+			this.StartAction.ShortLabel = global::Mono.Unix.Catalog.GetString ("Start");
+			w1.Add (this.StartAction, null);
+			this.StopAction = new global::Gtk.Action ("StopAction", global::Mono.Unix.Catalog.GetString ("Stop"), null, null);
+			this.StopAction.ShortLabel = global::Mono.Unix.Catalog.GetString ("Stop");
+			w1.Add (this.StopAction, null);
 			this.UIManager.InsertActionGroup (w1, 0);
 			this.AddAccelGroup (this.UIManager.AccelGroup);
 			this.Name = "Ideas.Scada.Server.Manager.MainWindow";
@@ -96,19 +138,16 @@ namespace Ideas.Scada.Server.Manager
 			this.vbox1 = new global::Gtk.VBox ();
 			this.vbox1.Name = "vbox1";
 			// Container child vbox1.Gtk.Box+BoxChild
-			this.UIManager.AddUiFromString (@"<ui><menubar name='menubar3'><menu name='FileAction' action='FileAction'><menuitem name='openAction' action='openAction'/><menuitem name='saveAction' action='saveAction'/><menuitem name='closeAction' action='closeAction'/><separator/><menuitem name='quitAction1' action='quitAction1'/></menu><menu name='EditAction' action='EditAction'><menuitem name='SettingsAction' action='SettingsAction'/></menu><menu name='HelpAction' action='HelpAction'><menuitem name='aboutAction' action='aboutAction'/></menu></menubar></ui>");
+			this.UIManager.AddUiFromString ("<ui><menubar name='menubar3'><menu name='FileAction' action='FileAction'><menuitem name='OpenAction1' action='OpenAction1'/><menuitem name='saveAction' action='saveAction'/><menuitem name='closeAction' action='closeAction'/><separator/><menuitem name='quitAction1' action='quitAction1'/></menu><menu name='EditAction' action='EditAction'><menuitem name='SettingsAction' action='SettingsAction'/></menu><menu name='ServerAction' action='ServerAction'><menuitem name='StartAction' action='StartAction'/><menuitem name='StopAction' action='StopAction'/></menu><menu name='HelpAction' action='HelpAction'><menuitem name='aboutAction' action='aboutAction'/></menu></menubar></ui>");
 			this.menubar3 = ((global::Gtk.MenuBar)(this.UIManager.GetWidget ("/menubar3")));
 			this.menubar3.Name = "menubar3";
 			this.vbox1.Add (this.menubar3);
-			global::Gtk.Box.BoxChild w2 = ((global::Gtk.Box.BoxChild)(this.vbox1 [this.menubar3]));
+			global::Gtk.Box.BoxChild w2 = ((global::Gtk.Box.BoxChild)(this.vbox1[this.menubar3]));
 			w2.Position = 0;
 			w2.Expand = false;
 			w2.Fill = false;
 			// Container child vbox1.Gtk.Box+BoxChild
-			this.UIManager.AddUiFromString ("<ui><toolbar name=\'tbrMenuBar\'><toolitem name=\'OpenAction\' action=\'OpenAction\'/><" +
-                    "toolitem name=\'tbbClose\' action=\'tbbClose\'/><toolitem name=\'tbbStartServer\' acti" +
-                    "on=\'tbbStartServer\'/><toolitem name=\'tbbStopServer\' action=\'tbbStopServer\'/></to" +
-                    "olbar></ui>");
+			this.UIManager.AddUiFromString ("<ui><toolbar name='tbrMenuBar'><toolitem name='OpenAction' action='OpenAction'/><toolitem name='tbbClose' action='tbbClose'/><toolitem name='tbbStartServer' action='tbbStartServer'/><toolitem name='tbbStopServer' action='tbbStopServer'/></toolbar></ui>");
 			this.tbrMenuBar = ((global::Gtk.Toolbar)(this.UIManager.GetWidget ("/tbrMenuBar")));
 			this.tbrMenuBar.TooltipMarkup = "Start Server";
 			this.tbrMenuBar.Name = "tbrMenuBar";
@@ -116,7 +155,7 @@ namespace Ideas.Scada.Server.Manager
 			this.tbrMenuBar.ToolbarStyle = ((global::Gtk.ToolbarStyle)(0));
 			this.tbrMenuBar.IconSize = ((global::Gtk.IconSize)(1));
 			this.vbox1.Add (this.tbrMenuBar);
-			global::Gtk.Box.BoxChild w3 = ((global::Gtk.Box.BoxChild)(this.vbox1 [this.tbrMenuBar]));
+			global::Gtk.Box.BoxChild w3 = ((global::Gtk.Box.BoxChild)(this.vbox1[this.tbrMenuBar]));
 			w3.Position = 1;
 			w3.Expand = false;
 			w3.Fill = false;
@@ -136,7 +175,7 @@ namespace Ideas.Scada.Server.Manager
 			this.trvApplicationTreeView.HeadersVisible = false;
 			this.GtkScrolledWindow.Add (this.trvApplicationTreeView);
 			this.hpaned1.Add (this.GtkScrolledWindow);
-			global::Gtk.Paned.PanedChild w5 = ((global::Gtk.Paned.PanedChild)(this.hpaned1 [this.GtkScrolledWindow]));
+			global::Gtk.Paned.PanedChild w5 = ((global::Gtk.Paned.PanedChild)(this.hpaned1[this.GtkScrolledWindow]));
 			w5.Resize = false;
 			// Container child hpaned1.Gtk.Paned+PanedChild
 			this.GtkScrolledWindow1 = new global::Gtk.ScrolledWindow ();
@@ -149,7 +188,7 @@ namespace Ideas.Scada.Server.Manager
 			this.GtkScrolledWindow1.Add (this.txvTextView);
 			this.hpaned1.Add (this.GtkScrolledWindow1);
 			this.vbox1.Add (this.hpaned1);
-			global::Gtk.Box.BoxChild w8 = ((global::Gtk.Box.BoxChild)(this.vbox1 [this.hpaned1]));
+			global::Gtk.Box.BoxChild w8 = ((global::Gtk.Box.BoxChild)(this.vbox1[this.hpaned1]));
 			w8.Position = 2;
 			// Container child vbox1.Gtk.Box+BoxChild
 			this.notebook1 = new global::Gtk.Notebook ();
@@ -173,14 +212,14 @@ namespace Ideas.Scada.Server.Manager
 			this.notebook1.SetTabLabel (this.GtkScrolledWindow2, this.label1);
 			this.label1.ShowAll ();
 			this.vbox1.Add (this.notebook1);
-			global::Gtk.Box.BoxChild w11 = ((global::Gtk.Box.BoxChild)(this.vbox1 [this.notebook1]));
+			global::Gtk.Box.BoxChild w11 = ((global::Gtk.Box.BoxChild)(this.vbox1[this.notebook1]));
 			w11.Position = 3;
 			// Container child vbox1.Gtk.Box+BoxChild
 			this.statusbar1 = new global::Gtk.Statusbar ();
 			this.statusbar1.Name = "statusbar1";
 			this.statusbar1.Spacing = 6;
 			this.vbox1.Add (this.statusbar1);
-			global::Gtk.Box.BoxChild w12 = ((global::Gtk.Box.BoxChild)(this.vbox1 [this.statusbar1]));
+			global::Gtk.Box.BoxChild w12 = ((global::Gtk.Box.BoxChild)(this.vbox1[this.statusbar1]));
 			w12.Position = 4;
 			w12.Expand = false;
 			w12.Fill = false;
@@ -192,15 +231,17 @@ namespace Ideas.Scada.Server.Manager
 			this.DeleteEvent += new global::Gtk.DeleteEventHandler (this.OnDeleteEvent);
 			this.aboutAction.Activated += new global::System.EventHandler (this.aboutAction_Click);
 			this.quitAction.Activated += new global::System.EventHandler (this.mnuFileExit_Click);
-			this.openAction.Activated += new global::System.EventHandler (this.mnuOpenApplication_Click);
+			this.OpenAction1.Activated += new global::System.EventHandler (this.OnOpenActionActivated);
 			this.quitAction1.Activated += new global::System.EventHandler (this.mnuFileExit_Click);
 			this.closeAction.Activated += new global::System.EventHandler (this.OnCloseActionActivated);
-			this.OpenAction.Activated += new global::System.EventHandler (this.tbbOpen_Click);
-			this.tbbClose.Activated += new global::System.EventHandler (this.tbbClose_Click);
-			this.tbbStartServer.Activated += new global::System.EventHandler (this.tbbStartServer_Click);
-			this.tbbStopServer.Activated += new global::System.EventHandler (this.tbbStopServer_Click);
+			this.OpenAction.Activated += new global::System.EventHandler (this.OnOpenActionActivated);
+			this.tbbClose.Activated += new global::System.EventHandler (this.OnCloseActionActivated);
+			this.tbbStartServer.Activated += new global::System.EventHandler (this.OnStartServerActionActivated);
+			this.tbbStopServer.Activated += new global::System.EventHandler (this.OnStopServerActionActivated);
 			this.SettingsAction.Activated += new global::System.EventHandler (this.OnSettingsActionActivated);
 			this.saveAction.Activated += new global::System.EventHandler (this.OnSaveActionActivated);
+			this.StartAction.Activated += new global::System.EventHandler (this.OnStartServerActionActivated);
+			this.StopAction.Activated += new global::System.EventHandler (this.OnStopServerActionActivated);
 		}
 	}
 }

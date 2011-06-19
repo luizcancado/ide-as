@@ -6,6 +6,7 @@
   </configuration>
   <import>
     <widget-library name="glade-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <widget-library name="Mono.TextEditor, Version=1.0.0.0, Culture=neutral" />
     <widget-library name="../bin/Debug/Ideas.Server.Manager.exe" internal="true" />
   </import>
   <icon-factory>
@@ -17,11 +18,6 @@
     <icon-set id="tagsdatabase">
       <source>
         <property name="Image">file:./Resources/Icons/Interface/16/database.png</property>
-      </source>
-    </icon-set>
-    <icon-set id="folder">
-      <source>
-        <property name="Image">file:./Resources/Icons/Interface/16/folder.png</property>
       </source>
     </icon-set>
     <icon-set id="screen">
@@ -38,6 +34,36 @@
       </source>
       <source>
         <property name="Image">resource:Ideas.Scada.Server.Manager.Resources.Icons.Interface.32.ideas.png</property>
+      </source>
+    </icon-set>
+    <icon-set id="close">
+      <source>
+        <property name="Image">file:./Resources/Icons/Interface/16/close.png</property>
+      </source>
+    </icon-set>
+    <icon-set id="start">
+      <source>
+        <property name="Image">file:./Resources/Icons/Interface/16/start.png</property>
+      </source>
+    </icon-set>
+    <icon-set id="settings">
+      <source>
+        <property name="Image">resource:Ideas.Scada.Server.Manager.Resources.Icons.Interface.16.settings.png</property>
+      </source>
+    </icon-set>
+    <icon-set id="stop">
+      <source>
+        <property name="Image">file:./Resources/Icons/Interface/16/stop.png</property>
+      </source>
+    </icon-set>
+    <icon-set id="folder">
+      <source>
+        <property name="Image">file:./Resources/Icons/Interface/16/folder.png</property>
+      </source>
+    </icon-set>
+    <icon-set id="open">
+      <source>
+        <property name="Image">resource:Ideas.Scada.Server.Manager.Resources.Icons.Interface.16.open.png</property>
       </source>
     </icon-set>
   </icon-factory>
@@ -72,12 +98,12 @@
         <property name="StockId">gtk-quit</property>
         <signal name="Activated" handler="mnuFileExit_Click" />
       </action>
-      <action id="openAction">
+      <action id="OpenAction1">
         <property name="Type">Action</property>
         <property name="Label" translatable="yes">Open...</property>
         <property name="ShortLabel" translatable="yes">Open Application</property>
-        <property name="StockId">gtk-open</property>
-        <signal name="Activated" handler="mnuOpenApplication_Click" />
+        <property name="StockId">open</property>
+        <signal name="Activated" handler="OnOpenActionActivated" />
       </action>
       <action id="quitAction1">
         <property name="Type">Action</property>
@@ -97,9 +123,9 @@
         <property name="Type">Action</property>
         <property name="Label" translatable="yes">Open</property>
         <property name="ShortLabel" translatable="yes">Open</property>
-        <property name="StockId">folder</property>
+        <property name="StockId">open</property>
         <property name="Tooltip" translatable="yes">Open...</property>
-        <signal name="Activated" handler="tbbOpen_Click" />
+        <signal name="Activated" handler="OnOpenActionActivated" />
       </action>
       <action id="tbbClose">
         <property name="Type">Action</property>
@@ -108,7 +134,7 @@
         <property name="ShortLabel" translatable="yes">Close</property>
         <property name="StockId">gtk-close</property>
         <property name="Tooltip" translatable="yes">Close</property>
-        <signal name="Activated" handler="tbbClose_Click" />
+        <signal name="Activated" handler="OnCloseActionActivated" />
       </action>
       <action id="tbbStartServer">
         <property name="Type">Action</property>
@@ -117,7 +143,7 @@
         <property name="ShortLabel" translatable="yes">Start Server</property>
         <property name="StockId">gtk-execute</property>
         <property name="Tooltip" translatable="yes">Start Server</property>
-        <signal name="Activated" handler="tbbStartServer_Click" />
+        <signal name="Activated" handler="OnStartServerActionActivated" />
       </action>
       <action id="tbbStopServer">
         <property name="Type">Action</property>
@@ -126,12 +152,13 @@
         <property name="ShortLabel" translatable="yes">Stop</property>
         <property name="StockId">gtk-stop</property>
         <property name="Tooltip" translatable="yes">Stop Server</property>
-        <signal name="Activated" handler="tbbStopServer_Click" />
+        <signal name="Activated" handler="OnStopServerActionActivated" />
       </action>
       <action id="SettingsAction">
         <property name="Type">Action</property>
         <property name="Label" translatable="yes">Settings...</property>
         <property name="ShortLabel" translatable="yes">Settings...</property>
+        <property name="StockId">settings</property>
         <signal name="Activated" handler="OnSettingsActionActivated" />
       </action>
       <action id="saveAction">
@@ -140,6 +167,23 @@
         <property name="ShortLabel" translatable="yes">_Save</property>
         <property name="StockId">gtk-save</property>
         <signal name="Activated" handler="OnSaveActionActivated" />
+      </action>
+      <action id="ServerAction">
+        <property name="Type">Action</property>
+        <property name="Label" translatable="yes">Server</property>
+        <property name="ShortLabel" translatable="yes">Server</property>
+      </action>
+      <action id="StartAction">
+        <property name="Type">Action</property>
+        <property name="Label" translatable="yes">Start</property>
+        <property name="ShortLabel" translatable="yes">Start</property>
+        <signal name="Activated" handler="OnStartServerActionActivated" after="yes" />
+      </action>
+      <action id="StopAction">
+        <property name="Type">Action</property>
+        <property name="Label" translatable="yes">Stop</property>
+        <property name="ShortLabel" translatable="yes">Stop</property>
+        <signal name="Activated" handler="OnStopServerActionActivated" />
       </action>
     </action-group>
     <property name="MemberName" />
@@ -157,7 +201,7 @@
             <property name="MemberName" />
             <node name="menubar3" type="Menubar">
               <node type="Menu" action="FileAction">
-                <node type="Menuitem" action="openAction" />
+                <node type="Menuitem" action="OpenAction1" />
                 <node type="Menuitem" action="saveAction" />
                 <node type="Menuitem" action="closeAction" />
                 <node type="Separator" />
@@ -165,6 +209,10 @@
               </node>
               <node type="Menu" action="EditAction">
                 <node type="Menuitem" action="SettingsAction" />
+              </node>
+              <node type="Menu" action="ServerAction">
+                <node type="Menuitem" action="StartAction" />
+                <node type="Menuitem" action="StopAction" />
               </node>
               <node type="Menu" action="HelpAction">
                 <node type="Menuitem" action="aboutAction" />

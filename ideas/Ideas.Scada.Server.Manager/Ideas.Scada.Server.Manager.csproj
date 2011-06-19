@@ -34,16 +34,22 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="gtk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
+      <Package>gtk-sharp-2.0</Package>
     </Reference>
     <Reference Include="gdk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
+      <Package>gtk-sharp-2.0</Package>
     </Reference>
     <Reference Include="glib-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
+      <Package>glib-sharp-2.0</Package>
     </Reference>
     <Reference Include="glade-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
+      <Package>glade-sharp-2.0</Package>
     </Reference>
     <Reference Include="pango-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
+      <Package>gtk-sharp-2.0</Package>
     </Reference>
     <Reference Include="atk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
+      <Package>gtk-sharp-2.0</Package>
     </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="Mono.Posix">
@@ -54,8 +60,10 @@
       <HintPath>..\References\NDesk.Options.dll</HintPath>
     </Reference>
     <Reference Include="Mono.TextEditor, Version=1.0.0.0, Culture=neutral">
+      <Package>monodevelop</Package>
     </Reference>
     <Reference Include="Mono.Debugging, Version=0.0.0.0, Culture=neutral, PublicKeyToken=5e9ce85b0923c84f">
+      <Package>monodevelop</Package>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -65,6 +73,11 @@
     <EmbeddedResource Include="Resources\Icons\Interface\16\ideas.png" />
     <EmbeddedResource Include="Resources\Icons\Interface\24\ideas.png" />
     <EmbeddedResource Include="Resources\Icons\Interface\32\ideas.png" />
+    <EmbeddedResource Include="Resources\Icons\Interface\16\settings.png" />
+    <EmbeddedResource Include="Resources\Icons\Interface\16\ideas-client.png" />
+    <EmbeddedResource Include="Resources\Icons\Interface\16\stop.png" />
+    <EmbeddedResource Include="Resources\Icons\Interface\16\start.png" />
+    <EmbeddedResource Include="Resources\Icons\Interface\16\open.png" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="gtk-gui\generated.cs" />
@@ -122,7 +135,7 @@
     <MonoDevelop>
       <Properties>
         <Policies>
-          <StandardHeader Text=" &#xA; ${FileName}&#xA; &#xA; Author:&#xA;      ${AuthorName} &lt;${AuthorEmail}&gt;&#xA;&#xA; Copyright (c) ${Year} ${CopyrightHolder}&#xA;&#xA; This program is free software: you can redistribute it and/or modify&#xA; it under the terms of the GNU General Public License as published by&#xA; the Free Software Foundation, either version 3 of the License, or&#xA; (at your option) any later version.&#xA;&#xA; This program is distributed in the hope that it will be useful,&#xA; but WITHOUT ANY WARRANTY; without even the implied warranty of&#xA; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the&#xA; GNU General Public License for more details.&#xA;&#xA; You should have received a copy of the GNU General Public License&#xA; along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;." IncludeInNewFiles="True" />
+          <StandardHeader inheritsSet="GPLv3License" />
           <VersionControlPolicy inheritsSet="Mono" />
         </Policies>
         <MonoDevelop.Autotools.MakefileInfo RelativeMakefileName="Makefile.am" SyncReferences="true" IsAutotoolsProject="true" RelativeConfigureInPath="..">

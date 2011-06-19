@@ -17,8 +17,49 @@ var mouseMove = 0;
 var mouseOut = 0;
 var textbutton1;
 
+
+function RegisterTags()
+{
+	TAGS = {
+        AUTOMATICO: "", // TODO          
+		BICO_A: "",
+		BICO_B: "",
+		BICO_C: "",
+		CONT_PROD_A: "", // TODO
+		CONT_PROD_B: "", // TODO    
+		CONT_PROD_C: "", // TODO    
+		DESLIGA_ESTEIRA: "", 
+		EMERGENCIA: "", 
+		ESTEIRA: "", // TODO    
+		LIGA_ESTEIRA: "",   
+		MANUAL: "", // TODO
+		MISTURADOR: "", // TODO 
+		PRODUTO_A: "",      
+		PRODUTO_B: "",      
+		PRODUTO_C: "",      
+		RESET: "", // TODO
+		S1: "", 
+		S2: "", 
+		S3: "", 
+		S4: "", 
+		S5: "", 
+		S6: "", 
+		T_MISTURADOR: "",   
+		T_PROD_A_BICO_A: "",
+		T_PROD_A_BICO_B: "",
+		T_PROD_A_BICO_C: "",
+		T_PROD_B_BICO_A: "",
+		T_PROD_B_BICO_B: "",
+		T_PROD_B_BICO_C: "",
+		T_PROD_C_BICO_A: "",
+		T_PROD_C_BICO_B: "",
+		T_PROD_C_BICO_C: ""                	
+	} 
+}
+
+
 //now create a new button instance
-function initScreen(evt)
+function InitScreen(evt)
 {
 	textbutton1 = 
 		new button(
@@ -37,20 +78,10 @@ function initScreen(evt)
 			{"fill":"white"},
 			{"fill":"navy"},
 			1);
-
-	updateVars();
 }
 
-function updateVars() 
-{
-	ReadTagList();
-
-	updateStats();
-	
-	setTimeout ( "updateVars()", 1000 );
-}
-    
-function updateStats()
+   
+function UpdateStats()
 {
 	for(key in TAGS)
 	{

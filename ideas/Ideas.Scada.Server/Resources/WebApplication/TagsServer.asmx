@@ -9,23 +9,23 @@ namespace Ideas.ScadaApplication
 	public class TagsServer : WebService
 	{
 		[WebMethod]
-		public int GetAllTagsValues ()
+		public int ReadAll ()
 		{
             Random random = new Random();
             
-            return random.Next(0, 100);
+            return random.Next(2);
 		}
   
         [WebMethod]
-        public int GetTagValue (string tagname)
+        public int Read (string tagname)
         {
             Random random = new Random();
             
-            return random.Next(0, 100);
+            return random.Next(2);
         }
  
 		[WebMethod]
-		public void SetTagValue (string tagname, string value)
+		public void Write (string tagname, string value)
 		{
 			// do nothing
 		}

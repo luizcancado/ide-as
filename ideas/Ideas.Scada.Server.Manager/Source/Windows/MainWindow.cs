@@ -10,7 +10,14 @@ namespace Ideas.Scada.Server.Manager
 {
 	public partial class MainWindow : Gtk.Window
 	{
+        /// <summary>
+        /// The ScadaApplication opened by the manager
+        /// </summary>
 		private ScadaApplication scadaApplication;
+        
+        /// <summary>
+        /// A system process instantiated as a Ideas.Scada.Server
+        /// </summary>
 		private Process serverProcess;
 		
 		/// <summary>
@@ -28,65 +35,104 @@ namespace Ideas.Scada.Server.Manager
 		/// Constructor from a Configuration setup
 		/// </summary>
 		/// <param name="config">
-		/// A <see cref="Configuration"/>
+		/// A <see cref="Configuration"/> with the manager settings
 		/// </param>
 		public MainWindow (Configuration config) : base(Gtk.WindowType.Toplevel)
 		{
 			Build ();
 			
+            // Check if any configuration was provided
 			if(config == null)
 			{
+                // If not, initializes an empty scada application
 				scadaApplication = null;
 			}
 			else
 			{
+                // Else, creates a new scada application based on a .scada file
 				scadaApplication = new ScadaApplication(config.file);
 				UpdateScadaApplicationsListTree ();
 			}
 		}
 	
-		protected void OnDeleteEvent (object sender, DeleteEventArgs a)
+        /// <summary>
+        /// Handler for the Delete event of the MainWindow
+        /// </summary>
+        /// <param name="sender">
+        /// A <see cref="System.Object"/> reference to the event sender
+        /// </param>
+        /// <param name="e">
+        /// A <see cref="DeleteEventArgs"/> with parameters passed to the event
+        /// </param>
+		protected void OnDeleteEvent (object sender, DeleteEventArgs e)
 		{
 			Application.Quit ();
-			a.RetVal = true;
+			e.RetVal = true;
 		}
 		
+        /// <summary>
+        /// Handler for the Click event of the Menu: File -> Exit
+        /// </summary>
+        /// <param name="sender">
+        /// A <see cref="System.Object"/> reference to the event sender
+        /// </param>
+        /// <param name="e">
+        /// A <see cref="System.EventArgs"/> with parameters passed to the event
+        /// </param>
 		protected virtual void mnuFileExit_Click (object sender, System.EventArgs e)
 		{
 			this.Destroy();
 			Application.Quit();
 		}
 		
-		protected virtual void mnuOpenApplication_Click (object sender, System.EventArgs e)
+        /// <summary>
+        /// Handler for the Click event of the Menu: File -> Open
+        /// </summary>
+        /// <param name="sender">
+        /// A <see cref="System.Object"/> reference to the event sender
+        /// </param>
+        /// <param name="e">
+        /// A <see cref="System.EventArgs"/> with parameters passed to the event
+        /// </param>
+		protected virtual void OnOpenActionActivated (object sender, System.EventArgs e)
 		{
 			OpenApplication();
 		}
 		
 		/// <summary>
-		/// Loads the SCADA configuration file. Converts XML to a ScadaApplication class
+		/// Loads the SCADA file. Converts XML to a ScadaApplication class
 		/// </summary>
 		/// <param name="scadafile">
-		/// A <see cref="System.String"/>
+		/// A <see cref="System.String"/> containing the filename of the .scada file to open
 		/// </param>
 		public void LoadScadaFile(string scadafile)
 		{
+            // Creates the scada aplication based on the scada file
 			scadaApplication = new ScadaApplication(scadafile);
 			
-			// Updates the list tree/expander
+			// Updates the TreeView with the application structure
 			UpdateScadaApplicationsListTree();
 			
+            // Fills the TextView with the content of the file
 			UpdateTextView();
 		}
 		
-		
+		/// <summary>
+        /// Fills the TextView with the content of the file
+        /// </summary>
 		protected void UpdateTextView ()
 		{
+            // Read the content of the scada file
 			StreamReader scadaFile = new StreamReader(scadaApplication.FilePath);
 			string fileString = scadaFile.ReadToEnd();
 			
+            // Fill the textview control
 			txvTextView.Buffer.Text = fileString;
 		}
 		
+        /// <summary>
+        /// Updates the TreeView with the application structure
+        /// </summary>
 		protected void UpdateScadaApplicationsListTree ()
 		{
 			// Check if a scada app was already loaded
@@ -97,7 +143,8 @@ namespace Ideas.Scada.Server.Manager
 			
 			// Clean tree view
 			CleanTreeView();
-	
+	        
+            // Definition of the icons to appear for the tree nodes
 			Gdk.Pixbuf icnApplicationIcon = IconFactory.LookupDefault("ideas").RenderIcon(new Style(), TextDirection.None, StateType.Active, IconSize.Menu, null, null);
 			Gdk.Pixbuf icnFolderIcon = IconFactory.LookupDefault("folder").RenderIcon(new Style(), TextDirection.None, StateType.Active, IconSize.Menu, null, null);
 			Gdk.Pixbuf icnScreenIcon =  IconFactory.LookupDefault("screen").RenderIcon(new Style(), TextDirection.None, StateType.Active, IconSize.Menu, null, null);
@@ -172,10 +219,19 @@ namespace Ideas.Scada.Server.Manager
 			this.ShowAll();
 		}
 	
+        /// <summary>
+        /// Handler for the Click event of the Menu: Help -> About
+        /// </summary>
+        /// <param name="sender">
+        /// A <see cref="System.Object"/> reference to the event sender
+        /// </param>
+        /// <param name="e">
+        /// A <see cref="System.EventArgs"/> with parameters passed to the event
+        /// </param>
 		protected virtual void aboutAction_Click (object sender, System.EventArgs e)
 		{
+            // Show the AboutDialog
 			About aboutDialog = new About();
-			
 			aboutDialog.Show();
 		}
 			
@@ -316,16 +372,7 @@ namespace Ideas.Scada.Server.Manager
 			this.ShowAll();
 		}
 		
-		protected virtual void tbbOpen_Click (object sender, System.EventArgs e)
-		{
-			OpenApplication();
-		}
-		
-		protected virtual void tbbClose_Click (object sender, System.EventArgs e)
-		{
-			CloseApplication();
-		}
-		
+        		
 		protected void enableToolBarButtons()
 		{
 			tbbClose.Sensitive = true;		
@@ -339,16 +386,25 @@ namespace Ideas.Scada.Server.Manager
 			tbbStopServer.Sensitive = false;
 		}
 		
-		protected virtual void tbbStartServer_Click (object sender, System.EventArgs e)
+		protected virtual void OnStartServerActionActivated (object sender, System.EventArgs e)
 		{
 			StartServersByProcess();		
 		}
 		
-		protected virtual void tbbStopServer_Click (object sender, System.EventArgs e)
+		protected virtual void OnStopServerActionActivated (object sender, System.EventArgs e)
 		{
 			StopServers();
 		}
 		
+        /// <summary>
+        /// Handler for the Click event of the Menu: File -> Close
+        /// </summary>
+        /// <param name="sender">
+        /// A <see cref="System.Object"/> reference to the event sender
+        /// </param>
+        /// <param name="e">
+        /// A <see cref="System.EventArgs"/> with parameters passed to the event
+        /// </param>
 		protected virtual void OnCloseActionActivated (object sender, System.EventArgs e)
 		{
 			CloseApplication();
@@ -359,7 +415,16 @@ namespace Ideas.Scada.Server.Manager
 			Ideas.Scada.Server.Manager.Settings.SettingsMain settingsDialog = new Ideas.Scada.Server.Manager.Settings.SettingsMain();
 			settingsDialog.Show();
 		}
-			
+		
+        /// <summary>
+        /// Handler for the Click event of the Menu: File -> Save
+        /// </summary>
+        /// <param name="sender">
+        /// A <see cref="System.Object"/> reference to the event sender
+        /// </param>
+        /// <param name="e">
+        /// A <see cref="System.EventArgs"/> with parameters passed to the event
+        /// </param>
 		protected void OnSaveActionActivated (object sender, System.EventArgs e)
 		{
 			string stringToSave = txvTextView.Buffer.Text;
@@ -396,8 +461,6 @@ namespace Ideas.Scada.Server.Manager
 	            md.Run ();
 			    md.Destroy();
 			}
-			
-			
 		}
 	}
 }

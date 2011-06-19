@@ -9,7 +9,7 @@
 	Description: A sample client-side script to demonstrate IDEAS application structure.
 */
 
-var TAGS;
+var TAGS; // must be defined inside the screen script
 
 var Ideas = {
     
@@ -19,10 +19,9 @@ var Ideas = {
     }   
 }
 
-
 function GotoScreen(scr) 
 {
-    window.location('/?s=' + scr);
+    window.location('/?s=' + scr); 
 }
 
 // Function to handle SVG onLoad event
@@ -35,46 +34,26 @@ function init(evt)
 
 	RegisterTags();
 
-	initScreen();
+	InitScreen();
+ 
+    UpdateVars();   
 }
 
-function RegisterTags()
+function UpdateVars() 
 {
-	TAGS = {
-        AUTOMATICO: "",
-        BICO_A: "",                             
-        BICO_B: "",                             
-        DESLIGA_ESTEIRA: "",                    
-        EMERGENCIA: "",                         
-        ESTEIRA_LIGADA: "",                     
-        LIGA_ESTEIRA: "",                       
-        MANUAL: "",                             
-        MISTURADOR: "",                         
-        PRODUTO_A: "",                          
-        PRODUTO_B: "",                          
-        PRODUTO_C: "",                          
-        S1: "",                                
-        S2: "",                                
-        S3: "",                                
-        S4: "",                                
-        S5: "",                                
-        T_MISTURADOR: "",                       
-        T_PROD_A_BICO_A: "",                    
-        T_PROD_A_BICO_B: "",                    
-        T_PROD_B_BICO_A: "",                    
-        T_PROD_B_BICO_B: "",                    
-        T_PROD_C_BICO_A: "",                    
-        T_PROD_C_BICO_B: ""                   	
-	}
+    ReadTagList();
+
+    UpdateStats(); // must be defined inside the screen script
+    
+    setTimeout ( "UpdateVars()", 1000 );
 }
 
-
-// Function to retrieve tag data from webservice
+// Function to retrieve/write tag data from/to webservice
 function ReadTag(tagName) 
 {	
 	$.ajax({
 	    type: "GET",
-	    url: "/TagsServer.asmx/GetTagValue?tagname=" + tagName,
+	    url: "/TagsServer.asmx/Read?tagname=" + tagName,
 	    contentType: "text/xml; charset=utf-8",
 	    dataType: "xml",
 	    success: 
@@ -84,11 +63,92 @@ function ReadTag(tagName)
 	  });
 }
 
-
 function ReadTagList()
 {	
 	for(key in TAGS)
 	{
 	   ReadTag(key);
 	}
+}
+
+function WriteTag(tagName, tagValue) 
+{   
+    $.ajax({
+        type: "GET",
+        url: "/TagsServer.asmx/Write?tagname=" + tagName + "&value="+ tagValue,
+        contentType: "text/xml; charset=utf-8",
+        dataType: "xml",
+        success: 
+            function(xml) {  
+                alert("Written successfully.");
+            }
+      });
+}
+
+
+// Animation functions
+
+function SetVisibility(objID, value)
+{
+    obj = svgDocument.getElementById(objID);
+
+    if(obj != null)
+    {
+        if(value == false)
+        {
+            //obj.setAttribute("visibility", "hidden");
+            obj.setAttribute('style','display:none');
+        }
+        else
+        {
+            //obj.setAttribute("visibility", "visible");
+            obj.setAttribute('style','display:inline');
+        }
+    }
+    else
+    {
+        alert("Error: Object '" + objID + "' not found.");
+    }
+}
+
+function SetText(objID, value)
+{
+    obj = svgDocument.getElementById(objID);
+
+    if(obj != null)
+    {
+        obj.firstChild.data = value;
+    }
+    else
+    {
+        alert("Error: Object '" + objID + "' not found.");
+    }
+}
+
+function SetPosition(objID, valueX, valueY)
+{
+    obj = svgDocument.getElementById(objID);
+
+    if(obj != null)
+    {
+        obj.setAttribute('transform','translate(' + valueX + ',' + valueY + ')');
+    }
+    else
+    {
+        alert("Error: Object '" + objID + "' not found.");
+    }
+}
+
+function SetFillColor(objID, color)
+{
+    obj = svgDocument.getElementById(objID);
+
+    if(obj != null)
+    {
+        obj.style.setProperty('fill',color);
+    }
+    else
+    {
+        alert("Error: Object '" + objID + "' not found.");
+    }
 }
