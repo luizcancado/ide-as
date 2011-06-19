@@ -17,27 +17,27 @@ var mouseMove = 0;
 var mouseOut = 0;
 var textbutton1;
 
-
+ 
 function RegisterTags()
 {
 	TAGS = {
-        AUTOMATICO: "", // TODO          
-		BICO_A: "",
-		BICO_B: "",
-		BICO_C: "",
-		CONT_PROD_A: "", // TODO
-		CONT_PROD_B: "", // TODO    
-		CONT_PROD_C: "", // TODO    
+        AUTOMATICO: "",         
+		BICO_A: "", 
+		BICO_B: "", 
+		BICO_C: "", 
+		CONT_PROD_A: "",  
+		CONT_PROD_B: "",  
+		CONT_PROD_C: "",  
 		DESLIGA_ESTEIRA: "", 
-		EMERGENCIA: "", 
-		ESTEIRA: "", // TODO    
-		LIGA_ESTEIRA: "",   
-		MANUAL: "", // TODO
-		MISTURADOR: "", // TODO 
-		PRODUTO_A: "",      
-		PRODUTO_B: "",      
-		PRODUTO_C: "",      
-		RESET: "", // TODO
+		EMERGENCIA: "",  
+		ESTEIRA: "",   
+		LIGA_ESTEIRA: "",    
+		MANUAL: "",  
+		MISTURADOR: "",  
+		PRODUTO_A: "",       
+		PRODUTO_B: "",       
+		PRODUTO_C: "",       
+		RESET: "", 
 		S1: "", 
 		S2: "", 
 		S3: "", 

@@ -125,6 +125,20 @@ function SetText(objID, value)
     }
 }
 
+function GetText(objID)
+{
+    obj = svgDocument.getElementById(objID);
+
+    if(obj != null)
+    {
+        return obj.firstChild.data;
+    }
+    else
+    {
+        alert("Error: Object '" + objID + "' not found.");
+    }
+}
+
 function SetPosition(objID, valueX, valueY)
 {
     obj = svgDocument.getElementById(objID);

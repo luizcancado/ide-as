@@ -14,23 +14,23 @@ var objTambor;
 function RegisterTags()
 {
 	TAGS = {
-        AUTOMATICO: "", // TODO          
+        AUTOMATICO: "",        
 		BICO_A: "",
 		BICO_B: "",
 		BICO_C: "",
-		CONT_PROD_A: "", // TODO
-		CONT_PROD_B: "", // TODO    
-		CONT_PROD_C: "", // TODO    
+		CONT_PROD_A: "", 
+		CONT_PROD_B: "",    
+		CONT_PROD_C: "",    
 		DESLIGA_ESTEIRA: "", 
 		EMERGENCIA: "", 
-		ESTEIRA: "", // TODO    
+		ESTEIRA: "", 
 		LIGA_ESTEIRA: "",   
-		MANUAL: "", // TODO
-		MISTURADOR: "", // TODO 
+		MANUAL: "", 
+		MISTURADOR: "", 
 		PRODUTO_A: "",      
 		PRODUTO_B: "",      
 		PRODUTO_C: "",      
-		RESET: "", // TODO
+		RESET: "", // Nao sera comandado
 		S1: "", 
 		S2: "", 
 		S3: "", 
@@ -61,6 +61,54 @@ function UpdateStats()
 	UpdateSensores();
 	UpdateBicosTinta();
 	UpdateMisturador();
+	UpdateManualRemoto();
+	UpdateProducao();
+	UpdateEsteira();
+}
+
+function UpdateEsteira()
+{
+	  
+	if(TAGS["ESTEIRA"] == 1)
+	{
+		SetFillColor("IndicadorEsteiraLigada", "#00AA00");
+		SetFillColor("IndicadorEsteiraDesligada", "#666666");
+	}
+	else
+	{
+		SetFillColor("IndicadorEsteiraLigada", "#666666");	
+		SetFillColor("IndicadorEsteiraDesligada", "#AA0000"); 
+	}
+}
+
+function UpdateProducao()
+{ 
+	if(TAGS["CONT_PROD_A"] != GetText("LabelProducaoA"))
+	{
+		SetText("LabelProducaoA", TAGS["CONT_PROD_A"]);
+	}
+	
+	if(TAGS["CONT_PROD_B"] != GetText("LabelProducaoB"))
+	{
+		SetText("LabelProducaoB", TAGS["CONT_PROD_B"]);
+	}
+	
+	if(TAGS["CONT_PROD_C"] != GetText("LabelProducaoC"))
+	{
+		SetText("LabelProducaoC", TAGS["CONT_PROD_C"]);
+	}
+}
+
+function UpdateManualRemoto()
+{ 
+	if(TAGS["MANUAL"] == 1)
+	{
+		SetText("LabelIndicadorOperacao", "Operacao: Manual");
+	}
+	else
+	{
+		SetText("LabelIndicadorOperacao", "Operacao: Automatico");
+	}
 }
 
 function UpdateMisturador()
@@ -69,13 +117,13 @@ function UpdateMisturador()
 	{
 		SetFillColor("IndicadorMisturadorLigado", "#00AA00");
 		SetFillColor("IndicadorMisturadorDesligado", "#666666");
-		SetPosition("Misturador", 755, 300);
+		SetPosition("Misturador", -4, 60);
 	}
 	else
 	{
 		SetFillColor("IndicadorMisturadorLigado", "#666666");	
 		SetFillColor("IndicadorMisturadorDesligado", "#AA0000"); 
-		SetPosition("Misturador", 755, 400);
+		SetPosition("Misturador", -4, 0);		 
 	}
 }
 
@@ -164,4 +212,12 @@ function UpdateSensores()
 	}
 	else
 		SetFillColor("LabelS5", "#000000");
+		
+	if(TAGS["S6"] == 1)
+	{
+		SetPosition("Tambor", 925, 0);
+		SetFillColor("LabelS6", "#ff0000");
+	}
+	else
+		SetFillColor("LabelS6", "#000000");
 }
