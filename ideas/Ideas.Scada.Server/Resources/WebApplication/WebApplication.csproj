@@ -41,6 +41,7 @@
     <Content Include="Global.asax" />
     <Content Include="Default.aspx" />
     <Content Include="Web.config" />
+    <Content Include="TagsServer.asmx" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Global.asax.cs">

@@ -6,10 +6,14 @@ using Ideas.Scada.Common.Tags;
 using Ideas.Scada.Common.DataSources;
 using System.Threading;
 using log4net;
+using System.Runtime.Remoting;
+using System.Runtime.Remoting.Channels;
+using System.Runtime.Remoting.Channels.Tcp;
+
 
 namespace Ideas.Scada.Common
 {
-	public class Project
+	public class Project : MarshalByRefObject
 	{
 		#region MEMBERS
 		
@@ -21,7 +25,7 @@ namespace Ideas.Scada.Common
 		private WebService tagsWebService;
 		private string initialScreenName;
 		private static readonly ILog log = LogManager.GetLogger(typeof(Project));
-		
+		private SocketInterface socketInterface = new SocketInterface();
 		#endregion
 		
 		/// <summary>
@@ -29,6 +33,7 @@ namespace Ideas.Scada.Common
 		/// </summary>
 		public Project (XmlNode node, string appPath)
 		{
+           
 			string nodeName = node.Attributes["name"].Value;
 			string nodePath = node.Attributes["path"].Value;
 			string initScreen = node.Attributes["initscreen"].Value;
@@ -141,7 +146,14 @@ namespace Ideas.Scada.Common
 			this.TagsWebService.Start();
 			
 			log.Info("WebService from project " + this.Name + " is started. ");
-					
+			
+            log.Info("Starting TCP/IP interface... ");
+            
+            //RegisterSocketInterface();
+            SocketInterface.Start(this);
+            
+            log.Info("TCP/IP interface is started. ");
+            
 			foreach(DataSource ds in this.Datasources)
 			{
 				log.Info("Starting DataSource " + ds.Name + "... ");
@@ -165,7 +177,27 @@ namespace Ideas.Scada.Common
 		{
 			this.TagsDatabase.WriteTagValue(tag);
 		}
+        
+        public string Read (Tag tag)
+        {
+            this.TagsDatabase.ReadTagValue(ref tag);
+            
+            return tag.value;
+        }
 		
+        private void RegisterSocketInterface()
+        {
+            // Create an instance of a channel
+            TcpChannel channel = new TcpChannel(8080);
+            ChannelServices.RegisterChannel(channel);
+            
+            // Register as an available service with the name GetCount
+            // Every incoming message is serviced by the same object instance.
+            RemotingConfiguration.RegisterWellKnownServiceType(
+                typeof(Project),
+                "Read",
+                WellKnownObjectMode.Singleton);
+        }
 		
 		#region PROPERTIES
 		

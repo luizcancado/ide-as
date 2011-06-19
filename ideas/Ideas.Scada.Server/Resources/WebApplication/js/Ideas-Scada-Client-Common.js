@@ -45,7 +45,7 @@ function UpdateVars()
 
     UpdateStats(); // must be defined inside the screen script
     
-    setTimeout ( "UpdateVars()", 1000 );
+    setTimeout("UpdateVars()", 1500);
 }
 
 // Function to retrieve/write tag data from/to webservice
@@ -58,7 +58,7 @@ function ReadTag(tagName)
 	    dataType: "xml",
 	    success: 
 	    	function(xml) {	 
-	     		TAGS[tagName] = $(xml).find('int').text();
+	     		TAGS[tagName] = $(xml).find('string').text();
 	    	}
 	  });
 }

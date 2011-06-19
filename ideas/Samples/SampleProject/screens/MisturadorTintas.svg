@@ -2168,10 +2168,10 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.1009789"
-     inkscape:cx="632.89118"
-     inkscape:cy="417.1323"
+     inkscape:cx="569.46201"
+     inkscape:cy="548.97777"
      inkscape:document-units="px"
-     inkscape:current-layer="layer3"
+     inkscape:current-layer="layer2"
      showgrid="false"
      inkscape:window-width="1280"
      inkscape:window-height="776"
@@ -3320,9 +3320,9 @@
        style="color:#000000;fill:#808080;fill-opacity:1;fill-rule:nonzero;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
     <rect
        inkscape:label="#rect6119-1"
-       y="277.01266"
+       y="187.09268"
        x="390.33441"
-       height="15.440802"
+       height="105.36078"
        width="14.986663"
        id="nivel_tanque_amarelo"
        style="color:#000000;fill:#ffff00;fill-opacity:1;fill-rule:nonzero;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
@@ -3356,9 +3356,9 @@
        style="color:#000000;fill:#808080;fill-opacity:1;fill-rule:nonzero;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
     <rect
        inkscape:label="#rect6119-1-9"
-       y="277.01266"
+       y="186.1844"
        x="508.82709"
-       height="15.440802"
+       height="106.26907"
        width="14.986663"
        id="nivel_tanque_vermelho"
        style="color:#000000;fill:#ff0000;fill-opacity:1;fill-rule:nonzero;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
@@ -3392,9 +3392,9 @@
        style="color:#000000;fill:#808080;fill-opacity:1;fill-rule:nonzero;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
     <rect
        inkscape:label="#rect6119-1-9-7"
-       y="277.01266"
+       y="188.00096"
        x="627.31964"
-       height="15.440802"
+       height="104.4525"
        width="14.986663"
        id="nivel_tanque_azul"
        style="color:#000000;fill:#0000ff;fill-opacity:1;fill-rule:nonzero;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
@@ -3745,9 +3745,10 @@
     </g>
     <path
        style="fill:#b3b3b3"
-       d="m 805.38501,191.25699 c 41.37611,-23.8885 41.65421,-24.04907 41.65421,-24.04907 l 102.21042,0 -40.77997,23.54433 z"
+       d="m 805.38501,191.25699 c 41.37611,-13.06188 38.76407,-12.1863 38.76407,-12.1863 l 90.03598,0.21094 -25.71539,11.69938 z"
        id="path6657"
-       inkscape:connector-curvature="0" />
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccc" />
     <rect
        style="color:#000000;fill:#cccccc;fill-opacity:1;fill-rule:nonzero;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
        id="rect6659"
@@ -3759,7 +3760,7 @@
        ry="0" />
     <path
        style="fill:#808080"
-       d="m 948.60739,167.81476 -0.32113,100.47269 -39.98023,36.54811 0,-114.11593 z"
+       d="m 933.37752,179.3564 0.41964,113.66669 -25.49113,11.81247 0,-114.46192 z"
        id="path6661"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="ccccc" />

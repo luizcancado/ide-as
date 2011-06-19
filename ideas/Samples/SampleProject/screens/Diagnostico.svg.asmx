@@ -18,7 +18,6 @@ namespace Ideas.ScadaApplication
             return random.Next(0, 100);
 		}
   
-  
         [WebMethod]
         public int GetTagValue (string tagname)
         {

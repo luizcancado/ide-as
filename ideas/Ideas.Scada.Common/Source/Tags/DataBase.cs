@@ -15,7 +15,7 @@ namespace Ideas.Scada.Common.Tags
 		private IDbConnection dbcon = null;
 		private IDbCommand dbcmd = null;
 		private string connectionString = "URI=file::memory:,version=3";
-		//private string connectionString = "URI=file:Ideas.TagsDatabase.db,version=3";
+		//private string connectionString = "URI=file:/home/luiz/Desktop/Ideas.TagsDatabase.db,version=3";
 		
 		#endregion
 		
@@ -216,7 +216,6 @@ namespace Ideas.Scada.Common.Tags
 		public void ReadTagValue(ref Tag tag)
 		{
 			string sql = "" +
-				"INSERT INTO @Value " +
 				"SELECT Value " +
 			 	"FROM tb" + tag.datasource + " " +
 			 	"WHERE " +
@@ -229,17 +228,12 @@ namespace Ideas.Scada.Common.Tags
 			parTagName.DbType = DbType.String;
 			parTagName.Value = tag.name;
 			dbcmd.Parameters.Add(parTagName);
-			
-			IDbDataParameter parValue = dbcmd.CreateParameter();
-			parValue.ParameterName = "Value";
-			parValue.Direction = ParameterDirection.Output;
-			parValue.DbType = DbType.String;
-			dbcmd.Parameters.Add(parValue);
-			
+				
 			dbcmd.CommandText = sql;
-			dbcmd.ExecuteNonQuery();
-			
-			tag.value = parValue.Value.ToString();
+            //SqliteDataReader dr = dbcmd.ExecuteReader() as SqliteDataReader;
+			//tag.value = dr.GetString(0);
+            
+            tag.value = dbcmd.ExecuteScalar().ToString();
 		}
 		
 		#region PROPERTIES

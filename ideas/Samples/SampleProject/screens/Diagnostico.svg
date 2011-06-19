@@ -950,9 +950,6 @@
    id="Label12-9-9"
    style="font-size:18.19803047px">Produto C</text>
 
-
-
-
 <text
    x="247.65459"
    y="214.72121"
@@ -972,13 +969,13 @@
 <text
    x="247.57805"
    y="233.13965"
-   id="BICO_A_value-3"
+   id="CONT_PROD_A_value"
    style="font-size:15.43024349px"
    transform="scale(0.98234567,1.0179716)">[CONT_PROD_A]</text>
 <text
    x="247.57805"
    y="252.42743"
-   id="BICO_B_value-7"
+   id="CONT_PROD_B_value"
    style="font-size:15.43024349px"
    transform="scale(0.98234567,1.0179716)">[CONT_PROD_B]</text>
 <path
@@ -1004,7 +1001,7 @@
 <text
    x="247.92058"
    y="272.18652"
-   id="BICO_C_value-9"
+   id="CONT_PROD_C_value"
    style="font-size:15.43024349px"
    transform="scale(0.98234567,1.0179716)">[CONT_PROD_C]</text>
 <path

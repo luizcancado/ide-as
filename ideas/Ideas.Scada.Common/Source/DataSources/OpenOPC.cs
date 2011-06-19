@@ -138,12 +138,14 @@ namespace Ideas.Scada.Common.DataSources
 				Tag tag = this.Tags.GetByTagAddress(csvReader[0]);
 				
 				if(tag != null)
-				{
+				{	
+									
 					// If it was found, update tag's value and last update date
-					if(tag.value == null || tag.value.Trim() != csvReader[1].Trim())
+					if(tag.value == null || tag.value.Trim() != ConvertTagValueToStandard(csvReader[1]))
 					{
-						tag.value = csvReader[1];
+						tag.value = ConvertTagValueToStandard(csvReader[1]);
 						tag.lastupdate = csvReader[3];
+														
 						//Console.WriteLine(tag);
 						log.Info("Read new tag value: " + tag.name + " = " + tag.value);
 						
@@ -151,6 +153,20 @@ namespace Ideas.Scada.Common.DataSources
 					}
 				}
 			}
+		}
+		
+		private string ConvertTagValueToStandard(string value)
+		{
+			if(value.ToLower() == "true")
+			{
+				return "1";
+			}
+			else if(value.ToLower() == "false")
+			{
+				return "0";
+			}
+			
+			return value;
 		}
 			
 		public override TagGroup Read()

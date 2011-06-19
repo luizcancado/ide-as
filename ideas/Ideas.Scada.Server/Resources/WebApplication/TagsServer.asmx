@@ -2,32 +2,56 @@
  
 using System;
 using System.Web.Services;
- 
+using System.Net.Sockets;
+
 namespace Ideas.ScadaApplication
 {
 	[WebService (Namespace = "http://tempuri.org/TagsServer")]
 	public class TagsServer : WebService
 	{
-		[WebMethod]
-		public int ReadAll ()
-		{
-            Random random = new Random();
-            
-            return random.Next(2);
-		}
+        private static Socket clientSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+       
+        [WebMethod]
+        public string ReadAll ()
+        {
+            return "";
+        }
   
         [WebMethod]
-        public int Read (string tagname)
+        public string Read (string tagname)
         {
-            Random random = new Random();
-            
-            return random.Next(2);
+            if(clientSocket.Connected)
+            {
+                return SocketRead(tagname);
+            }
+            else
+            {
+                clientSocket.Connect("127.0.0.1", 2200);
+                return Read(tagname);
+            }
         }
  
-		[WebMethod]
-		public void Write (string tagname, string value)
-		{
-			// do nothing
-		}
+        [WebMethod]
+        public void Write (string tagname, string value)
+        {
+            // do nothing
+        }  
+    
+    	private string SocketRead(string tagname)
+    	{
+    		NetworkStream sendStream = new NetworkStream(clientSocket);
+                
+            byte[] outStream = System.Text.Encoding.ASCII.GetBytes("READ|" + tagname + "<EOF>");
+            //serverStream.Write(outStream, 0, outStream.Length);
+            clientSocket.Send(outStream);
+            sendStream.Flush();
+
+            byte[] inStream = new byte[1024];
+            clientSocket.Receive(inStream);
+            //serverStream.Read(inStream, 0, (int)clientSocket.ReceiveBufferSize);
+            string returndata = System.Text.Encoding.ASCII.GetString(inStream);
+            
+            return returndata.TrimEnd(new char[] {Convert.ToChar(default(byte))});
+    	}   
 	}
 }
