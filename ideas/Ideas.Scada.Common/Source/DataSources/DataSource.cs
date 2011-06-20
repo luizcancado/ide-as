@@ -69,10 +69,10 @@ namespace Ideas.Scada.Common.DataSources
 		
 		private void OnUpdateDataBaseTimerElapsed(object sender, ElapsedEventArgs args)
 		{
-			foreach(Tag t in this.Tags)
-			{
-				this.Project.Write(t);
-			}
+//			foreach(Tag t in this.Tags)
+//			{
+//				this.Project.Write(t);
+//			}
 		}
 		
 		protected void ReadSourceFile ()

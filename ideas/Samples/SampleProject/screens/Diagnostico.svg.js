@@ -25,35 +25,35 @@ function RegisterTags()
 		BICO_A: "", 
 		BICO_B: "", 
 		BICO_C: "", 
-		CONT_PROD_A: "",  
-		CONT_PROD_B: "",  
-		CONT_PROD_C: "",  
-		DESLIGA_ESTEIRA: "", 
-		EMERGENCIA: "",  
-		ESTEIRA: "",   
-		LIGA_ESTEIRA: "",    
-		MANUAL: "",  
-		MISTURADOR: "",  
-		PRODUTO_A: "",       
-		PRODUTO_B: "",       
-		PRODUTO_C: "",       
-		RESET: "", 
-		S1: "", 
-		S2: "", 
-		S3: "", 
-		S4: "", 
-		S5: "", 
-		S6: "", 
-		T_MISTURADOR: "",   
-		T_PROD_A_BICO_A: "",
-		T_PROD_A_BICO_B: "",
-		T_PROD_A_BICO_C: "",
-		T_PROD_B_BICO_A: "",
-		T_PROD_B_BICO_B: "",
-		T_PROD_B_BICO_C: "",
-		T_PROD_C_BICO_A: "",
-		T_PROD_C_BICO_B: "",
-		T_PROD_C_BICO_C: ""                	
+		//CONT_PROD_A: "",  
+		//CONT_PROD_B: "",  
+		//CONT_PROD_C: "",  
+		//DESLIGA_ESTEIRA: "", 
+		//EMERGENCIA: "",  
+		//ESTEIRA: "",   
+		//LIGA_ESTEIRA: "",    
+		//MANUAL: "",  
+		//MISTURADOR: "",  
+		//PRODUTO_A: "",       
+		//PRODUTO_B: "",       
+		//PRODUTO_C: "",       
+		//RESET: "", 
+		//S1: "", 
+		//S2: "", 
+		//S3: "", 
+		//S4: "", 
+		//S5: "", 
+		//S6: "", 
+		//T_MISTURADOR: "",   
+		//T_PROD_A_BICO_A: "",
+		//T_PROD_A_BICO_B: "",
+		//T_PROD_A_BICO_C: "",
+		//T_PROD_B_BICO_A: "",
+		//T_PROD_B_BICO_B: "",
+		//T_PROD_B_BICO_C: "",
+		//T_PROD_C_BICO_A: "",
+		//T_PROD_C_BICO_B: "",
+		//T_PROD_C_BICO_C: ""                	
 	} 
 }
 
@@ -61,6 +61,7 @@ function RegisterTags()
 //now create a new button instance
 function InitScreen(evt)
 {
+/*
 	textbutton1 = 
 		new button(
 			"Botao1",
@@ -78,6 +79,7 @@ function InitScreen(evt)
 			{"fill":"white"},
 			{"fill":"navy"},
 			1);
+*/
 }
 
    

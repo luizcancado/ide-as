@@ -135,10 +135,12 @@ namespace Ideas.Scada.Common.Tags
                     //Console.WriteLine("Read {0} bytes from socket. \n Data : {1}",
                     //    content.Length, content );
                     
-                    content = content.Replace("<EOF>","");
+                    content = content.Remove(content.IndexOf("<EOF>"));
                     
                     if(content.StartsWith("READ|"))
                     {
+                        content = content.Replace("READ|", "");
+                        
                         string response = ReadFromDataBase(content);
                         //string response = ReadRandom();
                         
@@ -204,17 +206,16 @@ namespace Ideas.Scada.Common.Tags
             }
         }
         
-        private static string ReadFromDataBase(string command)
-        {
-            string tagname = command.Replace("READ|", "");
-            
+        private static string ReadFromDataBase(string tagname)
+        {          
             Tag tag = new Tag();
             
             tag.datasource = "S7_1214C";
             tag.name = tagname;
             
-
-            return parentProject.Read(tag).ToString();
+            tag.value = parentProject.Read(tag);
+            
+            return tag.value;
         }
         
         private static string ReadRandom()

@@ -51,7 +51,7 @@ namespace Ideas.ScadaApplication
             //serverStream.Read(inStream, 0, (int)clientSocket.ReceiveBufferSize);
             string returndata = System.Text.Encoding.ASCII.GetString(inStream);
             
-            return returndata.TrimEnd(new char[] {Convert.ToChar(default(byte))});
+            return tagname + "=" + returndata.TrimEnd(new char[] {Convert.ToChar(default(byte))});
     	}   
 	}
 }

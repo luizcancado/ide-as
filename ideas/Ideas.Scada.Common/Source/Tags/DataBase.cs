@@ -2,7 +2,7 @@ using System;
 using System.Data;
 using System.IO;
 using System.Xml;
-using Mono.Data.Sqlite;
+using System.Data.SQLite;
 using Ideas.Scada.Common.DataSources;
 using System.Collections.Generic;
 
@@ -14,8 +14,8 @@ namespace Ideas.Scada.Common.Tags
 			
 		private IDbConnection dbcon = null;
 		private IDbCommand dbcmd = null;
-		private string connectionString = "URI=file::memory:,version=3";
-		//private string connectionString = "URI=file:/home/luiz/Desktop/Ideas.TagsDatabase.db,version=3";
+		private string connectionString = "URI=file::memory:";
+		//private string connectionString = "URI=file:/home/luiz/Desktop/Ideas.TagsDatabase.db";
 		
 		#endregion
 		
@@ -34,7 +34,9 @@ namespace Ideas.Scada.Common.Tags
 		
 		private void Start()
 		{
-			dbcon = (IDbConnection) new SqliteConnection(connectionString);
+            
+            
+			dbcon = (IDbConnection) new SQLiteConnection(connectionString);
 			dbcon.Open();
 			dbcmd = dbcon.CreateCommand();
 		}
@@ -215,25 +217,39 @@ namespace Ideas.Scada.Common.Tags
 		
 		public void ReadTagValue(ref Tag tag)
 		{
-			string sql = "" +
-				"SELECT Value " +
-			 	"FROM tb" + tag.datasource + " " +
-			 	"WHERE " +
-			 	"TagName = @TagName ";
-			
-			dbcmd.Parameters.Clear();
-			
-			IDbDataParameter parTagName = dbcmd.CreateParameter();
-			parTagName.ParameterName = "TagName";
-			parTagName.DbType = DbType.String;
-			parTagName.Value = tag.name;
-			dbcmd.Parameters.Add(parTagName);
-				
-			dbcmd.CommandText = sql;
-            //SqliteDataReader dr = dbcmd.ExecuteReader() as SqliteDataReader;
-			//tag.value = dr.GetString(0);
+            try
+            {
             
-            tag.value = dbcmd.ExecuteScalar().ToString();
+			    string sql = "" +
+    				"SELECT Value " +
+    			 	"FROM tb" + tag.datasource + " " +
+    			 	"WHERE " +
+    			 	"TagName = @TagName ";
+    			
+    			dbcmd.Parameters.Clear();
+    			
+    			IDbDataParameter parTagName = dbcmd.CreateParameter();
+    			parTagName.ParameterName = "TagName";
+    			parTagName.DbType = DbType.String;
+    			parTagName.Value = tag.name;
+    			dbcmd.Parameters.Add(parTagName);
+    				
+    			dbcmd.CommandText = sql;          
+            
+                tag.value = dbcmd.ExecuteScalar().ToString();
+                
+                
+//                    tag.value = objValue.;
+//                }
+//                {
+//                    tag.value = "Nulo";
+//                }
+                
+            }
+            catch(Exception e)
+            {
+                tag.value = "Erro";
+            }
 		}
 		
 		#region PROPERTIES

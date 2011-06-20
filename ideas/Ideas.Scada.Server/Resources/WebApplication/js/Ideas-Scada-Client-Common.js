@@ -21,7 +21,7 @@ var Ideas = {
 
 function GotoScreen(scr) 
 {
-    window.location('/?s=' + scr); 
+    window.location = '/?s=' + scr; 
 }
 
 // Function to handle SVG onLoad event
@@ -45,22 +45,29 @@ function UpdateVars()
 
     UpdateStats(); // must be defined inside the screen script
     
-    setTimeout("UpdateVars()", 1500);
+    setTimeout("UpdateVars()", 1000);
 }
 
 // Function to retrieve/write tag data from/to webservice
 function ReadTag(tagName) 
 {	
-	$.ajax({
+	bodyContent = $.ajax({
 	    type: "GET",
 	    url: "/TagsServer.asmx/Read?tagname=" + tagName,
 	    contentType: "text/xml; charset=utf-8",
 	    dataType: "xml",
+        timeout: 1000,   
 	    success: 
 	    	function(xml) {	 
-	     		TAGS[tagName] = $(xml).find('string').text();
-	    	}
-	  });
+                var text = $(xml).find('string').text();
+                var myArray = text.split('=');
+	     		TAGS[myArray[0]] = myArray[1];
+	    	},
+        error: 
+            function(msg) {
+                //alert(msg);
+            }      
+	  }).responseText;
 }
 
 function ReadTagList()

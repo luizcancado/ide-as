@@ -139,10 +139,23 @@ namespace Ideas.Scada.Common.DataSources
 				
 				if(tag != null)
 				{	
+				
 									
 					// If it was found, update tag's value and last update date
-					if(tag.value == null || tag.value.Trim() != ConvertTagValueToStandard(csvReader[1]))
+					if(tag.value == null)
 					{
+						tag.value = ConvertTagValueToStandard(csvReader[1]);
+						tag.lastupdate = csvReader[3];
+														
+						//Console.WriteLine(tag);
+						log.Info("Read new tag value: " + tag.name + " = " + tag.value);
+						
+						base.UpdateDataBase(tag);
+					}
+					else if(tag.value.Trim() != ConvertTagValueToStandard(csvReader[1]))
+					{
+						log.Info("Diferenca: " + tag.value + " != " + ConvertTagValueToStandard(csvReader[1]));
+					
 						tag.value = ConvertTagValueToStandard(csvReader[1]);
 						tag.lastupdate = csvReader[3];
 														
@@ -157,33 +170,36 @@ namespace Ideas.Scada.Common.DataSources
 		
 		private string ConvertTagValueToStandard(string value)
 		{
-			if(value.ToLower() == "true")
+			if(value.ToLower().Trim() == "true")
 			{
 				return "1";
 			}
-			else if(value.ToLower() == "false")
+			else //if(value.ToLower().Trim() == "false")
 			{
 				return "0";
 			}
-			
-			return value;
+			//else
+			//{
+			//	log.Info("Unrecognized value: " + value);
+			//	return "0";
+			//}
 		}
 			
 		public override TagGroup Read()
 		{
             				
 			try
-            {
-				
-            }
-            catch ( Exception e )
-            {
+			{
+		
+			}
+			catch ( Exception e )
+			{
 				string errorMessage = "Could not read tag values from datasource ";
 				errorMessage += "'" + this.Name + "': ";
 				errorMessage += e.Message;
-				
-                throw new Exception(errorMessage);
-            }
+		
+				throw new Exception(errorMessage);
+			}
 			
 			return new TagGroup();
 		}
