@@ -2168,10 +2168,10 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.1009789"
-     inkscape:cx="569.46201"
+     inkscape:cx="249.01473"
      inkscape:cy="548.97777"
      inkscape:document-units="px"
-     inkscape:current-layer="layer2"
+     inkscape:current-layer="svg4591"
      showgrid="false"
      inkscape:window-width="1280"
      inkscape:window-height="776"
@@ -4079,7 +4079,7 @@
        y="690.05371"
        x="1059.2721"
        style="cursor:pointer;font-size:16px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
-       onclick="WriteTag('MANUAL','0')"
+       onclick="WriteTag('MANUAL','1');WriteTag('AUTOMATICO','0')"
        xml:space="preserve">Manual</text>
   </g>
   <g
@@ -4103,7 +4103,7 @@
        id="text3704-6"
        y="689.64185"
        x="1150.5677"
-       onclick="WriteTag('MANUAL','0')"
+       onclick="WriteTag('MANUAL','0');WriteTag('AUTOMATICO','1')"
        style="cursor:pointer;font-size:16px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;enable-background:new;font-family:Bitstream Vera Sans"
        xml:space="preserve">Automatico</text>
   </g>
@@ -4114,83 +4114,87 @@
      y="656.56915"
      id="LabelIndicadorOperacao"
      sodipodi:linespacing="125%">Operacao: Operacao</text>
-  <rect
-     x="29.651907"
-     y="112.31953"
-     width="295.5448"
-     height="127.32576"
-     rx="0"
-     ry="5.5889134"
-     id="rect3116-9"
-     style="fill:#ffffff;stroke:#7a0000;stroke-width:3.49113202;stroke-opacity:1" />
-  <text
-     x="267.02328"
-     y="176.33978"
-     id="LabelProducaoA"
-     style="font-size:18.19803047px"
-     inkscape:label="#Label1-89">????</text>
-  <text
-     x="267.02328"
-     y="198.86945"
-     id="LabelProducaoB"
-     style="font-size:18.19803047px"
-     inkscape:label="#Label8-9">????</text>
-  <text
-     x="267.02328"
-     y="221.39902"
-     id="LabelProducaoC"
-     style="font-size:18.19803047px"
-     inkscape:label="#Label10-3">????</text>
-  <rect
-     x="28.410452"
-     y="110.04006"
-     width="295.91144"
-     height="39.264553"
-     rx="0"
-     ry="1.723502"
-     id="rect3116-7-8"
-     style="fill:#800000;stroke:none" />
-  <text
-     xml:space="preserve"
-     style="font-size:24px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;font-family:sans-serif"
-     x="50.893303"
-     y="136.82919"
-     id="text3833-5"
-     sodipodi:linespacing="125%"><tspan
-       sodipodi:role="line"
-       id="tspan3835-5"
+  <g
+     id="grupo_producao"
+     inkscape:label="#g3635" style="display:none;">
+    <rect
+       style="fill:#ffffff;stroke:#7a0000;stroke-width:3.49113202;stroke-opacity:1"
+       id="rect3116-9"
+       ry="5.5889134"
+       rx="0"
+       height="127.32576"
+       width="295.5448"
+       y="112.31953"
+       x="29.651907" />
+    <text
+       inkscape:label="#Label1-89"
+       style="font-size:18.19803047px"
+       id="LabelProducaoA"
+       y="176.33978"
+       x="267.02328">????</text>
+    <text
+       inkscape:label="#Label8-9"
+       style="font-size:18.19803047px"
+       id="LabelProducaoB"
+       y="198.86945"
+       x="267.02328">????</text>
+    <text
+       inkscape:label="#Label10-3"
+       style="font-size:18.19803047px"
+       id="LabelProducaoC"
+       y="221.39902"
+       x="267.02328">????</text>
+    <rect
+       style="fill:#800000;stroke:none"
+       id="rect3116-7-8"
+       ry="1.723502"
+       rx="0"
+       height="39.264553"
+       width="295.91144"
+       y="110.04006"
+       x="28.410452" />
+    <text
+       sodipodi:linespacing="125%"
+       id="text3833-5"
+       y="136.82919"
        x="50.893303"
-       y="136.82919">Producao</tspan></text>
-  <path
-     style="fill:none;stroke:#000000;stroke-width:0.79581255px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-     d="m 148.33126,214.06361 c 100.69751,0 101.01417,0 101.01417,0"
-     id="path4045-8"
-     inkscape:connector-curvature="0" />
-  <text
-     x="44.039787"
-     y="175.84126"
-     id="Label1-8-3"
-     style="font-size:18.19803047px">Produto A</text>
-  <text
-     x="45.039787"
-     y="198.85664"
-     id="Label8-0-9"
-     style="font-size:18.19803047px">Produto B</text>
-  <text
-     x="45.039787"
-     y="221.87207"
-     id="Label10-4-4"
-     style="font-size:18.19803047px">Produto C</text>
-  <path
-     style="fill:none;stroke:#000000;stroke-width:0.79581255px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;enable-background:new"
-     d="m 148.14049,170.70489 c 100.69749,0 101.01416,0 101.01416,0"
-     id="path4045-8-6"
-     inkscape:connector-curvature="0" />
-  <path
-     style="fill:none;stroke:#000000;stroke-width:0.79581255px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;enable-background:new"
-     d="m 148.24894,191.97248 c 100.69749,0 101.01415,0 101.01415,0"
-     id="path4045-8-64"
-     inkscape:connector-curvature="0" />
+       style="font-size:24px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;font-family:sans-serif"
+       xml:space="preserve"><tspan
+         y="136.82919"
+         x="50.893303"
+         id="tspan3835-5"
+         sodipodi:role="line">Producao</tspan></text>
+    <path
+       inkscape:connector-curvature="0"
+       id="path4045-8"
+       d="m 148.33126,214.06361 c 100.69751,0 101.01417,0 101.01417,0"
+       style="fill:none;stroke:#000000;stroke-width:0.79581255px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+    <text
+       style="font-size:18.19803047px"
+       id="Label1-8-3"
+       y="175.84126"
+       x="44.039787">Produto A</text>
+    <text
+       style="font-size:18.19803047px"
+       id="Label8-0-9"
+       y="198.85664"
+       x="45.039787">Produto B</text>
+    <text
+       style="font-size:18.19803047px"
+       id="Label10-4-4"
+       y="221.87207"
+       x="45.039787">Produto C</text>
+    <path
+       inkscape:connector-curvature="0"
+       id="path4045-8-6"
+       d="m 148.14049,170.70489 c 100.69749,0 101.01416,0 101.01416,0"
+       style="fill:none;stroke:#000000;stroke-width:0.79581255px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;enable-background:new" />
+    <path
+       inkscape:connector-curvature="0"
+       id="path4045-8-64"
+       d="m 148.24894,191.97248 c 100.69749,0 101.01415,0 101.01415,0"
+       style="fill:none;stroke:#000000;stroke-width:0.79581255px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;enable-background:new" />
+  </g>
   <g
      transform="translate(-1014.334,-420.76632)"
      style="enable-background:new"

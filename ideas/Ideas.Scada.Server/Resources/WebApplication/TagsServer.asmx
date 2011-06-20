@@ -34,7 +34,22 @@ namespace Ideas.ScadaApplication
         [WebMethod]
         public void Write (string tagname, string value)
         {
-            // do nothing
+            if(clientSocket.Connected)
+            {
+                NetworkStream sendStream = new NetworkStream(clientSocket);
+                
+                byte[] outStream = System.Text.Encoding.ASCII.GetBytes("WRITE|" + tagname + "|" + value + "<EOF>");
+                //serverStream.Write(outStream, 0, outStream.Length);
+                clientSocket.Send(outStream);
+                sendStream.Flush();
+            }
+            else
+            {
+                clientSocket.Connect("127.0.0.1", 2200);
+                Write(tagname, value);
+            }
+        
+            
         }  
     
     	private string SocketRead(string tagname)
@@ -51,7 +66,7 @@ namespace Ideas.ScadaApplication
             //serverStream.Read(inStream, 0, (int)clientSocket.ReceiveBufferSize);
             string returndata = System.Text.Encoding.ASCII.GetString(inStream);
             
-            return tagname + "=" + returndata.TrimEnd(new char[] {Convert.ToChar(default(byte))});
+            return returndata.TrimEnd(new char[] {Convert.ToChar(default(byte))});
     	}   
 	}
 }

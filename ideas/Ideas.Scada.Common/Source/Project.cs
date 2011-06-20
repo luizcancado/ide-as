@@ -178,6 +178,12 @@ namespace Ideas.Scada.Common
 			this.TagsDatabase.WriteTagValue(tag);
 		}
         
+        public void WriteToDataSource (Tag tag)
+        {
+            DataSource ds = this.Datasources[tag.datasource];
+            ds.Write(tag);
+        }
+        
         public string Read (Tag tag)
         {
             this.TagsDatabase.ReadTagValue(ref tag);

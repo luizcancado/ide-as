@@ -154,7 +154,7 @@ namespace Ideas.Scada.Common.DataSources
 					}
 					else if(tag.value.Trim() != ConvertTagValueToStandard(csvReader[1]))
 					{
-						log.Info("Diferenca: " + tag.value + " != " + ConvertTagValueToStandard(csvReader[1]));
+						//log.Info("Diferenca: " + tag.value + " != " + ConvertTagValueToStandard(csvReader[1]));
 					
 						tag.value = ConvertTagValueToStandard(csvReader[1]);
 						tag.lastupdate = csvReader[3];
@@ -206,6 +206,15 @@ namespace Ideas.Scada.Common.DataSources
 		
 		public override void Write(Tag tag)
 		{
+			if(tag.value.Trim().ToLower() == "1")
+			{
+				tag.value = "True";
+			}
+			else if(tag.value.Trim().ToLower() == "0")
+			{
+				tag.value = "False";
+			}
+		
 			// Mount argument string
 			string infoOpenOPCWriteArguments = 
 				openOPCPath +

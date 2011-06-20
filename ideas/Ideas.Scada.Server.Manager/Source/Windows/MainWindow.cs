@@ -243,11 +243,13 @@ namespace Ideas.Scada.Server.Manager
 			// Define where the server exec is placed
 			serverProcess = new Process();
 			serverProcess.StartInfo.FileName = 
-				@"C:\Documents and Settings\Luiz\Desktop\ideas\Ideas.Scada.Server\bin\Debug\Ideas.Scada.Server.exe";
+				@"mono";
 			serverProcess.StartInfo.WorkingDirectory = System.IO.Path.GetDirectoryName(scadaApplication.FilePath);
 			
 			// Pass the (already loaded) scada file as argument
-			serverProcess.StartInfo.Arguments = scadaApplication.FilePath;
+			serverProcess.StartInfo.Arguments = 
+                @"/home/luiz/Projects/Ideas/Ideas.Scada.Server/bin/Debug/Ideas.Scada.Server.exe " 
+                    + scadaApplication.FilePath;
 			
 			// Redirects outputs 
 			serverProcess.StartInfo.UseShellExecute = false;

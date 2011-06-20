@@ -141,7 +141,7 @@ namespace Ideas.Scada.Common.Tags
                     {
                         content = content.Replace("READ|", "");
                         
-                        string response = ReadFromDataBase(content);
+                        string response = content + "=" + ReadFromDataBase(content);
                         //string response = ReadRandom();
                         
                         // Send tag value to the client
@@ -149,8 +149,17 @@ namespace Ideas.Scada.Common.Tags
                     }
                     else if(content.StartsWith("WRITE|"))
                     {
-                        //WriteToDataSource();
-                        //parentProject.Write();
+                        content = content.Replace("WRITE|", "");
+                        
+                        string[] array = content.Split('|');
+                        
+                        if(array.Length > 1)
+                        {
+                            string tagname = array[0];
+                            string tagvalue = array[1];
+                            
+                            WriteToDataSource(tagname, tagvalue);   
+                        }
                     }
                     else
                     {
@@ -223,6 +232,19 @@ namespace Ideas.Scada.Common.Tags
             Random random = new Random();
             return random.Next(2).ToString();
         }
+        
+        static void WriteToDataSource (string tagname, string tagvalue)
+        {
+            Tag tag = new Tag();
+            
+            tag.datasource = "S7_1214C";
+            tag.name = tagname;
+            tag.address = "Channel1.S7_1200__1214C." + tagname;
+            tag.value = tagvalue.Trim();
+            
+            parentProject.WriteToDataSource(tag);
+        }
+
     }
     
     public class SocketInterfaceStateObject {
